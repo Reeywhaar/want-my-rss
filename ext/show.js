@@ -131,9 +131,28 @@ function render(context) {
 								)}
 							</p>
 						</header>
-						<div class="content item__content">${enableMedia(
-							t(item, ">description:") || t(item, ">content:")
-						)}</div>
+						<div class="content item__content">${t(item, ">description:") ||
+							t(item, ">content:")}</div>
+						${vif(
+							() => t(item, ">enclosure"),
+							media => {
+								try {
+									let type = t(media, "^type");
+									let strtype = type.indexOf("audio/" === 0)
+										? "audio"
+										: "video";
+									return `<div class="item__media">
+											<h4 class="item__media-title">Media</h4>
+											<${strtype} controls class="item__media-element item__media-element-${strtype}" preload="none" src="${t(
+										media,
+										"^url"
+									)}" type="${type}"/>
+										</div>`;
+								} catch (e) {
+									return "";
+								}
+							}
+						)}
 					</article>
 				`
 					)

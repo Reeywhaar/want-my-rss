@@ -181,6 +181,23 @@ a.header__main-url:visited:hover {
 	font-style: italic;
 }
 
+.item__media-title {
+	margin-bottom: 0.2rem;
+	opacity: 0.6;
+}
+
+.item__media-element-audio {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.item__media-element-video {
+	width: 100%;
+	height: 25rem;
+	box-sizing: border-box;
+	box-shadow: var(--item-shadow);
+}
+
 /* content */
 
 .content img {
