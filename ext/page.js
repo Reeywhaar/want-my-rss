@@ -5,11 +5,7 @@
 		.filter(el => {
 			if (!el.hasAttribute("type")) return false;
 			const type = el.getAttribute("type");
-			if (
-				type.indexOf("rss") !== -1 ||
-				type.indexOf("atom") !== -1 ||
-				type.indexOf("xml") !== -1
-			)
+			if (type.indexOf("rss") !== -1 || type.indexOf("atom") !== -1)
 				return true;
 			return false;
 		})
