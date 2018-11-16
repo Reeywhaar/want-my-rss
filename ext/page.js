@@ -1,10 +1,22 @@
 (() => {
 	const data = Array.from(
 		document.head.querySelectorAll("link[rel='alternate']")
-	).map(el => ({
-		url: el.href,
-		title: el.title || null,
-	}));
+	)
+		.filter(el => {
+			if (!el.hasAttribute("type")) return false;
+			const type = el.getAttribute("type");
+			if (
+				type.indexOf("rss") !== -1 ||
+				type.indexOf("atom") !== -1 ||
+				type.indexOf("xml") !== -1
+			)
+				return true;
+			return false;
+		})
+		.map(el => ({
+			url: el.href,
+			title: el.title || null,
+		}));
 
 	return {
 		url: window.location.href,

@@ -21,6 +21,7 @@ Contributions are welcome. Fill issues, make prs!
 ### 0.2
 
 * "Feed not found" message
+* Better picking of feeds
 
 ### 0.1
 
