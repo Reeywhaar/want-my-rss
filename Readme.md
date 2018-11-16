@@ -18,6 +18,10 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.2
+
+* "Feed not found" message
+
 ### 0.1
 
 * Initial version with basic notification and displaying capabilities

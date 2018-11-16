@@ -211,7 +211,17 @@ async function main() {
 
 	const url = decodeURI(window.location.search.substr(5));
 	const resp = await fetch(url);
-	if (resp.status >= 400) return;
+	if (resp.status >= 400) {
+		const notFound = document.createElement("div");
+		notFound.innerHTML = `
+			<div>
+				<h1>404</h1>
+				<p>Feed <a href="${url}">${url}</a> not found</p>
+			</div>
+		`;
+		document.body.appendChild(notFound);
+		return;
+	}
 	const data = new DOMParser().parseFromString(await resp.text(), "text/xml");
 	const container = document.body;
 	vif(
