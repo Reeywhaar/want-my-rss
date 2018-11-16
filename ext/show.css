@@ -198,6 +198,12 @@ a.header__main-url:visited:hover {
 	box-shadow: var(--item-shadow);
 }
 
+.item__bottom-link {
+	margin-top: 0.5rem;
+	height: 1rem;
+	display: block;
+}
+
 /* content */
 
 .content img {

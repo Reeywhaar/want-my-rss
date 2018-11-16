@@ -153,6 +153,13 @@ function render(context) {
 								}
 							}
 						)}
+						${vif(
+							() =>
+								t(item, ">link:") ||
+								t(item, ">guid[isPermalink='true']:") ||
+								t(item, ">link^href"),
+							link => `<a class="item__bottom-link" href="${link}"></a>`
+						)}
 					</article>
 				`
 					)
