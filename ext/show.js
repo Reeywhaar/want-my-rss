@@ -126,7 +126,11 @@ function render(context) {
 										`<time class="item__pubDate" datetime="${date}">${date}</time>`
 								)}
 								${vif(
-									() => t(item, ">author:") || t(item, ">creator:"),
+									() =>
+										t(item, ">author>name:") ||
+										t(item, ">author>email:") ||
+										t(item, ">author:") ||
+										t(item, ">creator:"),
 									author => `<span class="item__author">by ${author}</span>`
 								)}
 							</p>
