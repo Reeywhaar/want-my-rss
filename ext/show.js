@@ -121,7 +121,10 @@ function render(context) {
 							</h2>
 							<p class="item__info">
 								${vif(
-									() => t(item, ">pubDate:") || t(item, ">published:"),
+									() =>
+										t(item, ">pubDate:") ||
+										t(item, ">published:") ||
+										t(item, ">date:"),
 									date =>
 										`<time class="item__pubDate" datetime="${date}">${date}</time>`
 								)}
