@@ -22,6 +22,8 @@ Contributions are welcome. Fill issues, make prs!
 
 * "Feed not found" message
 * Better picking of feeds
+* Line with article link at bottom
+* \<enclosure> tag handling
 
 ### 0.1
 
