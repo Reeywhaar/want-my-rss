@@ -289,16 +289,29 @@ async function main() {
 	setHotkeyNavigation();
 
 	const url = decodeURI(window.location.search.substr(5));
-	const resp = await fetch(url);
-	if (resp.status >= 400) {
-		const notFound = document.createElement("div");
-		notFound.innerHTML = `
-			<div>
-				<h1>404</h1>
-				<p>Feed <a href="${url}">${url}</a> not found</p>
-			</div>
-		`;
-		document.body.appendChild(notFound);
+	let resp;
+	try {
+		resp = await fetch(url);
+		if (resp.status >= 400) {
+			const notFound = document.createElement("div");
+			notFound.innerHTML = `
+				<div>
+					<h1>404</h1>
+					<p>Feed <a href="${url}">${url}</a> not found</p>
+				</div>
+			`;
+			document.body.appendChild(notFound);
+			return;
+		}
+	} catch (e) {
+		const error = document.createElement("div");
+		error.innerHTML = `
+				<div>
+					<h1>Error</h1>
+					<p>Error while fetching feed</p>
+				</div>
+			`;
+		document.body.appendChild(error);
 		return;
 	}
 	const data = new DOMParser().parseFromString(await resp.text(), "text/xml");
