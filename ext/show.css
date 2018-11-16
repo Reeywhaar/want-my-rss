@@ -202,6 +202,7 @@ a.header__main-url:visited:hover {
 	margin-top: 0.5rem;
 	height: 1rem;
 	display: block;
+	border-bottom-width: 0.5rem;
 }
 
 /* content */
