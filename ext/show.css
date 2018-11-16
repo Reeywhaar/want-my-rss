@@ -186,6 +186,12 @@ a.header__main-url:visited:hover {
 	opacity: 0.6;
 }
 
+.item__media-element-image {
+	max-width: 100%;
+	object-fit: scale-down;
+	box-sizing: border-box;
+}
+
 .item__media-element-audio {
 	width: 100%;
 	box-sizing: border-box;

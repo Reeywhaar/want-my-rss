@@ -142,6 +142,16 @@ function render(context) {
 							media => {
 								try {
 									let type = t(media, "^type");
+									if (type.indexOf("image/") === 0) {
+										return `<div class="item__media">
+											<h4 class="item__media-title">Media</h4>
+											<img class="item__media-element item__media-element-image" src="${t(
+												media,
+												"^url"
+											)}">
+											</div>
+											`;
+									}
 									let strtype = type.indexOf("audio/" === 0)
 										? "audio"
 										: "video";
