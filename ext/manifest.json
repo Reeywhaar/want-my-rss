@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "Want My RSS",
+  "version": "0.1",
+  "description": "RSS featutes for Firefox",
+	"author": "Mikhail Vyrtsev",
+	"developer": {
+		"name": "Mikhail Vyrtsev",
+		"url": "https://github.com/Reeywhaar"
+	},
+	"homepage_url": "https://github.com/Reeywhaar/want-my-rss",
+  "icons": {
+    "48": "icon.svg",
+    "96": "icon.svg"
+	},
+	"background": {
+		"scripts": ["background.js"]
+	},
+	"permissions": [
+		"<all_urls>"
+	],
+	"page_action": {
+    "default_icon": "icon.svg",
+    "default_title": "Subscribe to page",
+		"browser_style": true,
+		"pinned": true
+  },
+	"applications": {
+		"gecko": {
+			"strict_min_version": "54.0"
+		}
+	}
+}
