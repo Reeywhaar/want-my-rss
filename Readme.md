@@ -24,6 +24,7 @@ Contributions are welcome. Fill issues, make prs!
 * Better picking of feeds
 * Line with article link at bottom
 * \<enclosure> tag handling
+* `j/k` navigation for previous/next article
 
 ### 0.1
 

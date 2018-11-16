@@ -104,8 +104,8 @@ function render(context) {
 			<div class="items">
 				${context.items
 					.map(
-						item => `
-					<article class="item items__item">
+						(item, index) => `
+					<article class="item items__item" data-index="${index}">
 						<header class="item__header">
 							<h2 class="item__title">
 								${vif(
@@ -232,8 +232,61 @@ async function setThemeSwitching() {
 	});
 }
 
+function findCurrentArticle() {
+	const center = document.body.clientWidth / 2;
+	const height = document.body.clientHeight;
+	let startPosition = 0;
+	while (startPosition <= height) {
+		const target = document
+			.elementsFromPoint(center, startPosition)
+			.find(x => x.matches(".item"));
+		if (target) return target;
+		startPosition += 10;
+	}
+	return null;
+}
+
+async function setHotkeyNavigation() {
+	document.addEventListener("keydown", e => {
+		switch (e.keyCode) {
+			// j
+			case 74: {
+				e.preventDefault();
+				const currentEl = findCurrentArticle();
+				if (!currentEl) return;
+				const index = parseInt(currentEl.dataset.index, 10);
+				if (index === 0) {
+					window.scrollTo({
+						top: 0,
+						behavior: "smooth",
+					});
+				} else {
+					const next = document.querySelector(
+						`.item[data-index="${index - 1}"]`
+					);
+					next.scrollIntoView({ behavior: "smooth", block: "start" });
+				}
+				break;
+			}
+			// k
+			case 75: {
+				e.preventDefault();
+				const currentEl = findCurrentArticle();
+				if (!currentEl) return;
+				const index = parseInt(currentEl.dataset.index, 10);
+				const next = document.querySelector(`.item[data-index="${index + 1}"]`);
+				if (!next) return;
+				next.scrollIntoView({ behavior: "smooth", block: "start" });
+				break;
+			}
+		}
+	});
+}
+
 async function main() {
 	setThemeSwitching();
+
+	setHotkeyNavigation();
 
 	const url = decodeURI(window.location.search.substr(5));
 	const resp = await fetch(url);
