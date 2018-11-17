@@ -1,3 +1,10 @@
+/**
+ * takes predicate and if it is not falsy then pass it
+ * as first argument to fn, if falsy then fnNot will be
+ * called with no arguments
+ *
+ * used as rendering helper
+ */
 function vif(predicate, fn, fnNot = () => "") {
 	let l;
 	try {
@@ -9,6 +16,9 @@ function vif(predicate, fn, fnNot = () => "") {
 	return fnNot();
 }
 
+/**
+ * mappers for query params for "t" function
+ */
 const accessMappers = {
 	">": (el, prop) => el.querySelector(":scope " + prop),
 	"^": (el, prop) => el.getAttribute(prop),
@@ -50,19 +60,6 @@ function t(el, query) {
 		return action(el, current) || "";
 	} catch (e) {
 		return "";
-	}
-}
-
-function enableMedia(fragment) {
-	const root = document.createElement("div");
-	try {
-		root.innerHTML = fragment;
-		const audios = root.querySelectorAll("audio, video");
-		for (let el of audios) {
-			el.controls = true;
-		}
-	} finally {
-		return root.innerHTML || fragment;
 	}
 }
 
