@@ -103,6 +103,12 @@ hr {
 	margin-right: 0.5rem;
 }
 
+.header__subscribe {
+	margin-left: 0.4rem;
+	display: inline-block;
+	vertical-align: middle;
+}
+
 a.header__main-url {
 	color: var(--main-url-color);
 	border-bottom-color: var(--main-url-underline-color);

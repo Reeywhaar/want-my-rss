@@ -1,3 +1,7 @@
+import SubscribeButton from "./subscribeButton.js";
+
+window.customElements.define("subscribe-button", SubscribeButton);
+
 /**
  * takes predicate and if it is not falsy then pass it
  * as first argument to fn, if falsy then fnNot will be
@@ -76,10 +80,15 @@ function render(context) {
 					`<h1 class="header__title"><a class="header__main-url" href="${url}">${t(
 						context.root,
 						">title:"
-					) || "Untitled"}</a></h1>`,
+					) ||
+						"Untitled"}</a><subscribe-button class="header__subscribe" link="${
+						context.url
+					}"></subsribe-button></h1>`,
 				() =>
 					`<h1 class="header__title">${t(context.root, ">title:") ||
-						"Untitled"}</h1>`
+						"Untitled"}<subscribe-button class="header__subscribe" link="${
+						context.url
+					}"></subsribe-button></h1>`
 			)}
 			<div class="header__links">
 				<a class="header__original-url" href="${context.url}">${
