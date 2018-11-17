@@ -1,3 +1,14 @@
+import SubscribeButton from "./subscribeButton.js";
+
+window.customElements.define("subscribe-button", SubscribeButton);
+
+/**
+ * takes predicate and if it is not falsy then pass it
+ * as first argument to fn, if falsy then fnNot will be
+ * called with no arguments
+ *
+ * used as rendering helper
+ */
 function vif(predicate, fn, fnNot = () => "") {
 	let l;
 	try {
@@ -9,6 +20,9 @@ function vif(predicate, fn, fnNot = () => "") {
 	return fnNot();
 }
 
+/**
+ * mappers for query params for "t" function
+ */
 const accessMappers = {
 	">": (el, prop) => el.querySelector(":scope " + prop),
 	"^": (el, prop) => el.getAttribute(prop),
@@ -31,7 +45,6 @@ function t(el, query) {
 		let isEscape = false;
 		for (let char of query) {
 			if (char === "\\") {
-				current += char;
 				isEscape = true;
 				continue;
 			}
@@ -53,19 +66,6 @@ function t(el, query) {
 	}
 }
 
-function enableMedia(fragment) {
-	const root = document.createElement("div");
-	try {
-		root.innerHTML = fragment;
-		const audios = root.querySelectorAll("audio, video");
-		for (let el of audios) {
-			el.controls = true;
-		}
-	} finally {
-		return root.innerHTML || fragment;
-	}
-}
-
 function render(context) {
 	return `
 		<header class="header body__header">
@@ -74,15 +74,21 @@ function render(context) {
 				url => `<img class="header__image" src="${url}"/>`
 			)}
 			${vif(
-				() => t(context.root, ">link:"),
+				() =>
+					t(context.root, ">link\\:not([rel]):") || t(context.root, ">link:"),
 				url =>
 					`<h1 class="header__title"><a class="header__main-url" href="${url}">${t(
 						context.root,
 						">title:"
-					) || "Untitled"}</a></h1>`,
+					) ||
+						"Untitled"}</a><subscribe-button class="header__subscribe" link="${
+						context.url
+					}"></subsribe-button></h1>`,
 				() =>
 					`<h1 class="header__title">${t(context.root, ">title:") ||
-						"Untitled"}</h1>`
+						"Untitled"}<subscribe-button class="header__subscribe" link="${
+						context.url
+					}"></subsribe-button></h1>`
 			)}
 			<div class="header__links">
 				<a class="header__original-url" href="${context.url}">${
@@ -104,8 +110,8 @@ function render(context) {
 			<div class="items">
 				${context.items
 					.map(
-						item => `
-					<article class="item items__item">
+						(item, index) => `
+					<article class="item items__item" data-index="${index}">
 						<header class="item__header">
 							<h2 class="item__title">
 								${vif(
@@ -121,19 +127,62 @@ function render(context) {
 							</h2>
 							<p class="item__info">
 								${vif(
-									() => t(item, ">pubDate:") || t(item, ">published:"),
+									() =>
+										t(item, ">pubDate:") ||
+										t(item, ">published:") ||
+										t(item, ">date:"),
 									date =>
 										`<time class="item__pubDate" datetime="${date}">${date}</time>`
 								)}
 								${vif(
-									() => t(item, ">author:") || t(item, ">creator:"),
+									() =>
+										t(item, ">author>name:") ||
+										t(item, ">author>email:") ||
+										t(item, ">author:") ||
+										t(item, ">creator:"),
 									author => `<span class="item__author">by ${author}</span>`
 								)}
 							</p>
 						</header>
-						<div class="content item__content">${enableMedia(
-							t(item, ">description:") || t(item, ">content:")
-						)}</div>
+						<div class="content item__content">${t(item, ">description:") ||
+							t(item, ">content:")}</div>
+						${vif(
+							() => t(item, ">enclosure"),
+							media => {
+								try {
+									const type = t(media, "^type");
+									if (type.indexOf("image/") === 0) {
+										return `<div class="item__media">
+											<h4 class="item__media-title">Media</h4>
+											<img class="item__media-element item__media-element-image" src="${t(
+												media,
+												"^url"
+											)}">
+											</div>
+											`;
+									}
+									const strtype = type.indexOf("audio/" === 0)
+										? "audio"
+										: "video";
+									return `<div class="item__media">
+											<h4 class="item__media-title">Media</h4>
+											<${strtype} controls class="item__media-element item__media-element-${strtype}" preload="none" src="${t(
+										media,
+										"^url"
+									)}" type="${type}"/>
+										</div>`;
+								} catch (e) {
+									return "";
+								}
+							}
+						)}
+						${vif(
+							() =>
+								t(item, ">link:") ||
+								t(item, ">guid[isPermalink='true']:") ||
+								t(item, ">link^href"),
+							link => `<a class="item__bottom-link" href="${link}"></a>`
+						)}
 					</article>
 				`
 					)
@@ -206,12 +255,88 @@ async function setThemeSwitching() {
 	});
 }
 
+function findCurrentArticle() {
+	const center = document.body.clientWidth / 2;
+	const height = document.body.clientHeight;
+	let startPosition = 0;
+	while (startPosition <= height) {
+		const target = document
+			.elementsFromPoint(center, startPosition)
+			.find(x => x.matches(".item"));
+		if (target) return target;
+		startPosition += 10;
+	}
+	return null;
+}
+
+async function setHotkeyNavigation() {
+	document.addEventListener("keydown", e => {
+		switch (e.keyCode) {
+			// j
+			case 74: {
+				e.preventDefault();
+				const currentEl = findCurrentArticle();
+				if (!currentEl) return;
+				const index = parseInt(currentEl.dataset.index, 10);
+				if (index === 0) {
+					window.scrollTo({
+						top: 0,
+						behavior: "smooth",
+					});
+				} else {
+					const next = document.querySelector(
+						`.item[data-index="${index - 1}"]`
+					);
+					next.scrollIntoView({ behavior: "smooth", block: "start" });
+				}
+				break;
+			}
+			// k
+			case 75: {
+				e.preventDefault();
+				const currentEl = findCurrentArticle();
+				if (!currentEl) return;
+				const index = parseInt(currentEl.dataset.index, 10);
+				const next = document.querySelector(`.item[data-index="${index + 1}"]`);
+				if (!next) return;
+				next.scrollIntoView({ behavior: "smooth", block: "start" });
+				break;
+			}
+		}
+	});
+}
+
 async function main() {
 	setThemeSwitching();
 
+	setHotkeyNavigation();
+
 	const url = decodeURI(window.location.search.substr(5));
-	const resp = await fetch(url);
-	if (resp.status >= 400) return;
+	let resp;
+	try {
+		resp = await fetch(url);
+		if (resp.status >= 400) {
+			const notFound = document.createElement("div");
+			notFound.innerHTML = `
+				<div>
+					<h1>404</h1>
+					<p>Feed <a href="${url}">${url}</a> not found</p>
+				</div>
+			`;
+			document.body.appendChild(notFound);
+			return;
+		}
+	} catch (e) {
+		const error = document.createElement("div");
+		error.innerHTML = `
+				<div>
+					<h1>Error</h1>
+					<p>Error while fetching feed</p>
+				</div>
+			`;
+		document.body.appendChild(error);
+		return;
+	}
 	const data = new DOMParser().parseFromString(await resp.text(), "text/xml");
 	const container = document.body;
 	vif(

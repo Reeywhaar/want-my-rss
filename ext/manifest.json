@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Want My RSS",
-  "version": "0.1",
+  "version": "0.2",
   "description": "RSS featutes for Firefox",
 	"author": "Mikhail Vyrtsev",
 	"developer": {
@@ -10,8 +10,8 @@
 	},
 	"homepage_url": "https://github.com/Reeywhaar/want-my-rss",
   "icons": {
-    "48": "icon.svg",
-    "96": "icon.svg"
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg"
 	},
 	"background": {
 		"scripts": ["background.js"]
@@ -20,7 +20,7 @@
 		"<all_urls>"
 	],
 	"page_action": {
-    "default_icon": "icon.svg",
+    "default_icon": "icons/bar-icon.svg",
     "default_title": "Subscribe to page",
 		"browser_style": true,
 		"pinned": true

@@ -1,4 +1,4 @@
-# ![icon](ext/icon-color.svg) WANT MY RSS
+# ![icon](ext/icons/icon-color.svg) WANT MY RSS
 
 [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/want-my-rss/)
 
@@ -9,6 +9,9 @@ Firefox extension that restores some of RSS functionality which Firefox abandone
 
 [![Screencap](https://img.youtube.com/vi/d3tP7JFOLqc/0.jpg)](https://youtu.be/d3tP7JFOLqc)
 
+## Add Feed Reader
+If you want to add feed reader of your choice, see [following link](https://github.com/Reeywhaar/want-my-rss/issues/6)
+
 ## TODO
 
 * Subscribe buttons for popular services (Feedly, Tiny Tiny Rss, etc...)
@@ -17,6 +20,15 @@ Firefox extension that restores some of RSS functionality which Firefox abandone
 Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
+
+### 0.2
+
+* "Feed not found" message
+* Better picking of feeds
+* Line with article link at bottom
+* \<enclosure> tag handling
+* `j/k` navigation for previous/next article
+* subscribe button
 
 ### 0.1
 
