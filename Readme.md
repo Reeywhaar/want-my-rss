@@ -1,4 +1,4 @@
-# ![icon](ext/icon-color.svg) WANT MY RSS
+# ![icon](ext/icons/icon-color.svg) WANT MY RSS
 
 [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/want-my-rss/)
 
