@@ -28,6 +28,7 @@ Contributions are welcome. Fill issues, make prs!
 * Line with article link at bottom
 * \<enclosure> tag handling
 * `j/k` navigation for previous/next article
+* subscribe button
 
 ### 0.1
 
