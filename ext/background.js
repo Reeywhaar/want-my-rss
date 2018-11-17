@@ -50,7 +50,11 @@ browser.tabs.onUpdated.addListener(id => handler(id));
 browser.runtime.onMessage.addListener((message, sender, respond) => {
 	switch (message.action) {
 		case "open-tab":
-			browser.tabs.update({ url: message.url });
+			if (message.newTab && message.newTab === true) {
+				browser.tabs.create({ url: message.url });
+			} else {
+				browser.tabs.update({ url: message.url });
+			}
 			break;
 	}
 });

@@ -174,9 +174,13 @@ export default class SubscribeButton extends HTMLElement {
 			elements.icon.src = `./providers-icons/${prov.favicon}`;
 		});
 
-		elements.button.addEventListener("click", () => {
+		elements.button.addEventListener("click", e => {
 			const provider = Provider.get();
-			window.location.href = provider.link(this.getAttribute("link"));
+			browser.runtime.sendMessage({
+				action: "open-tab",
+				url: provider.link(this.getAttribute("link")),
+				newTab: e.metaKey,
+			});
 		});
 
 		elements.outlet.addEventListener("focus", e => {

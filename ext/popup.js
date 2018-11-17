@@ -14,6 +14,7 @@ const elements = links.map(el => {
 		browser.runtime.sendMessage({
 			action: "open-tab",
 			url: browser.runtime.getURL(`show.html?url=${encodeURI(el.url)}`),
+			newTab: e.metaKey,
 		});
 	});
 	return content;
