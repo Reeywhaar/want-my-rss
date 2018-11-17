@@ -30,9 +30,11 @@ browser.tabs
 	});
 
 const handler = async id => {
+	browser.pageAction.hide(id);
 	browser.tabs
 		.executeScript({
 			file: "./page.js",
+			runAt: "document_end",
 		})
 		.then(x => {
 			setAction(id, x[0].data);
