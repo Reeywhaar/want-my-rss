@@ -176,10 +176,7 @@ export default class SubscribeButton extends HTMLElement {
 
 		elements.button.addEventListener("click", () => {
 			const provider = Provider.get();
-			browser.runtime.sendMessage({
-				action: "open-tab",
-				url: provider.link(this.getAttribute("link")),
-			});
+			window.location.href = provider.link(this.getAttribute("link"));
 		});
 
 		elements.outlet.addEventListener("focus", e => {
