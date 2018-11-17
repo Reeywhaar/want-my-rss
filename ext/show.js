@@ -144,7 +144,7 @@ function render(context) {
 							() => t(item, ">enclosure"),
 							media => {
 								try {
-									let type = t(media, "^type");
+									const type = t(media, "^type");
 									if (type.indexOf("image/") === 0) {
 										return `<div class="item__media">
 											<h4 class="item__media-title">Media</h4>
@@ -155,7 +155,7 @@ function render(context) {
 											</div>
 											`;
 									}
-									let strtype = type.indexOf("audio/" === 0)
+									const strtype = type.indexOf("audio/" === 0)
 										? "audio"
 										: "video";
 									return `<div class="item__media">
