@@ -41,7 +41,6 @@ function t(el, query) {
 		let isEscape = false;
 		for (let char of query) {
 			if (char === "\\") {
-				current += char;
 				isEscape = true;
 				continue;
 			}
@@ -71,7 +70,8 @@ function render(context) {
 				url => `<img class="header__image" src="${url}"/>`
 			)}
 			${vif(
-				() => t(context.root, ">link:"),
+				() =>
+					t(context.root, ">link\\:not([rel]):") || t(context.root, ">link:"),
 				url =>
 					`<h1 class="header__title"><a class="header__main-url" href="${url}">${t(
 						context.root,
