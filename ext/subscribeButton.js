@@ -132,9 +132,9 @@ export default class SubscribeButton extends HTMLElement {
 			<div class="subscribe">
 				<span class="link">Subscribe</span><!--
 				--><div class="current-provider" tabindex="0"><!--
-					--><img class="provider-icon" src="./providers-icons/${
-						currentProvider.favicon
-					}"/>
+					--><img class="provider-icon" title=${
+						currentProvider.name
+					} src="./providers-icons/${currentProvider.favicon}"/>
 					<div class="providers hidden">
 						${Providers.map(
 							p =>
@@ -160,8 +160,10 @@ export default class SubscribeButton extends HTMLElement {
 		};
 
 		store.subscribe(prop => {
-			if (prop === "feed-provider")
+			if (prop === "feed-provider") {
 				elements.icon.src = `./providers-icons/${Provider.get().favicon}`;
+				elements.icon.title = Provider.get().name;
+			}
 		});
 
 		elements.button.addEventListener("mouseup", e => {
