@@ -85,16 +85,22 @@ function render(context) {
 			)}
 		</header>
 		<main class="main body__main">
-			<label class="items-sort">
-				<span class="items-sort__label">Sort:</span> <select class="items-sort__select">
-					${SortingsList.map(
-						sort =>
-							`<option value="${sort}" ${
-								sort === store.sort ? "selected" : ""
-							}>${Sortings[sort].label}</option>`
-					).join("")}
-				<select>
-			</label>
+			<div class="controls main__controls">
+				<label class="items-sort">
+					<span class="items-sort__label">Sort:</span> <select class="items-sort__select">
+						${SortingsList.map(
+							sort =>
+								`<option value="${sort}" ${
+									sort === store.sort ? "selected" : ""
+								}>${Sortings[sort].label}</option>`
+						).join("")}
+					<select>
+				</label>
+				<div class="controls__spacer"></div>
+				<label class="controls__relative-time-switch"><input class="relative-time-checkbox controls__relative-time-checkbox" type="checkbox" ${
+					store.useRelativeTime === "true" ? "checked" : ""
+				}>relative time</label>
+			</div>
 			<div class="items" id="items">
 				${context.items
 					.map(
@@ -125,7 +131,9 @@ function render(context) {
 										t(item, ">published:") ||
 										t(item, ">date:"),
 									date =>
-										`<time is="relative-date" data-relative="true" class="item__pubDate" datetime="${date}" title="${date}">${date}</time>`
+										`<time is="relative-date" data-relative="${
+											store.useRelativeTime
+										}" class="item__pubDate" datetime="${date}" title="${date}">${date}</time>`
 								)}
 								${vif(
 									() =>
@@ -379,6 +387,20 @@ async function main() {
 			});
 	};
 	if (store.sort !== "none") sortArticles(store.sort);
+
+	store.subscribe((prop, value) => {
+		if (prop === "use-relative-time") {
+			document.querySelectorAll("time[is='relative-date']").forEach(el => {
+				el.dataset.relative = value;
+			});
+		}
+	});
+
+	document
+		.querySelector(".relative-time-checkbox")
+		.addEventListener("change", e => {
+			store.useRelativeTime = e.target.checked.toString();
+		});
 
 	document
 		.querySelector(".items-sort__select")

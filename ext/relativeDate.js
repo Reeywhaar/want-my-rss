@@ -54,4 +54,8 @@ export default class RelativeDate extends HTMLTimeElement {
 			this.textContent = new Date(this.dateTime).toLocaleString();
 		}
 	}
+
+	static get observedAttributes() {
+		return ["datetime", "data-relative"];
+	}
 }

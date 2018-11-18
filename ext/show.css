@@ -153,14 +153,33 @@ a.header__main-url:visited:hover {
 	font-size: 0.8em;
 }
 
+/* main */
+
+/* controls */
+
+.controls {
+	display: flex;
+	margin-bottom: 0.5em;
+}
+
+.controls__spacer {
+	flex: 1;
+}
+
+.controls__relative-time-switch {
+	-moz-user-select: none;
+	user-select: none;
+}
+
 /* items-sort */
 
 .items-sort {
-	margin-bottom: 0.5em;
 	display: inline-block;
 }
 
 .items-sort__label {
+	-moz-user-select: none;
+	user-select: none;
 	font-size: 0.8em;
 }
 

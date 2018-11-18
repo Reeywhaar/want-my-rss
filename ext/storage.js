@@ -28,6 +28,7 @@ Object.defineProperties(store, {
 	theme: localStorageProperty("theme", "day"),
 	sort: localStorageProperty("sort", "none"),
 	provider: localStorageProperty("feed-provider", "feedly"),
+	useRelativeTime: localStorageProperty("use-relative-time", "true"),
 });
 
 store.subscribe = fn => {
