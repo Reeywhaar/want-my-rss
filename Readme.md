@@ -25,6 +25,9 @@ Contributions are welcome. Fill issues, make prs!
 
 * Article sorting
 * Better error handling
+* Show time relative feature
+* Bug fixes
+* Minor style changes
 
 ### 0.2
 
