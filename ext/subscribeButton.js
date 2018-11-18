@@ -1,3 +1,5 @@
+import store from "./storage.js";
+
 const Providers = [
 	{
 		id: "feedly",
@@ -28,24 +30,11 @@ const Providers = [
 
 class Provider {
 	static get() {
-		const provName = localStorage.getItem("feed-provider");
-		if (!provName) return Providers[0];
-		const prov = Providers.find(p => p.id === provName);
-		if (!prov) return Providers[0];
-		return prov;
+		return Providers.find(p => p.id === store.provider);
 	}
 
 	static set(id) {
-		const prov = Providers.find(p => p.id === id);
-		if (!prov) return;
-		localStorage.setItem("feed-provider", id);
-		this.listeners && this.listeners.forEach(fn => fn(prov));
-		return prov;
-	}
-
-	static subscribe(fn) {
-		if (!this.listeners) this.listeners = [];
-		this.listeners.push(fn);
+		store.provider = id;
 	}
 }
 
@@ -170,8 +159,9 @@ export default class SubscribeButton extends HTMLElement {
 			providers: root.querySelectorAll(".providers__item"),
 		};
 
-		Provider.subscribe(prov => {
-			elements.icon.src = `./providers-icons/${prov.favicon}`;
+		store.subscribe(prop => {
+			if (prop === "feed-provider")
+				elements.icon.src = `./providers-icons/${Provider.get().favicon}`;
 		});
 
 		elements.button.addEventListener("click", e => {
@@ -195,7 +185,8 @@ export default class SubscribeButton extends HTMLElement {
 			i.addEventListener("click", e => {
 				let currentProvider = Provider.get();
 				if (e.target.dataset.id === currentProvider.id) return;
-				currentProvider = Provider.set(e.target.dataset.id);
+				Provider.set(e.target.dataset.id);
+				currentProvider = Provider.get();
 				elements.outlet.blur();
 				elements.providers.forEach(i => {
 					if (i.dataset.id === currentProvider.id) {
