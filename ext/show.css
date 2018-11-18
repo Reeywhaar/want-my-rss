@@ -106,7 +106,7 @@ hr {
 .header__subscribe {
 	margin-left: 0.4rem;
 	display: inline-block;
-	vertical-align: middle;
+	vertical-align: 0.5em;
 }
 
 a.header__main-url {
@@ -125,6 +125,7 @@ a.header__main-url:visited:hover {
 }
 
 .header__title {
+	font-size: 2.5rem;
 	margin-top: 0.2rem;
 	margin-bottom: 0.2rem;
 }
