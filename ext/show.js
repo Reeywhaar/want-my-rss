@@ -51,7 +51,9 @@ function render(context) {
 			)}
 			${vif(
 				() =>
-					t(context.root, ">link\\:not([rel]):") || t(context.root, ">link:"),
+					t(context.root, ">link\\:not([rel]):") ||
+					t(context.root, ">link:") ||
+					t(context.root, ">link^href"),
 				url =>
 					`<h1 class="header__title"><a class="header__main-url" href="${url}">${t(
 						context.root,
