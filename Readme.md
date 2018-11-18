@@ -12,10 +12,6 @@ Firefox extension that restores some of RSS functionality which Firefox abandone
 ## Add Feed Reader
 If you want to add feed reader of your choice, see [following link](https://github.com/Reeywhaar/want-my-rss/issues/6)
 
-## TODO
-
-* Subscribe buttons for popular services (Feedly, Tiny Tiny Rss, etc...)
-
 ## Contributing
 Contributions are welcome. Fill issues, make prs!
 
