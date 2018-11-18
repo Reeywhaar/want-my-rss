@@ -164,12 +164,13 @@ export default class SubscribeButton extends HTMLElement {
 				elements.icon.src = `./providers-icons/${Provider.get().favicon}`;
 		});
 
-		elements.button.addEventListener("click", e => {
+		elements.button.addEventListener("mouseup", e => {
+			e.preventDefault();
 			const provider = Provider.get();
 			browser.runtime.sendMessage({
 				action: "open-tab",
 				url: provider.link(this.getAttribute("link")),
-				newTab: e.metaKey,
+				newTab: e.metaKey || e.which === 2,
 			});
 		});
 
