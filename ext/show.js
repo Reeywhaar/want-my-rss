@@ -84,7 +84,7 @@ function render(context) {
 		</header>
 		<main class="main body__main">
 			<label class="items-sort">
-				Sort: <select class="items-sort__select">
+				<span class="items-sort__label">Sort:</span> <select class="items-sort__select">
 					${SortingsList.map(
 						sort =>
 							`<option value="${sort}" ${

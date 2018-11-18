@@ -154,8 +154,8 @@ a.header__main-url:visited:hover {
 	display: inline-block;
 }
 
-.items-sort__select {
-	vertical-align: 0.2em;
+.items-sort__label {
+	font-size: 0.8em;
 }
 
 /* item */
