@@ -232,6 +232,11 @@ a.header__main-url:visited:hover {
 	height: 1rem;
 	display: block;
 	border-bottom-width: 0.5rem;
+	width: 100%;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	margin-left: -0.5rem;
+	margin-bottom: -0.5rem;
 }
 
 /* content */
