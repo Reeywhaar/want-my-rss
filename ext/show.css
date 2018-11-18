@@ -26,10 +26,10 @@
 	--link-underline-color: hsl(210, 70%, 50%, 0.3);
 	--link-hover-color: hsl(210, 90%, 70%);
 	--link-hover-underline-color: hsl(210, 90%, 70%, 0.3);
-	--link-visited-color: hsl(270, 70%, 50%);
-	--link-visited-underline-color: hsl(270, 70%, 50%, 0.3);
-	--link-visited-hover-color: hsl(270, 90%, 70%);
-	--link-visited-hover-underline-color: hsl(270, 90%, 70%, 0.3);
+	--link-visited-color: hsl(260, 70%, 50%);
+	--link-visited-underline-color: hsl(260, 70%, 50%, 0.3);
+	--link-visited-hover-color: hsl(260, 90%, 70%);
+	--link-visited-hover-underline-color: hsl(260, 90%, 70%, 0.3);
 
 	--header-source-opacity: 0.6;
 	--header-description-opacity: 0.6;
