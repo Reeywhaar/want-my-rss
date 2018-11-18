@@ -22,8 +22,8 @@ export function vif(predicate, fn, fnNot = () => "") {
 const accessMappers = {
 	">": (el, prop) => el.querySelector(":scope " + prop),
 	"^": (el, prop) => el.getAttribute(prop),
-	":": el => el.textContent,
-	"%": el => el.innerHTML,
+	":": el => el.textContent.trim(),
+	"%": el => el.innerHTML.trim(),
 };
 
 /**
