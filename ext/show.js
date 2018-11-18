@@ -334,7 +334,24 @@ async function main() {
 		document.body.appendChild(error);
 		return;
 	}
-	const data = new DOMParser().parseFromString(await resp.text(), "text/xml");
+
+	let data;
+	try {
+		data = new DOMParser().parseFromString(await resp.text(), "text/xml");
+		if (data.documentElement.tagName === "parsererror")
+			throw new Error("XML corrupted");
+	} catch (e) {
+		const error = document.createElement("div");
+		error.innerHTML = `
+				<div>
+					<h1>Error</h1>
+					<p>Error while parsing feed</p>
+				</div>
+			`;
+		document.body.appendChild(error);
+		return;
+	}
+
 	const container = document.body;
 	vif(
 		() => t(data, ">title:") || t(data, ">descripiton:"),
