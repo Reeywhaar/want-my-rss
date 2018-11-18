@@ -21,6 +21,14 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.3
+
+* Article sorting
+* Better error handling
+* Show time relative feature
+* Bug fixes
+* Minor style changes
+
 ### 0.2
 
 * "Feed not found" message

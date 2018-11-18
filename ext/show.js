@@ -1,70 +1,46 @@
 import SubscribeButton from "./subscribeButton.js";
+import RelativeDate from "./relativeDate.js";
+import store from "./storage.js";
+import { vif, t } from "./utils.js";
 
 window.customElements.define("subscribe-button", SubscribeButton);
+window.customElements.define("relative-date", RelativeDate, {
+	extends: "time",
+});
 
-/**
- * takes predicate and if it is not falsy then pass it
- * as first argument to fn, if falsy then fnNot will be
- * called with no arguments
- *
- * used as rendering helper
- */
-function vif(predicate, fn, fnNot = () => "") {
-	let l;
-	try {
-		l = predicate();
-	} catch (e) {}
-	if (l) {
-		return fn(l);
-	}
-	return fnNot();
-}
-
-/**
- * mappers for query params for "t" function
- */
-const accessMappers = {
-	">": (el, prop) => el.querySelector(":scope " + prop),
-	"^": (el, prop) => el.getAttribute(prop),
-	":": el => el.textContent,
-	"%": el => el.innerHTML,
+const Sortings = {
+	none: {
+		label: "None",
+		fn: (a, b) => {
+			try {
+				const pa = parseInt(a.dataset.index, 10);
+				const pb = parseInt(b.dataset.index, 10);
+				if (pa == pb) return 0;
+				return pa < pb ? -1 : 1;
+			} catch (e) {
+				return 0;
+			}
+		},
+	},
+	"date desc": {
+		label: "Newest",
+		fn: (a, b) => {
+			try {
+				const pa = Date.parse(a.dataset.datetime);
+				const pb = Date.parse(b.dataset.datetime);
+				if (pa == pb) return 0;
+				return pa < pb ? 1 : -1;
+			} catch (e) {
+				return 0;
+			}
+		},
+	},
+	"date asc": {
+		label: "Oldest",
+		fn: (a, b) => Sortings["date desc"].fn(a, b) * -1,
+	},
 };
-
-/**
- * t stands for "trace"
- *
- * t is a traversal tool for xml type documents
- *
- * @param {any} el
- * @param {String} query
- */
-function t(el, query) {
-	try {
-		let action;
-		let current;
-		let isEscape = false;
-		for (let char of query) {
-			if (char === "\\") {
-				isEscape = true;
-				continue;
-			}
-			if (accessMappers.hasOwnProperty(char) && !isEscape) {
-				if (typeof action !== "undefined") {
-					el = action(el, current);
-					current = undefined;
-				}
-				action = accessMappers[char];
-			} else {
-				if (typeof current === "undefined") current = "";
-				current += char;
-			}
-			isEscape = false;
-		}
-		return action(el, current) || "";
-	} catch (e) {
-		return "";
-	}
-}
+const SortingsList = ["none", "date desc", "date asc"];
 
 function render(context) {
 	return `
@@ -75,7 +51,9 @@ function render(context) {
 			)}
 			${vif(
 				() =>
-					t(context.root, ">link\\:not([rel]):") || t(context.root, ">link:"),
+					t(context.root, ">link\\:not([rel]):") ||
+					t(context.root, ">link:") ||
+					t(context.root, ">link^href"),
 				url =>
 					`<h1 class="header__title"><a class="header__main-url" href="${url}">${t(
 						context.root,
@@ -107,11 +85,32 @@ function render(context) {
 			)}
 		</header>
 		<main class="main body__main">
-			<div class="items">
+			<div class="controls main__controls">
+				<label class="items-sort">
+					<span class="items-sort__label">Sort:</span> <select class="items-sort__select">
+						${SortingsList.map(
+							sort =>
+								`<option value="${sort}" ${
+									sort === store.sort ? "selected" : ""
+								}>${Sortings[sort].label}</option>`
+						).join("")}
+					<select>
+				</label>
+				<div class="controls__spacer"></div>
+				<label class="controls__relative-time-switch"><input class="relative-time-checkbox controls__relative-time-checkbox" type="checkbox" ${
+					store.useRelativeTime === "true" ? "checked" : ""
+				}>relative time</label>
+			</div>
+			<div class="items" id="items">
 				${context.items
 					.map(
 						(item, index) => `
-					<article class="item items__item" data-index="${index}">
+					<article class="item items__item" data-index="${index}" data-sort-index="${index}" data-datetime="${t(
+							item,
+							">pubDate:"
+						) ||
+							t(item, ">published:") ||
+							t(item, ">date:")}">
 						<header class="item__header">
 							<h2 class="item__title">
 								${vif(
@@ -132,7 +131,9 @@ function render(context) {
 										t(item, ">published:") ||
 										t(item, ">date:"),
 									date =>
-										`<time class="item__pubDate" datetime="${date}">${date}</time>`
+										`<time is="relative-date" data-relative="${
+											store.useRelativeTime
+										}" class="item__pubDate" datetime="${date}" title="${date}">${date}</time>`
 								)}
 								${vif(
 									() =>
@@ -207,33 +208,37 @@ const Themes = {
 	},
 };
 
-function getTheme() {
-	const stored = localStorage.getItem("theme");
-	if (Themes.hasOwnProperty(stored)) return Themes[stored];
-	return Themes["day"];
-}
-
-let switchCounter = 0;
-
-function setTheme(themeName) {
-	localStorage.setItem("theme", themeName);
-	document.documentElement.classList.add("switch-transition");
-	++switchCounter;
-	setTimeout(() => {
-		document.documentElement.dataset.theme = themeName;
-	}, 10);
-	setTimeout(() => {
-		--switchCounter;
-		if (switchCounter < 1) {
-			document.documentElement.classList.remove("switch-transition");
-		}
-	}, 1500);
-}
-
 async function setThemeSwitching() {
+	const getTheme = () => {
+		return Themes[store.theme];
+	};
+
+	let switchCounter = 0;
+
+	const setTheme = themeName => {
+		store.theme = themeName;
+		document.documentElement.classList.add("switch-transition");
+		++switchCounter;
+		setTimeout(() => {
+			document.documentElement.dataset.theme = themeName;
+		}, 10);
+		setTimeout(() => {
+			--switchCounter;
+			if (switchCounter < 1) {
+				document.documentElement.classList.remove("switch-transition");
+			}
+		}, 1500);
+	};
+
 	const switcher = document.createElement("div");
 	switcher.classList.add("theme-switch");
 	document.body.appendChild(switcher);
+
+	store.subscribe((prop, v) => {
+		if (prop === theme) {
+			document.documentElement.dataset.theme = v;
+		}
+	});
 
 	const theme = getTheme();
 	document.documentElement.dataset.theme = theme.id;
@@ -277,7 +282,7 @@ async function setHotkeyNavigation() {
 				e.preventDefault();
 				const currentEl = findCurrentArticle();
 				if (!currentEl) return;
-				const index = parseInt(currentEl.dataset.index, 10);
+				const index = parseInt(currentEl.dataset.sortIndex, 10);
 				if (index === 0) {
 					window.scrollTo({
 						top: 0,
@@ -285,7 +290,7 @@ async function setHotkeyNavigation() {
 					});
 				} else {
 					const next = document.querySelector(
-						`.item[data-index="${index - 1}"]`
+						`.item[data-sort-index="${index - 1}"]`
 					);
 					next.scrollIntoView({ behavior: "smooth", block: "start" });
 				}
@@ -296,8 +301,10 @@ async function setHotkeyNavigation() {
 				e.preventDefault();
 				const currentEl = findCurrentArticle();
 				if (!currentEl) return;
-				const index = parseInt(currentEl.dataset.index, 10);
-				const next = document.querySelector(`.item[data-index="${index + 1}"]`);
+				const index = parseInt(currentEl.dataset.sortIndex, 10);
+				const next = document.querySelector(
+					`.item[data-sort-index="${index + 1}"]`
+				);
 				if (!next) return;
 				next.scrollIntoView({ behavior: "smooth", block: "start" });
 				break;
@@ -337,7 +344,24 @@ async function main() {
 		document.body.appendChild(error);
 		return;
 	}
-	const data = new DOMParser().parseFromString(await resp.text(), "text/xml");
+
+	let data;
+	try {
+		data = new DOMParser().parseFromString(await resp.text(), "text/xml");
+		if (data.documentElement.tagName === "parsererror")
+			throw new Error("XML corrupted");
+	} catch (e) {
+		const error = document.createElement("div");
+		error.innerHTML = `
+				<div>
+					<h1>Error</h1>
+					<p>Error while parsing feed</p>
+				</div>
+			`;
+		document.body.appendChild(error);
+		return;
+	}
+
 	const container = document.body;
 	vif(
 		() => t(data, ">title:") || t(data, ">descripiton:"),
@@ -350,6 +374,40 @@ async function main() {
 	const fr = document.createElement("template");
 	fr.innerHTML = render({ root: data, items: items, url });
 	container.append(fr.content);
+
+	const sortArticles = sort => {
+		const articleContainer = document.getElementById("items");
+		const articles = articleContainer.querySelectorAll(":scope > .item");
+
+		Array.from(articles)
+			.sort(Sortings[sort].fn)
+			.forEach((x, i) => {
+				x.dataset.sortIndex = i;
+				articleContainer.appendChild(x);
+			});
+	};
+	if (store.sort !== "none") sortArticles(store.sort);
+
+	store.subscribe((prop, value) => {
+		if (prop === "use-relative-time") {
+			document.querySelectorAll("time[is='relative-date']").forEach(el => {
+				el.dataset.relative = value;
+			});
+		}
+	});
+
+	document
+		.querySelector(".relative-time-checkbox")
+		.addEventListener("change", e => {
+			store.useRelativeTime = e.target.checked.toString();
+		});
+
+	document
+		.querySelector(".items-sort__select")
+		.addEventListener("change", e => {
+			store.sort = e.target.value;
+			sortArticles(e.target.value);
+		});
 }
 
 main().catch(e => {
