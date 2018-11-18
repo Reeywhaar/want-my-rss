@@ -147,6 +147,17 @@ a.header__main-url:visited:hover {
 	font-size: 0.8em;
 }
 
+/* items-sort */
+
+.items-sort {
+	margin-bottom: 0.5em;
+	display: inline-block;
+}
+
+.items-sort__select {
+	vertical-align: 0.2em;
+}
+
 /* item */
 
 .item {

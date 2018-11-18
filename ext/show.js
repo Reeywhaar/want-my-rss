@@ -8,6 +8,40 @@ window.customElements.define("relative-date", RelativeDate, {
 	extends: "time",
 });
 
+const Sortings = {
+	none: {
+		label: "None",
+		fn: (a, b) => {
+			try {
+				const pa = parseInt(a.dataset.index, 10);
+				const pb = parseInt(b.dataset.index, 10);
+				if (pa == pb) return 0;
+				return pa < pb ? -1 : 1;
+			} catch (e) {
+				return 0;
+			}
+		},
+	},
+	"date desc": {
+		label: "Newest",
+		fn: (a, b) => {
+			try {
+				const pa = Date.parse(a.dataset.datetime);
+				const pb = Date.parse(b.dataset.datetime);
+				if (pa == pb) return 0;
+				return pa < pb ? 1 : -1;
+			} catch (e) {
+				return 0;
+			}
+		},
+	},
+	"date asc": {
+		label: "Oldest",
+		fn: (a, b) => Sortings["date desc"].fn(a, b) * -1,
+	},
+};
+const SortingsList = ["none", "date desc", "date asc"];
+
 function render(context) {
 	return `
 		<header class="header body__header">
@@ -49,11 +83,26 @@ function render(context) {
 			)}
 		</header>
 		<main class="main body__main">
-			<div class="items">
+			<label class="items-sort">
+				Sort: <select class="items-sort__select">
+					${SortingsList.map(
+						sort =>
+							`<option value="${sort}" ${
+								sort === store.sort ? "selected" : ""
+							}>${Sortings[sort].label}</option>`
+					).join("")}
+				<select>
+			</label>
+			<div class="items" id="items">
 				${context.items
 					.map(
 						(item, index) => `
-					<article class="item items__item" data-index="${index}">
+					<article class="item items__item" data-index="${index}" data-sort-index="${index}" data-datetime="${t(
+							item,
+							">pubDate:"
+						) ||
+							t(item, ">published:") ||
+							t(item, ">date:")}">
 						<header class="item__header">
 							<h2 class="item__title">
 								${vif(
@@ -223,7 +272,7 @@ async function setHotkeyNavigation() {
 				e.preventDefault();
 				const currentEl = findCurrentArticle();
 				if (!currentEl) return;
-				const index = parseInt(currentEl.dataset.index, 10);
+				const index = parseInt(currentEl.dataset.sortIndex, 10);
 				if (index === 0) {
 					window.scrollTo({
 						top: 0,
@@ -231,7 +280,7 @@ async function setHotkeyNavigation() {
 					});
 				} else {
 					const next = document.querySelector(
-						`.item[data-index="${index - 1}"]`
+						`.item[data-sort-index="${index - 1}"]`
 					);
 					next.scrollIntoView({ behavior: "smooth", block: "start" });
 				}
@@ -242,8 +291,10 @@ async function setHotkeyNavigation() {
 				e.preventDefault();
 				const currentEl = findCurrentArticle();
 				if (!currentEl) return;
-				const index = parseInt(currentEl.dataset.index, 10);
-				const next = document.querySelector(`.item[data-index="${index + 1}"]`);
+				const index = parseInt(currentEl.dataset.sortIndex, 10);
+				const next = document.querySelector(
+					`.item[data-sort-index="${index + 1}"]`
+				);
 				if (!next) return;
 				next.scrollIntoView({ behavior: "smooth", block: "start" });
 				break;
@@ -296,6 +347,26 @@ async function main() {
 	const fr = document.createElement("template");
 	fr.innerHTML = render({ root: data, items: items, url });
 	container.append(fr.content);
+
+	const sortArticles = sort => {
+		const articleContainer = document.getElementById("items");
+		const articles = articleContainer.querySelectorAll(":scope > .item");
+
+		Array.from(articles)
+			.sort(Sortings[sort].fn)
+			.forEach((x, i) => {
+				x.dataset.sortIndex = i;
+				articleContainer.appendChild(x);
+			});
+	};
+	if (store.sort !== "none") sortArticles(store.sort);
+
+	document
+		.querySelector(".items-sort__select")
+		.addEventListener("change", e => {
+			store.sort = e.target.value;
+			sortArticles(e.target.value);
+		});
 }
 
 main().catch(e => {
