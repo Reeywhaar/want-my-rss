@@ -73,7 +73,7 @@ export default class SubscribeButton extends HTMLElement {
 
 				.current-provider {
 					display: inline;
-					padding: 0.2rem 0.4rem 0.2rem 0.35rem;
+					padding: 0.2rem 0.4rem 0.2rem 0.4rem;
 					background: #fff;
 					border: 1px solid rgba(0, 0, 0, 0.2);
 					cursor: default;
