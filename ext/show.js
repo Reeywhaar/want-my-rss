@@ -145,7 +145,8 @@ function render(context) {
 								)}
 							</p>
 						</header>
-						<div class="content item__content">${t(item, ">description:") ||
+						<div class="content item__content">${t(item, ">encoded:") ||
+							t(item, ">description:") ||
 							t(item, ">content:")}</div>
 						${vif(
 							() => t(item, ">enclosure"),
