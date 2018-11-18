@@ -137,6 +137,10 @@ a.header__main-url:visited:hover {
 	transition: opacity 0.4s;
 }
 
+.header__links {
+	display: inline-block;
+}
+
 .header__links:hover .header__original-url-source {
 	opacity: var(--header-source-opacity);
 	transition: opacity 0s;
