@@ -207,6 +207,7 @@ a.header__main-url:visited:hover {
 }
 
 .item__title {
+	font-size: 2rem;
 	margin-top: 0.2rem;
 	margin-bottom: 0.2rem;
 }
