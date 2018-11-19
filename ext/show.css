@@ -26,8 +26,8 @@
 	--link-underline-color: hsl(200, 70%, 45%, 0.3);
 	--link-hover-color: hsl(200, 90%, 60%);
 	--link-hover-underline-color: hsl(200, 90%, 60%, 0.3);
-	--link-visited-color: hsl(230, 50%, 50%);
-	--link-visited-underline-color: hsl(230, 50%, 50%, 0.3);
+	--link-visited-color: hsl(230, 20%, 50%);
+	--link-visited-underline-color: hsl(230, 20%, 50%, 0.3);
 	--link-visited-hover-color: hsl(230, 90%, 70%);
 	--link-visited-hover-underline-color: hsl(230, 90%, 70%, 0.3);
 
@@ -330,8 +330,8 @@ html[data-theme="night"] {
 	--link-underline-color: hsl(200, 100%, 70%, 0.7);
 	--link-hover-color: hsl(200, 100%, 90%);
 	--link-hover-underline-color: hsl(200, 90%, 90%, 0.7);
-	--link-visited-color: hsl(230, 60%, 80%);
-	--link-visited-underline-color: hsl(230, 60%, 80%, 0.7);
+	--link-visited-color: hsl(230, 40%, 80%);
+	--link-visited-underline-color: hsl(230, 40%, 80%, 0.7);
 	--link-visited-hover-color: hsl(230, 70%, 90%);
 	--link-visited-hover-underline-color: hsl(230, 70%, 90%, 0.7);
 
