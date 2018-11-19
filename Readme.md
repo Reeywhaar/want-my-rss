@@ -17,6 +17,10 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.4
+
+* Better keyboard navigation
+
 ### 0.3
 
 * Article sorting

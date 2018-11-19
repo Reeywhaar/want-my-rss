@@ -104,13 +104,10 @@ function render(context) {
 			<div class="items" id="items">
 				${context.items
 					.map(
-						(item, index) => `
-					<article class="item items__item" data-index="${index}" data-sort-index="${index}" data-datetime="${t(
-							item,
-							">pubDate:"
-						) ||
-							t(item, ">published:") ||
-							t(item, ">date:")}">
+						item => `
+					<article class="item items__item" data-datetime="${t(item, ">pubDate:") ||
+						t(item, ">published:") ||
+						t(item, ">date:")}">
 						<header class="item__header">
 							<h2 class="item__title">
 								${vif(
@@ -283,16 +280,14 @@ async function setHotkeyNavigation() {
 				e.preventDefault();
 				const currentEl = findCurrentArticle();
 				if (!currentEl) return;
-				const index = parseInt(currentEl.dataset.sortIndex, 10);
-				if (index === 0) {
+				const rect = currentEl.getBoundingClientRect();
+				const next = rect.y < -2 ? currentEl : currentEl.previousElementSibling;
+				if (!next) {
 					window.scrollTo({
 						top: 0,
 						behavior: "smooth",
 					});
 				} else {
-					const next = document.querySelector(
-						`.item[data-sort-index="${index - 1}"]`
-					);
 					next.scrollIntoView({ behavior: "smooth", block: "start" });
 				}
 				break;
@@ -302,12 +297,16 @@ async function setHotkeyNavigation() {
 				e.preventDefault();
 				const currentEl = findCurrentArticle();
 				if (!currentEl) return;
-				const index = parseInt(currentEl.dataset.sortIndex, 10);
-				const next = document.querySelector(
-					`.item[data-sort-index="${index + 1}"]`
-				);
-				if (!next) return;
-				next.scrollIntoView({ behavior: "smooth", block: "start" });
+				const rect = currentEl.getBoundingClientRect();
+				const next = rect.y > 2 ? currentEl : currentEl.nextElementSibling;
+				if (next) {
+					next.scrollIntoView({ behavior: "smooth", block: "start" });
+				} else {
+					window.scrollTo({
+						top: document.body.scrollHeight,
+						behavior: "smooth",
+					});
+				}
 				break;
 			}
 		}
