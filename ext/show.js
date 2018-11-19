@@ -1,7 +1,7 @@
 import SubscribeButton from "./subscribeButton.js";
 import RelativeDate from "./relativeDate.js";
 import store from "./storage.js";
-import { vif, t } from "./utils.js";
+import { vif, t, longest } from "./utils.js";
 
 window.customElements.define("subscribe-button", SubscribeButton);
 window.customElements.define("relative-date", RelativeDate, {
@@ -76,12 +76,12 @@ function render(context) {
 	}">source</a>
 			</div>
 			${vif(
-				() => t(context.root, ">description:"),
-				description =>
-					`<p class="header__description">${vif(
-						() => t(context.root, ">subtitle:"),
-						description => `${description}<br/>`
-					)}${description}</p>`
+				() =>
+					longest(
+						t(context.root, ">description:"),
+						t(context.root, ">subtitle:")
+					),
+				description => `<p class="header__description">${description}</p>`
 			)}
 		</header>
 		<main class="main body__main">
@@ -142,9 +142,11 @@ function render(context) {
 								)}
 							</p>
 						</header>
-						<div class="content item__content">${t(item, ">encoded:") ||
-							t(item, ">description:") ||
-							t(item, ">content:")}</div>
+						<div class="content item__content">${longest(
+							t(item, ">encoded:"),
+							t(item, ">description:"),
+							t(item, ">content:")
+						)}</div>
 						${vif(
 							() => t(item, ">enclosure"),
 							media => {

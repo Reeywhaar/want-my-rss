@@ -61,3 +61,11 @@ export function t(el, query) {
 		return "";
 	}
 }
+
+export function longest(...strings) {
+	let longest = strings[0];
+	for (let i = 1; i < strings.length; i++) {
+		if (strings[i].length > longest) longest = strings[i];
+	}
+	return longest;
+}
