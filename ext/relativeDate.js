@@ -4,6 +4,7 @@ const minute = 60 * second;
 const hour = 60 * minute;
 const day = 24 * hour;
 const week = 7 * day;
+const month = 31 * day;
 
 function pluralize(n, label) {
 	if (n === 1) {
@@ -26,7 +27,7 @@ function relativeDate(dateString) {
 		const timestamp = Date.parse(dateString);
 		const time = new Date(timestamp).toLocaleString();
 		const delta = now - timestamp;
-		if (delta > week) return time;
+		if (delta > month) return time;
 		if (delta < 30 * second) return "now";
 		if (delta < minute)
 			return `${pluralize(Math.round(delta / second), "second")} ago`;
@@ -34,7 +35,7 @@ function relativeDate(dateString) {
 			return `${pluralize(Math.round(delta / minute), "minute")} ago`;
 		if (delta < day)
 			return `${pluralize(Math.round(delta / hour), "hour")} ago`;
-		if (delta <= week)
+		if (delta <= month)
 			return `${pluralize(Math.round(delta / day), "day")} ago`;
 		return time;
 	} catch (e) {
