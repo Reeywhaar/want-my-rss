@@ -277,7 +277,8 @@ function findCurrentArticle() {
 async function setHotkeyNavigation() {
 	document.addEventListener("keydown", e => {
 		switch (e.keyCode) {
-			// j
+			// <-, j
+			case 37:
 			case 74: {
 				e.preventDefault();
 				const currentEl = findCurrentArticle();
@@ -294,7 +295,8 @@ async function setHotkeyNavigation() {
 				}
 				break;
 			}
-			// k
+			// ->, k
+			case 39:
 			case 75: {
 				e.preventDefault();
 				const currentEl = findCurrentArticle();
