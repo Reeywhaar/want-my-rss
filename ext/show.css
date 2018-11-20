@@ -188,7 +188,7 @@ a.header__main-url:visited:hover {
 .item {
 	background: var(--item-background-color);
 	box-shadow: var(--item-shadow);
-	padding: 0.5rem;
+	padding: 1rem;
 	border-radius: var(--item-border-radius);
 	overflow: hidden;
 }
@@ -199,7 +199,7 @@ a.header__main-url:visited:hover {
 
 .item__header {
 	padding: 0.5rem;
-	padding-top: 1.5rem;
+	padding-top: 1rem;
 	width: 100%;
 	margin-top: -0.5rem;
 	margin-bottom: 1rem;
@@ -207,6 +207,7 @@ a.header__main-url:visited:hover {
 }
 
 .item__title {
+	font-family: Lucida Bright, Georgia, serif;
 	font-size: 2rem;
 	margin-top: 0.2rem;
 	margin-bottom: 0.2rem;
@@ -255,8 +256,8 @@ a.header__main-url:visited:hover {
 	width: 100%;
 	padding-left: 1rem;
 	padding-right: 1rem;
-	margin-left: -0.5rem;
-	margin-bottom: -0.5rem;
+	margin-left: -1rem;
+	margin-bottom: -1rem;
 }
 
 /* content */
