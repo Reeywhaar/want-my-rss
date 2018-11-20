@@ -1,7 +1,7 @@
 import SubscribeButton from "./subscribeButton.js";
 import RelativeDate from "./relativeDate.js";
 import store from "./storage.js";
-import { vif, t } from "./utils.js";
+import { vif, t, longest } from "./utils.js";
 
 window.customElements.define("subscribe-button", SubscribeButton);
 window.customElements.define("relative-date", RelativeDate, {
@@ -76,12 +76,12 @@ function render(context) {
 	}">source</a>
 			</div>
 			${vif(
-				() => t(context.root, ">description:"),
-				description =>
-					`<p class="header__description">${vif(
-						() => t(context.root, ">subtitle:"),
-						description => `${description}<br/>`
-					)}${description}</p>`
+				() =>
+					longest(
+						t(context.root, ">description:"),
+						t(context.root, ">subtitle:")
+					),
+				description => `<p class="header__description">${description}</p>`
 			)}
 		</header>
 		<main class="main body__main">
@@ -104,13 +104,10 @@ function render(context) {
 			<div class="items" id="items">
 				${context.items
 					.map(
-						(item, index) => `
-					<article class="item items__item" data-index="${index}" data-sort-index="${index}" data-datetime="${t(
-							item,
-							">pubDate:"
-						) ||
-							t(item, ">published:") ||
-							t(item, ">date:")}">
+						item => `
+					<article class="item items__item" data-datetime="${t(item, ">pubDate:") ||
+						t(item, ">published:") ||
+						t(item, ">date:")}">
 						<header class="item__header">
 							<h2 class="item__title">
 								${vif(
@@ -145,8 +142,11 @@ function render(context) {
 								)}
 							</p>
 						</header>
-						<div class="content item__content">${t(item, ">description:") ||
-							t(item, ">content:")}</div>
+						<div class="content item__content">${longest(
+							t(item, ">encoded:"),
+							t(item, ">description:"),
+							t(item, ">content:")
+						)}</div>
 						${vif(
 							() => t(item, ">enclosure"),
 							media => {
@@ -277,36 +277,40 @@ function findCurrentArticle() {
 async function setHotkeyNavigation() {
 	document.addEventListener("keydown", e => {
 		switch (e.keyCode) {
-			// j
+			// <-, j
+			case 37:
 			case 74: {
 				e.preventDefault();
 				const currentEl = findCurrentArticle();
 				if (!currentEl) return;
-				const index = parseInt(currentEl.dataset.sortIndex, 10);
-				if (index === 0) {
+				const rect = currentEl.getBoundingClientRect();
+				const next = rect.y < -2 ? currentEl : currentEl.previousElementSibling;
+				if (!next) {
 					window.scrollTo({
 						top: 0,
 						behavior: "smooth",
 					});
 				} else {
-					const next = document.querySelector(
-						`.item[data-sort-index="${index - 1}"]`
-					);
 					next.scrollIntoView({ behavior: "smooth", block: "start" });
 				}
 				break;
 			}
-			// k
+			// ->, k
+			case 39:
 			case 75: {
 				e.preventDefault();
 				const currentEl = findCurrentArticle();
 				if (!currentEl) return;
-				const index = parseInt(currentEl.dataset.sortIndex, 10);
-				const next = document.querySelector(
-					`.item[data-sort-index="${index + 1}"]`
-				);
-				if (!next) return;
-				next.scrollIntoView({ behavior: "smooth", block: "start" });
+				const rect = currentEl.getBoundingClientRect();
+				const next = rect.y > 2 ? currentEl : currentEl.nextElementSibling;
+				if (next) {
+					next.scrollIntoView({ behavior: "smooth", block: "start" });
+				} else {
+					window.scrollTo({
+						top: document.body.scrollHeight,
+						behavior: "smooth",
+					});
+				}
 				break;
 			}
 		}

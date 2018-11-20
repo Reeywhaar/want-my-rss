@@ -6,20 +6,23 @@ Firefox extension that restores some of RSS functionality which Firefox abandone
 
 * Show indicator in the url bar if feed link available
 * Show preview page with rss feed
+* Subscribe button
+* Keyboard navigation with ←|j for previous and →|k for next article
 
 [![Screencap](https://img.youtube.com/vi/d3tP7JFOLqc/0.jpg)](https://youtu.be/d3tP7JFOLqc)
 
 ## Add Feed Reader
 If you want to add feed reader of your choice, see [following link](https://github.com/Reeywhaar/want-my-rss/issues/6)
 
-## TODO
-
-* Subscribe buttons for popular services (Feedly, Tiny Tiny Rss, etc...)
-
 ## Contributing
 Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
+
+### 0.4
+
+* Additional prev/next keyboard navigation with ←/→ arrow keys
+* Better keyboard navigation
 
 ### 0.3
 
