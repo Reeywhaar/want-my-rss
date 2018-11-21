@@ -147,6 +147,7 @@ function render(context) {
 							t(item, ">description:"),
 							t(item, ">content:")
 						)}</div>
+						<div style="clear: both;"></div>
 						${vif(
 							() => t(item, ">enclosure"),
 							media => {
