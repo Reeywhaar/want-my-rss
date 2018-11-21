@@ -11,6 +11,7 @@
 			return false;
 		})
 		.map(el => ({
+			type: el.getAttribute("type"),
 			url: el.href,
 			title: el.title || null,
 		}));
