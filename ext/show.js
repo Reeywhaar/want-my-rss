@@ -221,19 +221,19 @@ async function setThemeSwitching() {
 	document.documentElement.dataset.theme = theme.id;
 	const themeImg = document.createElement("img");
 	themeImg.classList.add("theme-switch__img");
-	themeImg.src = "./" + theme.img;
+	themeImg.src = "./icons/" + theme.img;
 
 	window.addEventListener("focus", () => {
 		const theme = getTheme();
 		document.documentElement.dataset.theme = theme.id;
-		themeImg.src = "./" + theme.img;
+		themeImg.src = "./icons/" + theme.img;
 	});
 
 	switcher.appendChild(themeImg);
 	switcher.addEventListener("click", () => {
 		const nt = getTheme().id === "day" ? "night" : "day";
 		setTheme(nt);
-		themeImg.src = "./" + Themes[nt].img;
+		themeImg.src = "./icons/" + Themes[nt].img;
 	});
 }
 
