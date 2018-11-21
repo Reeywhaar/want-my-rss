@@ -113,8 +113,7 @@ function render({ data, url }) {
 									<p class="item__info">
 										${vif(
 											() => item.date.toLocaleString(),
-											date =>
-												`
+											date => `
 												<time
 													is="relative-date"
 													data-relative="${store.useRelativeTime}"
@@ -123,7 +122,8 @@ function render({ data, url }) {
 													title="${date}"
 												>
 													${date}
-												</time>`
+												</time>
+											`
 										)}
 										${vif(
 											() => t(item, ".author", null, t.escape),

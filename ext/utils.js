@@ -88,7 +88,15 @@ export function t(el, query, def = "", escape = 0) {
 	}
 }
 
+/**
+ * escapes html entities
+ */
 t.escape = 0x01;
+
+/**
+ * prerenders dom to avoid breaking html with
+ * prematurely closed tags
+ */
 t.safe = 0x10;
 
 export function longest(...strings) {
