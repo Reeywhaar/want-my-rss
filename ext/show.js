@@ -47,21 +47,27 @@ function render({ data, url }) {
 		<header class="header body__header">
 			${vif(() => data.image, url => `<img class="header__image" src="${url}"/>`)}
 			${vif(
-				() => data.url,
+				() => t(data, ".url", null, t.escape),
 				mainUrl =>
-					`<h1 class="header__title"><a class="header__main-url" href="${mainUrl}">${
-						data.title
-					}</a><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`,
+					`<h1 class="header__title"><a class="header__main-url" href="${mainUrl}">${t(
+						data,
+						".title",
+						"",
+						t.escape
+					)}</a><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`,
 				() =>
-					`<h1 class="header__title"><span class="header__title-span">${
-						data.title
-					}</span><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`
+					`<h1 class="header__title"><span class="header__title-span">${t(
+						data,
+						".title",
+						"",
+						t.escape
+					)}</span><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`
 			)}
 			<div class="header__links">
 				<a class="header__original-url" href="${url}">${url}</a><a class="header__original-url-source" href="view-source:${url}">source</a>
 			</div>
 			${vif(
-				() => data.description,
+				() => t(data, ".description", null, t.escape),
 				description => `<p class="header__description">${description}</p>`
 			)}
 		</header>
@@ -95,13 +101,13 @@ function render({ data, url }) {
 									${vif(() => item.image, url => `<img class="item__image" src="${url}"/>`)}
 									<h2 class="item__title">
 										${vif(
-											() => item.url,
+											() => t(item, ".url", null, t.escape),
 											link => `
 												<a class="noline" href="${link}">
-													${t(item, ".title", "Untitled")}
+													${t(item, ".title", "Untitled", t.escape)}
 												</a>
 											`,
-											() => t(item, ".title", "Untitled")
+											() => t(item, ".title", "Untitled", t.escape)
 										)}
 									</h2>
 									<p class="item__info">
@@ -120,13 +126,13 @@ function render({ data, url }) {
 												</time>`
 										)}
 										${vif(
-											() => item.author,
+											() => t(item, ".author", null, t.escape),
 											author => `<span class="item__author">by ${author}</span>`
 										)}
 									</p>
 									<div style="clear: both;"></div>
 								</header>
-								<div class="content item__content">${t(item, ".content")}</div>
+								<div class="content item__content">${t(item, ".content", "", t.safe)}</div>
 								<div style="clear: both;"></div>
 								${vif(
 									() => item.media,
@@ -137,7 +143,7 @@ function render({ data, url }) {
 													<h4 class="item__media-title">Media</h4>
 													<img
 														class="item__media-element item__media-element-image"
-														src="${t(media, ".url")}"
+														src="${t(media, ".url", "", t.escape)}"
 													/>
 												</div>`;
 										}
@@ -151,14 +157,14 @@ function render({ data, url }) {
 														controls
 														class="item__media-element item__media-element-${strtype}"
 														preload="none"
-														src="${t(media, ".url")}"
-														type="${t(media, ".type")}"
+														src="${t(media, ".url", "", t.escape)}"
+														type="${t(media, ".type", "", t.escape)}"
 													/>
 											</div>`;
 									}
 								)}
 								${vif(
-									() => item.url,
+									() => t(item, ".url", "", t.escape),
 									link => `<a class="item__bottom-link" href="${link}"></a>`
 								)}
 							</article>
@@ -309,7 +315,7 @@ function parseXML(string) {
 	data.title = t(dom, ">title:", "Untitled");
 
 	vif(
-		() => longest(t(dom, ">description:"), t(dom, ">subtitle:")),
+		() => longest(t(dom, ">description:", ""), t(dom, ">subtitle:", "")),
 		setProp(data, "description")
 	);
 

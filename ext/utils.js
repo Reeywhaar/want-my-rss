@@ -27,6 +27,27 @@ const accessMappers = {
 	".": (el, prop) => el[prop],
 };
 
+const entityMap = {
+	"&": "&amp;",
+	"<": "&lt;",
+	">": "&gt;",
+	'"': "&quot;",
+	"'": "&#39;",
+	"/": "&#x2F;",
+	"`": "&#x60;",
+	"=": "&#x3D;",
+};
+
+export function escapeHtml(string) {
+	return string.replace(/[&<>"'`=\/]/g, s => entityMap[s]);
+}
+
+export function safe(string) {
+	const el = document.createElement("div");
+	el.innerHTML = string;
+	return el.innerHTML;
+}
+
 /**
  * t stands for "trace"
  *
@@ -35,7 +56,7 @@ const accessMappers = {
  * @param {any} el
  * @param {String} query
  */
-export function t(el, query, def = "") {
+export function t(el, query, def = "", escape = 0) {
 	try {
 		let action;
 		let current;
@@ -57,11 +78,18 @@ export function t(el, query, def = "") {
 			}
 			isEscape = false;
 		}
-		return action(el, current) || "";
+
+		let out = action(el, current);
+		if (escape & t.escape) out = escapeHtml(out);
+		if (escape & t.safe) out = safe(out);
+		return out || def;
 	} catch (e) {
 		return def;
 	}
 }
+
+t.escape = 0x01;
+t.safe = 0x10;
 
 export function longest(...strings) {
 	let longest = strings[0];
