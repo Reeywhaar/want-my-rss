@@ -24,6 +24,7 @@ const accessMappers = {
 	"^": (el, prop) => el.getAttribute(prop),
 	":": el => el.textContent.trim(),
 	"%": el => el.innerHTML.trim(),
+	".": (el, prop) => el[prop],
 };
 
 /**
@@ -34,7 +35,7 @@ const accessMappers = {
  * @param {any} el
  * @param {String} query
  */
-export function t(el, query) {
+export function t(el, query, def = "") {
 	try {
 		let action;
 		let current;
@@ -58,7 +59,7 @@ export function t(el, query) {
 		}
 		return action(el, current) || "";
 	} catch (e) {
-		return "";
+		return def;
 	}
 }
 
@@ -68,4 +69,8 @@ export function longest(...strings) {
 		if (strings[i].length > longest) longest = strings[i];
 	}
 	return longest;
+}
+
+export function setProp(obj, prop) {
+	return val => (obj[prop] = val);
 }
