@@ -324,6 +324,7 @@ async function main() {
 	setHotkeyNavigation();
 
 	const url = decodeURI(window.location.search.substr(5));
+	console.log(url);
 	let resp;
 	try {
 		resp = await fetch(url);
@@ -344,6 +345,7 @@ async function main() {
 				<div>
 					<h1>Error</h1>
 					<p>Error while fetching feed</p>
+					<a href="${url}">${url}</a>
 				</div>
 			`;
 		document.body.appendChild(error);
@@ -361,6 +363,7 @@ async function main() {
 				<div>
 					<h1>Error</h1>
 					<p>Error while parsing feed</p>
+					<a href="${url}">${url}</a>
 				</div>
 			`;
 		document.body.appendChild(error);
