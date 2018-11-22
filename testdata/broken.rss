@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+	<channel>
+		<title><![CDATA[Title with html</div>]]></title>
+		<link><![CDATA[https://example.com<div>]]></link>
+		<language>ru</language>
+		<copyright><![CDATA[Author]]></copyright>
+		<description><![CDATA[Description with <span>html</span>]]></description>
+		<item>
+			<title><![CDATA[Title with html</b>]]></title>
+			<description><![CDATA[<p><img src="https://podcast.umputun.com/images/uwp/uwp416.jpg" alt=""></p></div>
+				<ul>
+					<li>List item with <a href="https://example.com/listurl">link</a>.</li>
+					<li>list item with prematurely closed tag</div></li>
+					<li>Image with html in src <img src="https://example.com/image<b/>"/></li>
+				</ul>
+				<audio src="https://podcast.umputun.com/media/ump_podcast416.mp3" preload="none"></audio>
+				<b>And here is script <script>alert("pwned")</script></b>
+				<p onclick="alert('pwned')">Element with click event binded</p>
+			]]></description>
+			<link>https://example.com/article</link>
+			<pubDate>Tue, 20 Nov 2018 17:48:53 EST</pubDate>
+			<enclosure url="https://example.com/file.mp3" length="70469887" type="audio/mp3"/>
+		</item>
+		<item>
+			<title><![CDATA[Title with quote in " it]]></title>
+		</item>
+	</channel>
+</rss>
