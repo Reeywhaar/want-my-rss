@@ -340,6 +340,15 @@ a.header__main-url:visited:hover {
 	height: 2rem;
 }
 
+@media screen and (min-width: 68rem) {
+	.theme-switch {
+		height: 0;
+		position: sticky;
+		display: inline-block;
+		margin-left: 61rem;
+	}
+}
+
 /* switch-transition */
 
 .switch-transition {
