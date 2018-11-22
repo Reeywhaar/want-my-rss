@@ -1,7 +1,7 @@
 import SubscribeButton from "./subscribeButton.js";
 import RelativeDate from "./relativeDate.js";
 import store from "./storage.js";
-import { vif, t, longest } from "./utils.js";
+import { vif, t, longest, setProp } from "./utils.js";
 
 window.customElements.define("subscribe-button", SubscribeButton);
 window.customElements.define("relative-date", RelativeDate, {
@@ -26,8 +26,8 @@ const Sortings = {
 		label: "Newest",
 		fn: (a, b) => {
 			try {
-				const pa = Date.parse(a.dataset.datetime);
-				const pb = Date.parse(b.dataset.datetime);
+				const pa = parseInt(a.dataset.datetime, 10);
+				const pb = parseInt(b.dataset.datetime, 10);
 				if (pa == pb) return 0;
 				return pa < pb ? 1 : -1;
 			} catch (e) {
@@ -42,45 +42,32 @@ const Sortings = {
 };
 const SortingsList = ["none", "date desc", "date asc"];
 
-function render(context) {
+function render({ data, url }) {
 	return `
 		<header class="header body__header">
+			${vif(() => data.image, url => `<img class="header__image" src="${url}"/>`)}
 			${vif(
-				() => t(context.root, ">image>url:"),
-				url => `<img class="header__image" src="${url}"/>`
-			)}
-			${vif(
+				() => t(data, ".url", null, t.escape),
+				mainUrl =>
+					`<h1 class="header__title"><a class="header__main-url" href="${mainUrl}">${t(
+						data,
+						".title",
+						"",
+						t.escape
+					)}</a><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`,
 				() =>
-					t(context.root, ">link\\:not([rel]):") ||
-					t(context.root, ">link:") ||
-					t(context.root, ">link^href"),
-				url =>
-					`<h1 class="header__title"><a class="header__main-url" href="${url}">${t(
-						context.root,
-						">title:"
-					) ||
-						"Untitled"}</a><subscribe-button class="header__subscribe" link="${
-						context.url
-					}"></subsribe-button></h1>`,
-				() =>
-					`<h1 class="header__title">${t(context.root, ">title:") ||
-						"Untitled"}<subscribe-button class="header__subscribe" link="${
-						context.url
-					}"></subsribe-button></h1>`
+					`<h1 class="header__title"><span class="header__title-span">${t(
+						data,
+						".title",
+						"",
+						t.escape
+					)}</span><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`
 			)}
 			<div class="header__links">
-				<a class="header__original-url" href="${context.url}">${
-		context.url
-	}</a><a class="header__original-url-source" href="view-source:${
-		context.url
-	}">source</a>
+				<a class="header__original-url" href="${url}">${url}</a><a class="header__original-url-source" href="view-source:${url}">source</a>
 			</div>
 			${vif(
-				() =>
-					longest(
-						t(context.root, ">description:"),
-						t(context.root, ">subtitle:")
-					),
+				() => t(data, ".description", null, t.escape),
 				description => `<p class="header__description">${description}</p>`
 			)}
 		</header>
@@ -102,89 +89,85 @@ function render(context) {
 				}>relative time</label>
 			</div>
 			<div class="items" id="items">
-				${context.items
+				${data.items
 					.map(
-						item => `
-					<article class="item items__item" data-datetime="${t(item, ">pubDate:") ||
-						t(item, ">published:") ||
-						t(item, ">date:")}">
-						<header class="item__header">
-							<h2 class="item__title">
+						(item, index) => `
+							<article class="item items__item" data-index="${index}" data-datetime="${vif(
+							() => item.date.getTime(),
+							date => date,
+							() => 0
+						)}">
+								<header class="item__header">
+									${vif(() => item.image, url => `<img class="item__image" src="${url}"/>`)}
+									<h2 class="item__title">
+										${vif(
+											() => t(item, ".url", null, t.escape),
+											link => `
+												<a class="noline" href="${link}">
+													${t(item, ".title", "Untitled", t.escape)}
+												</a>
+											`,
+											() => t(item, ".title", "Untitled", t.escape)
+										)}
+									</h2>
+									<p class="item__info">
+										${vif(
+											() => item.date.toLocaleString(),
+											date => `
+												<time
+													is="relative-date"
+													data-relative="${store.useRelativeTime}"
+													class="item__pubDate"
+													datetime="${date}"
+													title="${date}"
+												>
+													${date}
+												</time>
+											`
+										)}
+										${vif(
+											() => t(item, ".author", null, t.escape),
+											author => `<span class="item__author">by ${author}</span>`
+										)}
+									</p>
+									<div style="clear: both;"></div>
+								</header>
+								<div class="content item__content">${t(item, ".content", "", t.safe)}</div>
+								<div style="clear: both;"></div>
 								${vif(
-									() =>
-										t(item, ">link:") ||
-										t(item, ">guid[isPermalink='true']:") ||
-										t(item, ">link^href"),
-									link => `<a class="noline" href="${link}">
-									${t(item, ">title:") || "Untitled"}
-								</a>`,
-									() => t(item, ">title:") || "Untitled"
-								)}
-							</h2>
-							<p class="item__info">
-								${vif(
-									() =>
-										t(item, ">pubDate:") ||
-										t(item, ">published:") ||
-										t(item, ">date:"),
-									date =>
-										`<time is="relative-date" data-relative="${
-											store.useRelativeTime
-										}" class="item__pubDate" datetime="${date}" title="${date}">${date}</time>`
-								)}
-								${vif(
-									() =>
-										t(item, ">author>name:") ||
-										t(item, ">author>email:") ||
-										t(item, ">author:") ||
-										t(item, ">creator:"),
-									author => `<span class="item__author">by ${author}</span>`
-								)}
-							</p>
-						</header>
-						<div class="content item__content">${longest(
-							t(item, ">encoded:"),
-							t(item, ">description:"),
-							t(item, ">content:")
-						)}</div>
-						${vif(
-							() => t(item, ">enclosure"),
-							media => {
-								try {
-									const type = t(media, "^type");
-									if (type.indexOf("image/") === 0) {
-										return `<div class="item__media">
-											<h4 class="item__media-title">Media</h4>
-											<img class="item__media-element item__media-element-image" src="${t(
-												media,
-												"^url"
-											)}">
-											</div>
-											`;
+									() => item.media,
+									media => {
+										if (media.type.indexOf("image/") === 0) {
+											return `
+												<div class="item__media">
+													<h4 class="item__media-title">Media</h4>
+													<img
+														class="item__media-element item__media-element-image"
+														src="${t(media, ".url", "", t.escape)}"
+													/>
+												</div>`;
+										}
+										const strtype = media.type.indexOf("audio/" === 0)
+											? "audio"
+											: "video";
+										return `
+											<div class="item__media">
+													<h4 class="item__media-title">Media</h4>
+													<${strtype}
+														controls
+														class="item__media-element item__media-element-${strtype}"
+														preload="none"
+														src="${t(media, ".url", "", t.escape)}"
+														type="${t(media, ".type", "", t.escape)}"
+													/>
+											</div>`;
 									}
-									const strtype = type.indexOf("audio/" === 0)
-										? "audio"
-										: "video";
-									return `<div class="item__media">
-											<h4 class="item__media-title">Media</h4>
-											<${strtype} controls class="item__media-element item__media-element-${strtype}" preload="none" src="${t(
-										media,
-										"^url"
-									)}" type="${type}"/>
-										</div>`;
-								} catch (e) {
-									return "";
-								}
-							}
-						)}
-						${vif(
-							() =>
-								t(item, ">link:") ||
-								t(item, ">guid[isPermalink='true']:") ||
-								t(item, ">link^href"),
-							link => `<a class="item__bottom-link" href="${link}"></a>`
-						)}
-					</article>
+								)}
+								${vif(
+									() => t(item, ".url", "", t.escape),
+									link => `<a class="item__bottom-link" href="${link}"></a>`
+								)}
+							</article>
 				`
 					)
 					.join("")}
@@ -244,19 +227,19 @@ async function setThemeSwitching() {
 	document.documentElement.dataset.theme = theme.id;
 	const themeImg = document.createElement("img");
 	themeImg.classList.add("theme-switch__img");
-	themeImg.src = "./" + theme.img;
+	themeImg.src = "./icons/" + theme.img;
 
 	window.addEventListener("focus", () => {
 		const theme = getTheme();
 		document.documentElement.dataset.theme = theme.id;
-		themeImg.src = "./" + theme.img;
+		themeImg.src = "./icons/" + theme.img;
 	});
 
 	switcher.appendChild(themeImg);
 	switcher.addEventListener("click", () => {
 		const nt = getTheme().id === "day" ? "night" : "day";
 		setTheme(nt);
-		themeImg.src = "./" + Themes[nt].img;
+		themeImg.src = "./icons/" + Themes[nt].img;
 	});
 }
 
@@ -317,6 +300,108 @@ async function setHotkeyNavigation() {
 	});
 }
 
+function parseXML(string) {
+	const data = {};
+	const dom = new DOMParser().parseFromString(string, "text/xml");
+	if (dom.documentElement.tagName === "parsererror")
+		throw new Error("XML corrupted");
+
+	vif(() => t(dom, ">image>url:"), setProp(data, "image"));
+	vif(
+		() =>
+			t(dom, ">link\\:not([rel]):") || t(dom, ">link:") || t(dom, ">link^href"),
+		setProp(data, "url")
+	);
+	data.title = t(dom, ">title:", "Untitled");
+
+	vif(
+		() => longest(t(dom, ">description:", ""), t(dom, ">subtitle:", "")),
+		setProp(data, "description")
+	);
+
+	let items = Array.from(dom.querySelectorAll("item"));
+	if (items.length === 0) items = Array.from(dom.querySelectorAll("entry"));
+
+	data.items =
+		items.map(item => {
+			const parsed = {};
+			vif(
+				() =>
+					t(item, ">pubDate:") || t(item, ">published:") || t(item, ">date:"),
+				date => setProp(parsed, "date")(new Date(date))
+			);
+
+			vif(
+				() =>
+					t(item, ">link:") ||
+					t(item, ">guid[isPermalink='true']:") ||
+					t(item, ">link^href"),
+				setProp(parsed, "url")
+			);
+
+			parsed.title = t(item, ">title:", "Untitled");
+
+			vif(
+				() =>
+					t(item, ">author>name:") ||
+					t(item, ">author>email:") ||
+					t(item, ">author:") ||
+					t(item, ">creator:"),
+				setProp(parsed, "author")
+			);
+
+			vif(
+				() =>
+					longest(
+						t(item, ">encoded:"),
+						t(item, ">description:"),
+						t(item, ">content:")
+					),
+				setProp(parsed, "content")
+			);
+
+			vif(
+				() => t(item, ">enclosure"),
+				media => {
+					const out = {};
+					out.type = t(media, "^type");
+					out.url = t(media, "^url");
+					setProp(parsed, "media")(out);
+				}
+			);
+
+			return parsed;
+		}) || [];
+
+	return data;
+}
+
+function parseJSON(json) {
+	const data = {};
+	data.title = t(json, ".title", "Untitled");
+	vif(() => json.home_page_url, setProp(data, "url"));
+	vif(() => json.icon, setProp(data, "image"));
+
+	try {
+		data.items = json.items.map(item => {
+			const out = {};
+			out.title = t(item, ".title", "Untitled");
+			vif(() => item.url, setProp(out, "url"));
+			vif(() => item.image, setProp(out, "image"));
+			vif(
+				() => item.date_published || item.date_modified,
+				date => setProp(out, "date")(new Date(date))
+			);
+			vif(() => item.content_html, setProp(out, "content"));
+			return out;
+		});
+	} catch (e) {
+		data.items = [];
+	}
+
+	return data;
+}
+
 async function main() {
 	setThemeSwitching();
 
@@ -343,6 +428,7 @@ async function main() {
 				<div>
 					<h1>Error</h1>
 					<p>Error while fetching feed</p>
+					<a href="${url}">${url}</a>
 				</div>
 			`;
 		document.body.appendChild(error);
@@ -351,32 +437,36 @@ async function main() {
 
 	let data;
 	try {
-		data = new DOMParser().parseFromString(await resp.text(), "text/xml");
-		if (data.documentElement.tagName === "parsererror")
-			throw new Error("XML corrupted");
+		const type = resp.headers.get("Content-Type");
+		if (type.includes("xml")) {
+			data = parseXML(await resp.text());
+		} else if (type.includes("json")) {
+			data = parseJSON(await resp.json());
+		} else {
+			throw new Error("Unsopported format");
+		}
+		data.feedUrl = url;
 	} catch (e) {
 		const error = document.createElement("div");
 		error.innerHTML = `
 				<div>
 					<h1>Error</h1>
 					<p>Error while parsing feed</p>
+					<a href="${url}">${url}</a>
 				</div>
 			`;
 		document.body.appendChild(error);
+		console.error(e);
 		return;
 	}
 
 	const container = document.body;
 	vif(
-		() => t(data, ">title:") || t(data, ">descripiton:"),
+		() => data.title || data.description,
 		description => (document.title = description)
 	);
-	let items = Array.from(data.querySelectorAll("item"));
-	if (items.length === 0) {
-		items = Array.from(data.querySelectorAll("entry"));
-	}
 	const fr = document.createElement("template");
-	fr.innerHTML = render({ root: data, items: items, url });
+	fr.innerHTML = render({ data, url });
 	container.append(fr.content);
 
 	const sortArticles = sort => {

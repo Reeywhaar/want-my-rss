@@ -19,6 +19,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.5
+
+* JSON feeds support
+* Data escaping (:
+* Slight design modifications
+
 ### 0.4
 
 * Additional prev/next keyboard navigation with ←/→ arrow keys

@@ -20,7 +20,7 @@
 }
 
 :root {
-	--background-color: hsl(40, 30%, 99%);
+	--background-color: hsl(40, 10%, 98.5%);
 	--main-color: #000;
 	--link-color: hsl(200, 70%, 45%);
 	--link-underline-color: hsl(200, 70%, 45%, 0.3);
@@ -39,7 +39,7 @@
 
 	--item-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1);
 	--item-border-radius: 0.2rem;
-	--item-background-color: rgba(0, 0, 0, 0.02);
+	--item-background-color: #fff;
 	--line-color: rgba(0, 0, 0, 0.09);
 }
 
@@ -131,6 +131,10 @@ a.header__main-url:visited:hover {
 	margin-right: 2.5rem;
 }
 
+.header__title-span {
+	margin-right: 0.4rem;
+}
+
 .header__original-url-source {
 	margin-left: 1em;
 	font-size: 0.8em;
@@ -197,6 +201,13 @@ a.header__main-url:visited:hover {
 	margin-top: 1rem;
 }
 
+.item__image {
+	max-width: 10rem;
+	max-height: 5rem;
+	float: right;
+	margin-top: -0.5rem;
+}
+
 .item__header {
 	padding: 0.5rem;
 	padding-top: 1rem;
@@ -204,6 +215,7 @@ a.header__main-url:visited:hover {
 	margin-top: -0.5rem;
 	margin-bottom: 1rem;
 	margin-left: -0.5rem;
+	border-bottom: 1px dashed var(--line-color);
 }
 
 .item__title {
@@ -218,7 +230,6 @@ a.header__main-url:visited:hover {
 	padding-bottom: 0.2rem;
 	margin-bottom: 0.2rem;
 	font-size: 0.8em;
-	border-bottom: 1px dashed var(--line-color);
 }
 
 .item__author {
@@ -297,6 +308,26 @@ a.header__main-url:visited:hover {
 	padding-left: 1em;
 }
 
+.content blockquote {
+	opacity: 0.8;
+	font-style: italic;
+}
+
+.content blockquote::before {
+	content: "— ";
+	opacity: 0.6;
+	float: left;
+	font-style: normal;
+	margin-left: -1.5rem;
+}
+
+.content iframe[allowfullscreen] {
+	width: 100%;
+	min-height: 30rem;
+}
+
+/* footer */
+
 .footer {
 	margin-top: 2rem;
 	height: 10rem;
@@ -316,6 +347,15 @@ a.header__main-url:visited:hover {
 	height: 2rem;
 }
 
+@media screen and (min-width: 68rem) {
+	.theme-switch {
+		height: 0;
+		position: sticky;
+		display: inline-block;
+		margin-left: 61rem;
+	}
+}
+
 /* switch-transition */
 
 .switch-transition {
@@ -325,7 +365,7 @@ a.header__main-url:visited:hover {
 /* night theme */
 
 html[data-theme="night"] {
-	--background-color: hsl(30, 20%, 2%);
+	--background-color: hsl(30, 20%, 4%);
 	--main-color: rgba(255, 255, 255, 0.8);
 	--link-color: hsl(200, 100%, 70%);
 	--link-underline-color: hsl(200, 100%, 70%, 0.7);
@@ -344,6 +384,6 @@ html[data-theme="night"] {
 
 	--item-shadow: 0px 0px 1px 1px rgba(255, 255, 255, 0.5);
 	--item-border-radius: 0;
-	--item-background-color: rgba(255, 255, 255, 0.2);
+	--item-background-color: hsl(30, 20%, 10%);
 	--line-color: rgba(255, 255, 255, 0.4);
 }
