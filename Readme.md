@@ -23,6 +23,7 @@ Contributions are welcome. Fill issues, make prs!
 
 * JSON feeds support
 * Data escaping (:
+* Slight design modifications
 
 ### 0.4
 
