@@ -321,6 +321,13 @@ a.header__main-url:visited:hover {
 	margin-left: -1.5rem;
 }
 
+.content iframe[allowfullscreen] {
+	width: 100%;
+	min-height: 30rem;
+}
+
+/* footer */
+
 .footer {
 	margin-top: 2rem;
 	height: 10rem;
