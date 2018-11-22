@@ -80,6 +80,7 @@ export function t(el, query, def = "", escape = 0) {
 		}
 
 		let out = action(el, current);
+		if (!out) return def;
 		if (escape & t.escape) out = escapeHtml(out);
 		if (escape & t.safe) out = safe(out);
 		return out || def;
