@@ -26,6 +26,13 @@ const Providers = [
 		link: feed => `http://www.newsblur.com/?url=${encodeURI(feed)}`,
 		favicon: "newsblur.png",
 	},
+	{
+		id: "netvibes",
+		name: "Netvibes",
+		link: feed =>
+			`https://www.netvibes.com/subscribe.php?url=${encodeURI(feed)}`,
+		favicon: "netvibes.png",
+	},
 ];
 
 class Provider {
