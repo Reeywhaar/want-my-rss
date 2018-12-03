@@ -37,7 +37,7 @@ const Providers = [
 
 class Provider {
 	static get() {
-		return Providers.find(p => p.id === store.provider);
+		return Providers.find(p => p.id === store.provider) || Providers[0];
 	}
 
 	static set(id) {
@@ -194,8 +194,8 @@ export default class SubscribeButton extends HTMLElement {
 		elements.providers.forEach(i => {
 			i.addEventListener("click", e => {
 				let currentProvider = Provider.get();
-				if (e.target.dataset.id === currentProvider.id) return;
-				Provider.set(e.target.dataset.id);
+				if (e.currentTarget.dataset.id === currentProvider.id) return;
+				Provider.set(e.currentTarget.dataset.id);
 				currentProvider = Provider.get();
 				elements.outlet.blur();
 				elements.providers.forEach(i => {
