@@ -19,6 +19,11 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.6
+
+* added Netvibes
+* fix subscribe button icon click
+
 ### 0.5
 
 * JSON feeds support
