@@ -21,7 +21,8 @@ Contributions are welcome. Fill issues, make prs!
 
 ### 0.6
 
-* Added Netvibes
+* added Netvibes
+* fix subscribe button icon click
 
 ### 0.5
 
