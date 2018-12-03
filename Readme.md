@@ -19,6 +19,10 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.6
+
+* Added Netvibes
+
 ### 0.5
 
 * JSON feeds support
