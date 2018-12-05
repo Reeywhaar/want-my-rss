@@ -19,6 +19,10 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.7
+
+* added BazQux
+
 ### 0.6
 
 * added Netvibes

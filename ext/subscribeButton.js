@@ -33,6 +33,12 @@ const Providers = [
 			`https://www.netvibes.com/subscribe.php?url=${encodeURI(feed)}`,
 		favicon: "netvibes.png",
 	},
+	{
+		id: "bazqux",
+		name: "BazQux",
+		link: feed => `https://bazqux.com/add?url=${encodeURI(feed)}`,
+		favicon: "bazqux.ico",
+	},
 ];
 
 class Provider {
@@ -51,91 +57,7 @@ export default class SubscribeButton extends HTMLElement {
 		const currentProvider = Provider.get();
 		const root = this.attachShadow({ mode: "open" });
 		root.innerHTML = `
-			<style>
-				:host {
-					font-size: initial;
-					font-weight: initial;
-					color: initial;
-					position: relative;
-				}
-
-				.subscribe {
-					display:inline-block;
-				}
-
-				.link {
-					display: inline-block;
-					padding: .2rem .4rem;
-					background: #fff;
-					border: 1px solid rgba(0, 0, 0, 0.2);
-					cursor: default;
-					border-top-left-radius: 0.2em;
-					border-bottom-left-radius: 0.2em;
-					border-right: none;
-				}
-
-				.link:hover {
-					background-color: hsla(210, 70%, 50%, 0.3);
-				}
-
-				.current-provider {
-					display: inline;
-					padding: 0.2rem 0.4rem 0.2rem 0.4rem;
-					background: #fff;
-					border: 1px solid rgba(0, 0, 0, 0.2);
-					cursor: default;
-					border-top-right-radius: 0.2em;
-					border-bottom-right-radius: 0.2em;
-				}
-
-				.current-provider:hover, .current-provider:focus {
-					background-color: hsla(210, 70%, 50%, 0.3);
-				}
-
-				.current-provider:focus {
-					outline: none;
-				}
-
-				.provider-icon {
-					width: 1em;
-					height: 1em;
-					vertical-align: -0.17em;
-				}
-
-				.providers {
-					position:absolute;
-					top: 1.5rem;
-					right: 0;
-					background: #fff;
-					border-radius: 0.2em;
-					border: 1px solid rgba(0, 0, 0, 0.2);
-					z-index: 2;
-				}
-
-				.providers__item {
-					display:block;
-					cursor: default;
-					padding: 0.2em 0.4em;
-					white-space: nowrap;
-					text-align: right;
-				}
-
-				.providers__item:not(.providers__item--current):hover {
-					background-color: hsla(210, 70%, 50%, 0.3);
-				}
-
-				.providers__item--current {
-					background-color: hsla(210, 70%, 50%, 0.1);
-				}
-
-				.providers__item + .providers__item {
-					border-top: 1px solid rgba(0, 0, 0, 0.2);
-				}
-
-				.hidden {
-					display: none;
-				}
-			</style>
+			<link rel="stylesheet" href="/subscribeButton.css">
 			<div class="subscribe">
 				<span class="link">Subscribe</span><!--
 				--><div class="current-provider" tabindex="0"><!--

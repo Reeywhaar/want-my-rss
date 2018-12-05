@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Want My RSS",
-  "version": "0.6",
+  "version": "0.7",
   "description": "RSS featutes for Firefox",
 	"author": "Mikhail Vyrtsev",
 	"developer": {
@@ -27,7 +27,7 @@
   },
 	"applications": {
 		"gecko": {
-			"strict_min_version": "54.0"
+			"strict_min_version": "63.0"
 		}
 	}
 }
