@@ -33,6 +33,12 @@ const Providers = [
 			`https://www.netvibes.com/subscribe.php?url=${encodeURI(feed)}`,
 		favicon: "netvibes.png",
 	},
+	{
+		id: "bazqux",
+		name: "BazQux",
+		link: feed => `https://bazqux.com/add?url=${encodeURI(feed)}`,
+		favicon: "bazqux.ico",
+	},
 ];
 
 class Provider {
