@@ -10,16 +10,24 @@ const types = {
 	"application/json": "json",
 };
 
+function findParent(el, selector) {
+	while (!el.matches(selector)) {
+		if (el === document.body) return null;
+		el = el.parentElement;
+	}
+	return el;
+}
+
 document.addEventListener("click", e => {
 	if (!(e.which === 1 || e.which === 2)) return;
+	const el = findParent(e.target, ".items__item-link");
+	if (!el) return;
 	e.preventDefault();
-	if (e.target.dataset.url) {
-		browser.runtime.sendMessage({
-			action: "open-tab",
-			url: browser.runtime.getURL(e.target.dataset.url),
-			newTab: e.which === 2 || e.metaKey,
-		});
-	}
+	browser.runtime.sendMessage({
+		action: "open-tab",
+		url: browser.runtime.getURL(el.dataset.url),
+		newTab: e.which === 2 || e.metaKey,
+	});
 });
 
 const elements = links.map(el => {
