@@ -302,10 +302,14 @@ async function setHotkeyNavigation() {
 
 function parseXML(string) {
 	const data = {};
-	const dom = new DOMParser().parseFromString(string, "text/xml");
+	const xmlHeaderIndex = string.indexOf("<?xml");
+	if (xmlHeaderIndex === -1) throw new Error("XML corrupted");
+	const dom = new DOMParser().parseFromString(
+		string.substr(xmlHeaderIndex),
+		"text/xml"
+	);
 	if (dom.documentElement.tagName === "parsererror")
 		throw new Error("XML corrupted");
-
 	vif(() => t(dom, ">image>url:"), setProp(data, "image"));
 	vif(
 		() =>
