@@ -19,6 +19,11 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.8
+
+* show original url in extension's popup
+* loose xml parsing from first occurance of `<?xml`
+
 ### 0.7
 
 * added BazQux
