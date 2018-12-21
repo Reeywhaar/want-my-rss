@@ -358,7 +358,8 @@ function parseXML(string) {
 					longest(
 						t(item, ">encoded:"),
 						t(item, ">description:"),
-						t(item, ">content:")
+						t(item, ">content:"),
+						t(item, ">summary:")
 					),
 				setProp(parsed, "content")
 			);
