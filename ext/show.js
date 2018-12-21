@@ -303,9 +303,8 @@ async function setHotkeyNavigation() {
 function parseXML(string) {
 	const data = {};
 	const xmlHeaderIndex = string.indexOf("<?xml");
-	if (xmlHeaderIndex === -1) throw new Error("XML corrupted");
 	const dom = new DOMParser().parseFromString(
-		string.substr(xmlHeaderIndex),
+		string.substr(xmlHeaderIndex === -1 ? 0 : xmlHeaderIndex),
 		"text/xml"
 	);
 	if (dom.documentElement.tagName === "parsererror")
@@ -359,7 +358,8 @@ function parseXML(string) {
 					longest(
 						t(item, ">encoded:"),
 						t(item, ">description:"),
-						t(item, ">content:")
+						t(item, ">content:"),
+						t(item, ">summary:")
 					),
 				setProp(parsed, "content")
 			);
@@ -407,11 +407,17 @@ function parseJSON(json) {
 }
 
 async function main() {
+	let url = decodeURI(window.location.search.substr(5));
+	if (url.indexOf("ext%2Brss%3A") === 0) {
+		url = decodeURIComponent(url.substr(12));
+		window.location.replace("/show.html?url=" + encodeURI(url));
+	}
+
 	setThemeSwitching();
 
 	setHotkeyNavigation();
 
-	const url = decodeURI(window.location.search.substr(5));
+	console.log(url);
 	let resp;
 	try {
 		resp = await fetch(url);

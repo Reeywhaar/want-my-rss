@@ -1,0 +1,1119 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>https://cert-portal.siemens.com/productcert/rss/advisories.atom</id>
+  <title>Siemens ProductCERT Security Advisories</title>
+  <updated>2018-12-17T00:00:00+00:00</updated>
+  <author>
+    <name>Siemens ProductCERT</name>
+    <email>productcert@siemens.com</email>
+  </author>
+  <link href="https://cert-portal.siemens.com/productcert/rss/advisories.atom" rel="self"/>
+  <generator>Siemens ProductCERT</generator>
+  <subtitle>Siemens Security Advisories</subtitle>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-982399.pdf</id>
+    <title>SSA-982399 (Last Update: 2018-12-17): Missing Authentication in TIM 1531 IRC Modules</title>
+    <updated>2018-12-17T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-982399.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for TIM 1531 IRC fixes a vulnerability. The devices was missing proper authentication when connecting on port 102/tcp, although configured.&lt;/p&gt;
+&lt;p&gt;An attacker needs to be able to connect to port 102/tcp of an affected device in order to exploit this vulnerability.&lt;/p&gt;
+&lt;p&gt;The vulnerability could allow an attacker to perform administrative operations.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for TIM 1531 IRC modules.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-181018.pdf</id>
+    <title>SSA-181018 (Last Update: 2018-12-13): Heap Overflow Vulnerability in SCALANCE X switches, RUGGEDCOM WiMAX, RFID 181-EIP, and SIMATIC RF182C</title>
+    <updated>2018-12-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-181018.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;SCALANCE X switches, RUGGEDCOM WiMAX, RFID 181-EIP, and SIMATIC RF182C are affected by a vulnerability that could allow an unprivileged attacker located in the same local network segment (OSI Layer 2) to gain system privileges by sending a specially crafted DHCP response to a client's DHCP request.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-293562.pdf</id>
+    <title>SSA-293562 (Last Update: 2018-12-13): Vulnerabilities in Industrial Products</title>
+    <updated>2018-12-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-293562.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial devices are affected by two vulnerabilities that could allow an attacker to cause a Denial-of-Service condition via PROFINET DCP network packets under certain circumstances. The precondition for this scenario is a direct layer 2 access to the affected products. PROFIBUS interfaces are not affected.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf</id>
+    <title>SSA-348629 (Last Update: 2018-12-13): Denial-of-Service Vulnerability in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC Software</title>
+    <updated>2018-12-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A Denial-of-Service vulnerability has been identified in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC-Software.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-982399.pdf</id>
+    <title>SSA-982399 (Last Update: 2018-12-13): Missing Authentication in TIM 1531 IRC Modules</title>
+    <updated>2018-12-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-982399.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;TIM 1531 IRC is affected by a vulnerability. The devices are missing proper authentication when connecting on port 102/tcp, although configured.&lt;/p&gt;
+&lt;p&gt;An attacker needs to be able to connect to port 102/tcp of an affected device in order to exploit this vulnerability.&lt;/p&gt;
+&lt;p&gt;The vulnerability could allow an attacker to perform arbitrary administrative operations.&lt;/p&gt;
+&lt;p&gt;Siemens is working on updates for TIM 1531 IRC modules.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-170881.pdf</id>
+    <title>SSA-170881 (Last Update: 2018-12-11): Vulnerabilities in SINUMERIK Controllers</title>
+    <updated>2018-12-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-170881.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest updates for SINUMERIK controllers fix multiple security vulnerabilities that could allow an attacker to cause Denial-of-Service conditions, escalate privileges, or to execute code from remote.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products and recommends specific countermeasures until fixes are available. Siemens recommends to update affected devices as soon as possible.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-254686.pdf</id>
+    <title>SSA-254686 (Last Update: 2018-12-11): Foreshadow / L1 Terminal Fault Vulnerabilities in Industrial Products</title>
+    <updated>2018-12-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-254686.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Foreshadow and L1 Terminal Fault (L1TF). These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Siemens Industrial Products contain processors that are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-293562.pdf</id>
+    <title>SSA-293562 (Last Update: 2018-12-11): Vulnerabilities in Industrial Products</title>
+    <updated>2018-12-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-293562.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial devices are affected by two vulnerabilities that could allow an attacker to cause a Denial-of-Service condition via PROFINET DCP network packets under certain circumstances. Precondition for this scenario is a direct Layer 2 access to the affected products. PROFIBUS interfaces are not affected.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf</id>
+    <title>SSA-346262 (Last Update: 2018-12-11): Denial-of-Service in Industrial Products</title>
+    <updated>2018-12-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial products are affected by a vulnerability that could allow remote attackers to conduct a Denial-of-Service (DoS) attack by sending specially crafted packets to port 161/udp (SNMP).&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssb-439005.pdf</id>
+    <title>SSB-439005 (Last Update: 2018-12-11): Vulnerabilities in the additional GNU/Linux subsystem of the SIMATIC S7-1500 CPU 1518(F)-4 PN/DP MFP</title>
+    <updated>2018-12-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssb-439005.pdf" rel="alternate"/>
+    <summary>
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-635129.pdf</id>
+    <title>SSA-635129 (Last Update: 2018-12-11): Denial-of-Service Vulnerabilities in EN100 Ethernet Communication Module and SIPROTEC 5 relays</title>
+    <updated>2018-12-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-635129.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The EN100 Ethernet communication module and SIPROTEC 5 relays are affected by security vulnerabilities which could allow an attacker to conduct a Denial-of-Service attack over the network.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products, and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-674165.pdf</id>
+    <title>SSA-674165 (Last Update: 2018-12-11): Vulnerability in McAfee MACC product for SINAMICS PERFECT HARMONY GH180 drives</title>
+    <updated>2018-12-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-674165.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;McAfee has issued Security Bulletin SB10250 to address a vulnerabilty in McAfee Application and Change Control (MACC). SINAMICS PERFECT HARMONY GH180 Drives with HMIs produced between November 4th, 2015 and October 9th, 2018, use MACC as part of their software package, if option A30 was part of the order.&lt;/p&gt;
+&lt;p&gt;Siemens has analyzed the vulnerability and has determined that this vulnerability applies to these HMIs.&lt;/p&gt;
+&lt;p&gt;HMIs with this vulnerability can be compromised via local attack using removable USB storage devices to transfer malicious files. These file can be executed to compromise the HMI and by extension the drive system.&lt;/p&gt;
+&lt;p&gt;For compatibility reasons, Siemens advises the installation of MACC 8.2.0 instead of version 8.0.0, hotfix 5 as mentioned in SB10250.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-268644.pdf</id>
+    <title>SSA-268644 (Last Update: 2018-12-11): Spectre-NG (Variants 3a and 4) Vulnerabilities in Industrial Products</title>
+    <updated>2018-12-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-268644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre-NG (Variants 3a and 4). These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-982399.pdf</id>
+    <title>SSA-982399 (Last Update: 2018-12-11): Missing Authentication in TIM 1531 IRC Modules</title>
+    <updated>2018-12-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-982399.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for TIM 1531 IRC fixes a vulnerability. The devices was missing proper authentication when connecting on port 102/tcp, although configured.&lt;/p&gt;
+&lt;p&gt;An attacker needs to be able to connect to port 102/tcp of an affected device in order to exploit this vulnerability.&lt;/p&gt;
+&lt;p&gt;The vulnerability could allow an attacker to perform arbitrary administrative operations.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for TIM 1531 IRC modules.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-181018.pdf</id>
+    <title>SSA-181018 (Last Update: 2018-12-11): Heap Overflow Vulnerability in SCALANCE X switches, RUGGEDCOM WiMAX, RFID 181-EIP, and SIMATIC RF182C</title>
+    <updated>2018-12-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-181018.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;SCALANCE X switches, RUGGEDCOM WiMAX, RFID 181-EIP, and SIMATIC RF182C are affected by a vulnerability that could allow an unprivileged attacker located in the same local network segment (OSI Layer 2) to gain system privileges by sending a specially crafted DHCP response to a client's DHCP request.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf</id>
+    <title>SSA-348629 (Last Update: 2018-12-11): Denial-of-Service Vulnerability in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC Software</title>
+    <updated>2018-12-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A Denial-of-Service vulnerability has been identified in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC-Software.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssb-439005.pdf</id>
+    <title>SSB-439005 (Last Update: 2018-11-27): Vulnerabilities in the additional GNU/Linux subsystem of the SIMATIC S7-1500 CPU 1518(F)-4 PN/DP MFP</title>
+    <updated>2018-11-27T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssb-439005.pdf" rel="alternate"/>
+    <summary>
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-113131.pdf</id>
+    <title>SSA-113131 (Last Update: 2018-11-13): Denial-of-Service Vulnerabilities in S7-400 CPUs</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-113131.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Two vulnerabilities have been identified in the SIMATIC S7-400 CPU family that could allow an attacker to cause a Denial-of-Service condition. In order to exploit the vulnerability, an attacker must have access to the affected devices on port 102/tcp via Ethernet, PROFIBUS or Multi Point Interfaces (MPI).&lt;/p&gt;
+&lt;p&gt;Siemens provides updates to address the vulnerability, and recommends specific mitigations.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-233109.pdf</id>
+    <title>SSA-233109 (Last Update: 2018-11-13): Web Vulnerabilities in SIMATIC Panels</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-233109.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for SIMATIC Panel software and SIMATIC WinCC (TIA Portal) fixes two web vulnerabilities. The most severe is a vulnerability which could allow an attacker with network access to the integrated webserver to download arbitrary files.&lt;/p&gt;
+&lt;p&gt;Siemens recommends to update to the newest version.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-242982.pdf</id>
+    <title>SSA-242982 (Last Update: 2018-11-13): Cross-Site Scripting Vulnerability in SCALANCE S</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-242982.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A Cross-Site Scripting (XSS) vulnerability was found in the web server of SCALANCE S firewalls. Siemens provides firmware version V4.0.1.1, which fixes the vulnerability and recommends to update to the newest version.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-584286.pdf</id>
+    <title>SSA-584286 (Last Update: 2018-11-13): Denial-of-Service Vulnerability in SIMATIC S7-1200 CPU and SIMATIC S7-1500 CPU</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-584286.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A vulnerability was identified in SIMATIC S7-1200 and S7-1500 CPUs that could allow an attacker to cause a denial-of-service condition preventing HMI or engineering access to the PLC over port 102/tcp.&lt;/p&gt;
+&lt;p&gt;Siemens has released an update for the S7-1500 product and recommends that customers update to the new version. Siemens is preparing a further update for the S7-1200 product and recommends specific workarounds and mitigations until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-621493.pdf</id>
+    <title>SSA-621493 (Last Update: 2018-11-13): Password Storage Vulnerability in SIMATIC STEP7 (TIA Portal)</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-621493.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for SIMATIC STEP7 (TIA Portal) fixes a vulnerability that could allow an attacker with local access to a project file to reconstruct certain passwords stored in the project.&lt;/p&gt;
+&lt;p&gt;Siemens recommends to update to the new version.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-886615.pdf</id>
+    <title>SSA-886615 (Last Update: 2018-11-13): Vulnerability in SIMATIC IT Production Suite</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-886615.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for SIMATIC IT Production Suite fixes a vulnerability that could allow authorized users with knowledge of a valid user name and physical or network access to the affected system to bypass the application-level authentication.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-944083.pdf</id>
+    <title>SSA-944083 (Last Update: 2018-11-13): HTTP Header Injection in SIMATIC Panels and SIMATIC WinCC (TIA Portal)</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-944083.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for SIMATIC Panel software and SIMATIC WinCC (TIA Portal) fixes a vulnerability that could allow an attacker with network access to the web server to perform a HTTP header injection attack.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf</id>
+    <title>SSA-168644 (Last Update: 2018-11-13): Spectre and Meltdown Vulnerabilities in Industrial Products</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre and Meltdown. These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-179516.pdf</id>
+    <title>SSA-179516 (Last Update: 2018-11-13): OpenSSL Vulnerability in Industrial Products</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-179516.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A vulnerability in OpenSSL affects several Siemens industrial products. Siemens has released updates for some affected products and is working on updates for others.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-254686.pdf</id>
+    <title>SSA-254686 (Last Update: 2018-11-13): Foreshadow / L1 Terminal Fault Vulnerabilities in Industrial Products</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-254686.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Foreshadow and L1 Terminal Fault (L1TF). These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Siemens Industrial Products contain processors that are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-268644.pdf</id>
+    <title>SSA-268644 (Last Update: 2018-11-13): Spectre-NG (Variants 3a and 4) Vulnerabilities in Industrial Products</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-268644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre-NG (Variants 3a and 4). These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-293562.pdf</id>
+    <title>SSA-293562 (Last Update: 2018-11-13): Vulnerabilities in Industrial Products</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-293562.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial devices are affected by two vulnerabilities that could allow an attacker to cause a Denial-of-Service condition via PROFINET DCP network packets under certain circumstances. Precondition for this scenario is a direct Layer 2 access to the affected products. PROFIBUS interfaces are not affected.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf</id>
+    <title>SSA-346262 (Last Update: 2018-11-13): Denial-of-Service in Industrial Products</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial products are affected by a vulnerability that could allow remote attackers to conduct a Denial-of-Service (DoS) attack by sending specially crafted packets to port 161/udp (SNMP).&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf</id>
+    <title>SSA-348629 (Last Update: 2018-11-13): Denial-of-Service Vulnerability in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC Software</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A Denial-of-Service vulnerability has been identified in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC-Software.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-901333.pdf</id>
+    <title>SSA-901333 (Last Update: 2018-11-13): KRACK Attacks Vulnerabilities in Industrial Products</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-901333.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Multiple vulnerabilities affecting WPA/WPA2 implementations were identified by a researcher and publicly disclosed under the term &amp;quot;Key Reinstallation Attacks&amp;quot; (KRACK). These vulnerabilities could potentially allow an attacker within the radio range of the wireless network to decrypt, replay or inject forged network packets into the wireless communication.&lt;/p&gt;
+&lt;p&gt;Several Siemens Industrial products use WPA/WPA2 and are therefore affected by some of the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-159860.pdf</id>
+    <title>SSA-159860 (Last Update: 2018-11-13): Access Control Vulnerability in IEC 61850 system configurator, DIGSI 5, DIGSI 4, SICAM PAS/PQS, SICAM PQ Analyzer, and SICAM SCC</title>
+    <updated>2018-11-13T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-159860.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;IEC 61850 system configurator, DIGSI 5, DIGSI 4, SICAM PAS/PQS, SICAM PQ Analyzer, and SICAM SCC products are affected by a security vulnerability which could allow an attacker to either exfiltrate limited data from the system or to execute code with operating system user permissions.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-507847.pdf</id>
+    <title>SSA-507847 (Last Update: 2018-10-09): Cross-Site Request Forgery Vulnerability in SIMATIC S7-1200 CPU Family Version 4</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-507847.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest firmware update for S7-1200 CPU family version 4 fixes a Cross-Site Request Forgery vulnerability. Siemens recommends to update affected devices as soon as possible.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-493830.pdf</id>
+    <title>SSA-493830 (Last Update: 2018-10-09): Privilege Escalation in ROX II</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-493830.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for ROX II fixes two vulnerabilities. One vulnerability could allow an attacker with a low-privileged user account to execute arbitrary commands. The other vulnerability could allow an attacker with a low-privileged user account to escalate his privileges.&lt;/p&gt;
+&lt;p&gt;Siemens recommends to update to the new version as soon as possible.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-464260.pdf</id>
+    <title>SSA-464260 (Last Update: 2018-10-09): TLS ROBOT vulnerability in SCALANCE W1750D</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-464260.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for SCALANCE W1750D addresses a vulnerability known as &lt;em&gt;ROBOT Attack&lt;/em&gt;. The vulnerability could allow an attacker to decrypt TLS traffic.&lt;/p&gt;
+&lt;p&gt;Siemens provides a firmware update and recommends users to update to the new version.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-254686.pdf</id>
+    <title>SSA-254686 (Last Update: 2018-10-09): Foreshadow / L1 Terminal Fault Vulnerabilities in Industrial Products</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-254686.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Foreshadow and L1 Terminal Fault (L1TF). These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Siemens Industrial Products contain processors that are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-347726.pdf</id>
+    <title>SSA-347726 (Last Update: 2018-10-09): Denial-of-Service Vulnerability in SIMATIC S7-1500, SIMATIC S7-1500 Software Controller and SIMATIC ET 200SP Open Controller</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-347726.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Versions of SIMATIC S7-1500, SIMATIC S7-1500 Software Controller and SIMATIC ET 200 SP Open Controller are affected by a denial-of-service vulnerability. An attacker with network access to the PLC can cause a Denial-of-Service condition on the network stack.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf</id>
+    <title>SSA-346262 (Last Update: 2018-10-09): Denial-of-Service in Industrial Products</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial products are affected by a vulnerability that could allow remote attackers to conduct a Denial-of-Service (DoS) attack by sending specially crafted packets to port 161/udp (SNMP).&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-546832.pdf</id>
+    <title>SSA-546832 (Last Update: 2018-10-09): Vulnerabilities in Medium Voltage SINAMICS Products</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-546832.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest updates for medium voltage SINAMICS products fix two security vulnerabilities that could allow an attacker to cause a Denial-of-Service condition either via specially crafted PROFINET DCP broadcast packets or by sending specially crafted packets to port 161/udp (SNMP). Precondition for the PROFINET DCP scenario is a direct Layer 2 access to the affected products. PROFIBUS interfaces are not affected.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf</id>
+    <title>SSA-348629 (Last Update: 2018-10-09): Denial-of-Service Vulnerability in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC Software</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A Denial-of-Service vulnerability has been identified in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC-Software.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-179516.pdf</id>
+    <title>SSA-179516 (Last Update: 2018-10-09): OpenSSL Vulnerability in Industrial Products</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-179516.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A vulnerability in OpenSSL affects several Siemens industrial products. Siemens has released updates for some affected products and is working on updates for others.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-597741.pdf</id>
+    <title>SSA-597741 (Last Update: 2018-10-09): Vulnerability in iOS App SIMATIC WinCC OA Operator</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-597741.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The SIMATIC WinCC OA Operator iOS app is affected by a security vulnerability which could allow an attacker to read unencrypted data from the application&#8217;s directory. Precondition for this scenario is that an attacker has physical access to the mobile device.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-979106.pdf</id>
+    <title>SSA-979106 (Last Update: 2018-10-09): Vulnerabilities in SIMATIC STEP 7 (TIA Portal) and SIMATIC WinCC (TIA Portal)</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-979106.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest updates for SIMATIC STEP 7 (TIA Portal) and SIMATIC WinCC (TIA Portal) fix two vulnerabilities. These two vulnerabilities could either allow an attacker with local file write access to manipulate files and cause a Denial-of-service-condition, or execute code both on the manipulated installation and on devices that are configured using the manipulated installation.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-592007.pdf</id>
+    <title>SSA-592007 (Last Update: 2018-10-09): Denial-of-Service Vulnerability in Industrial Products</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-592007.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial controllers are affected by a security vulnerability that could allow an attacker to cause a Denial-of-Service condition via PROFINET DCP network packets under certain circumstances. Precondition for this scenario is a direct OSI Layer 2 access to the affected products. PROFIBUS interfaces are not affected.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-268644.pdf</id>
+    <title>SSA-268644 (Last Update: 2018-10-09): Spectre-NG (Variants 3a and 4) Vulnerabilities in Industrial Products</title>
+    <updated>2018-10-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-268644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre-NG (Variants 3a and 4). These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf</id>
+    <title>SSA-346262 (Last Update: 2018-09-11): Denial-of-Service in Industrial Products</title>
+    <updated>2018-09-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial products are affected by a vulnerability that could allow remote attackers to conduct a Denial-of-Service (DoS) attack by sending specially crafted packets to port 161/udp (SNMP).&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-179516.pdf</id>
+    <title>SSA-179516 (Last Update: 2018-09-11): OpenSSL Vulnerability in Industrial Products</title>
+    <updated>2018-09-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-179516.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A vulnerability in OpenSSL affects several Siemens industrial products. Siemens has released updates for some affected products and is working on updates for others.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf</id>
+    <title>SSA-168644 (Last Update: 2018-09-11): Spectre and Meltdown Vulnerabilities in Industrial Products</title>
+    <updated>2018-09-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre and Meltdown. These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-268644.pdf</id>
+    <title>SSA-268644 (Last Update: 2018-09-11): Spectre-NG (Variants 3a and 4) Vulnerabilities in Industrial Products</title>
+    <updated>2018-09-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-268644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre-NG (Variants 3a and 4). These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-346256.pdf</id>
+    <title>SSA-346256 (Last Update: 2018-09-11): Vulnerability in SIMATIC WinCC OA V3.14 and prior</title>
+    <updated>2018-09-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-346256.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for SIMATIC WinCC OA V3.14 fixes a vulnerability that could allow an unauthenticated remote user to escalate its privileges in the context of SIMATIC WinCC OA V3.14.&lt;/p&gt;
+&lt;p&gt;This vulnerability affects SIMATIC WinCC OA V3.14 and prior. SIMATIC WinCC OA V3.15 and V3.16 are not affected by this vulnerability.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-198330.pdf</id>
+    <title>SSA-198330 (Last Update: 2018-09-11): Local Privilege Escalation in TD Keypad Designer</title>
+    <updated>2018-09-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-198330.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;All versions of the TD Keypad Designer for printing customized lamination sheets for Text Display devices are affected by a DLL hijacking vulnerability that could allow a local low-privileged attacker to escalate his privileges.&lt;/p&gt;
+&lt;p&gt;Text Display devices and TD Keypad Designer have been discontinued in 2012 and were replaced by KTP Basic with option Express Design.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-447396.pdf</id>
+    <title>SSA-447396 (Last Update: 2018-09-11): Denial-of-Service in SCALANCE X300, SCALANCE X408 and SCALANCE X414</title>
+    <updated>2018-09-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-447396.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A vulnerability has been identified in the integrated web server of SCALANCE X300, SCALANCE X408, and SCALANCE X414. The vulnerability could allow an attacker with network access to the device to cause a Denial-of-Service condition.&lt;/p&gt;
+&lt;p&gt;The vulnerability can be triggered with publicly available tools, including vulnerability scanners.&lt;/p&gt;
+&lt;p&gt;Siemens provides updates for SCALANCE X300, and SCALANCE X408, and provides mitigations for the SCALANCE X414.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-914382.pdf</id>
+    <title>SSA-914382 (Last Update: 2018-09-11): Denial-of-Service Vulnerability in SIMATIC S7-400</title>
+    <updated>2018-09-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-914382.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;SIMATIC S7-400 CPUs are affected by a security vulnerability which could lead to a Denial-of-Service condition of the PLC if specially crafted packets are received and processed.&lt;/p&gt;
+&lt;p&gt;The affected SIMATIC S7-400 CPU hardware versions are in the product cancellation phase or already phased-out. Siemens recommends customers either upgrading to a new version or implementing specific countermeasures.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssb-068644.pdf</id>
+    <title>SSB-068644 (Last Update: 2018-08-17): General Customer Information for Speculative Side-Channel Vulnerabilities in Microprocessors</title>
+    <updated>2018-08-17T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssb-068644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre, Meltdown, Spectre-NG, Lazy FP State Restore, Spectre V1.1, and L1 Terminal Fault/Foreshadow. These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Siemens is analyzing the impact of these vulnerabilities and of the mitigations released on its own products. If Siemens products are found to be affected, additional product-specific update information will be distributed either via the Siemens ProductCERT website or through Siemens&#8217; customer service organizations if applicable.&lt;/p&gt;
+    </summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf</id>
+    <title>SSA-168644 (Last Update: 2018-08-07): Spectre and Meltdown Vulnerabilities in Industrial Products</title>
+    <updated>2018-08-07T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre and Meltdown. These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-179516.pdf</id>
+    <title>SSA-179516 (Last Update: 2018-08-07): OpenSSL Vulnerability in Industrial Products</title>
+    <updated>2018-08-07T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-179516.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A vulnerability in OpenSSL affects several Siemens industrial products. Siemens has released updates for some affected products and is working on updates for others.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-979106.pdf</id>
+    <title>SSA-979106 (Last Update: 2018-08-07): Vulnerabilities in SIMATIC STEP 7 (TIA Portal) and SIMATIC WinCC (TIA Portal)</title>
+    <updated>2018-08-07T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-979106.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest updates for SIMATIC STEP 7 (TIA Portal) and SIMATIC WinCC (TIA Portal) fix two vulnerabilities. These two vulnerabilities could either allow an attacker with local file write access to manipulate files and cause a Denial-of-service-condition, or execute code both on the manipulated installation and on devices that are configured using the manipulated installation.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-920962.pdf</id>
+    <title>SSA-920962 (Last Update: 2018-08-07): Vulnerabilities in Automation License Manager</title>
+    <updated>2018-08-07T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-920962.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest updates for Automation License Manager fix two vulnerabilities. One of them could allow an attacker to execute arbitrary code on the target device, the other one could allow an attacker to abuse the target system for basic network scanning.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-635129.pdf</id>
+    <title>SSA-635129 (Last Update: 2018-07-11): Denial-of-Service Vulnerabilities in EN100 Ethernet Communication Module and SIPROTEC 5 relays</title>
+    <updated>2018-07-11T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-635129.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The EN100 Ethernet communication module and SIPROTEC 5 relays are affected by security vulnerabilities which could allow an attacker to conduct a Denial-of-Service attack over the network.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products, and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-197012.pdf</id>
+    <title>SSA-197012 (Last Update: 2018-07-03): Vulnerabilities in SICLOCK central plant clocks</title>
+    <updated>2018-07-03T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-197012.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;SICLOCK TC devices are affected by multiple vulnerabilities that could allow an attacker to cause Denial-of-Service conditions, bypass the authentication, and modify the firmware of the device or the administrative client.&lt;/p&gt;
+&lt;p&gt;SICLOCK TC devices are in a phase out process. Siemens recommends mitigations to reduce the risk.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-159860.pdf</id>
+    <title>SSA-159860 (Last Update: 2018-06-26): Access Control Vulnerability in IEC 61850 system configurator, DIGSI 5, DIGSI 4, SICAM PAS/PQS, SICAM PQ Analyzer, and SICAM SCC</title>
+    <updated>2018-06-26T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-159860.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;IEC 61850 system configurator, DIGSI 5, DIGSI 4, SICAM PAS/PQS, SICAM PQ Analyzer, and SICAM SCC products are affected by a security vulnerability which could allow an attacker to either exfiltrate limited data from the system or to execute code with operating system user permissions.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf</id>
+    <title>SSA-168644 (Last Update: 2018-06-26): Spectre and Meltdown Vulnerabilities in Industrial Products</title>
+    <updated>2018-06-26T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre and Meltdown. These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-755010.pdf</id>
+    <title>SSA-755010 (Last Update: 2018-06-26): Vulnerability in RAPIDLab 1200 and RAPIDPoint 400/500 Blood Gas Analyzers</title>
+    <updated>2018-06-26T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-755010.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Siemens Healthineers has become aware of two potential cybersecurity vulnerabilities for the RAPIDLab&#174; 1200 Series and RAPIDPoint&#174; 400/405/500 Blood Gas Analyzers and recommends specific countermeasures to mitigate the risk.&lt;/p&gt;
+&lt;p&gt;At the time of advisory publication, no public exploitation of this security vulnerability is known.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-966341.pdf</id>
+    <title>SSA-966341 (Last Update: 2018-06-19): SMBv1 Vulnerabilities in Molecular Diagnostics Products from Siemens Healthineers</title>
+    <updated>2018-06-19T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-966341.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Select Molecular Diagnostics products from Siemens Healthineers are affected by the Microsoft Windows SMBv1 vulnerabilities. The exploitability of the vulnerabilities depends on the actual configuration and deployment environment of each product.&lt;/p&gt;
+&lt;p&gt;Siemens Healthineers has developed solutions for all affected products which are available via customer support. Siemens Healthineers also provides specific countermeasures for systems that have not yet been remediated.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-755010.pdf</id>
+    <title>SSA-755010 (Last Update: 2018-06-12): Vulnerability in RAPIDLab 1200 and RAPIDPoint 400/500 Blood Gas Analyzers</title>
+    <updated>2018-06-12T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-755010.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Siemens Healthineers has become aware of two potential cybersecurity vulnerabilities for the RAPIDLab&#174; 1200 Series and RAPIDPoint&#174; 400/405/500 Blood Gas Analyzers and recommends specific countermeasures to mitigate the risk.&lt;/p&gt;
+&lt;p&gt;At the time of advisory publication, no public exploitation of this security vulnerability is known.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-323211.pdf</id>
+    <title>SSA-323211 (Last Update: 2018-06-12): Vulnerabilities in SIPROTEC 4 and SIPROTEC Compact Devices</title>
+    <updated>2018-06-12T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-323211.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;SIPROTEC 4 and SIPROTEC Compact devices are affected by several vulnerabilities. Two of the vulnerabilities could allow attackers to perform a denial-of-service attack under certain conditions.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for the affected products and will update this advisory when new information becomes available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-181018.pdf</id>
+    <title>SSA-181018 (Last Update: 2018-06-12): Heap Overflow Vulnerability in SCALANCE X switches, RUGGEDCOM WiMAX, RFID 181-EIP, and SIMATIC RF182C</title>
+    <updated>2018-06-12T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-181018.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;SCALANCE X switches, RUGGEDCOM WiMAX, RFID 181-EIP, and SIMATIC RF182C are affected by a vulnerability that could allow an unprivileged attacker located in the same local network segment (OSI Layer 2) to gain system privileges by sending a specially crafted DHCP response to a client's DHCP request.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-480829.pdf</id>
+    <title>SSA-480829 (Last Update: 2018-06-12): Cross-Site-Scripting Vulnerabilities in SCALANCE X Switches</title>
+    <updated>2018-06-12T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-480829.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Two cross-site-scripting (XSS) vulnerabilities were found in the web server of SCALANCE X switches. Siemens recommends updating the firmware to the newest version as soon as possible.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-977428.pdf</id>
+    <title>SSA-977428 (Last Update: 2018-06-12): Vulnerabilities in SCALANCE M875</title>
+    <updated>2018-06-12T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-977428.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Multiple vulnerabilities have been identified in the web interface of SCALANCE M875. The web interface of SCALANCE M875 could allow Cross-Site Request Forgery (CSRF), stored Cross-Site Scripting (XSS), or command injection attacks if an attacker is authenticated or tricks a legitimate authenticated user into accessing a malicious link.&lt;/p&gt;
+&lt;p&gt;Siemens recommends customers to upgrade their hardware, and provides mitigations until hardware upgrades can be applied.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-701708.pdf</id>
+    <title>SSA-701708 (Last Update: 2018-06-12): Local Privilege Escalation in Industrial Products</title>
+    <updated>2018-06-12T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-701708.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;In non-default configurations several industrial products are affected by a vulnerability that could allow local Microsoft Windows operating system users to escalate their privileges.&lt;/p&gt;
+&lt;p&gt;Siemens provides updates for several products and a temporary fix for the remaining affected products. Siemens is working on new versions for the remaining affected products and will update this advisory when new information becomes available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-275839.pdf</id>
+    <title>SSA-275839 (Last Update: 2018-06-12): Denial-of-Service Vulnerability in Industrial Products</title>
+    <updated>2018-06-12T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-275839.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial products are affected by a vulnerability that could allow an attacker to cause a Denial-of-Service condition via PROFINET DCP network packets under certain circumstances. Precondition for this scenario is a direct Layer 2 access to the affected products.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-566773.pdf</id>
+    <title>SSA-566773 (Last Update: 2018-06-12): Vulnerabilities in Building Technologies Products</title>
+    <updated>2018-06-12T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-566773.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The License Management System (LMS), which is used by multiple Siemens' building automation products, includes a vulnerable version of Gemalto Sentinel LDK RTE. Gemalto Sentinel LDK RTE is affected by two vulnerabilities that could allow denial-of-service and a cross-site-scripting vulnerability.&lt;/p&gt;
+&lt;p&gt;Siemens recommends updating the affected dongle driver.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-523365.pdf</id>
+    <title>SSA-523365 (Last Update: 2018-06-12): Vulnerability in SIMATIC PCS 7</title>
+    <updated>2018-06-12T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-523365.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest software update for SIMATIC PCS 7 fixes a vulnerability, which could allow an attacker to cause a Denial-of-Service (DoS) condition under certain circumstances.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf</id>
+    <title>SSA-348629 (Last Update: 2018-06-12): Denial-of-Service Vulnerability in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC Software</title>
+    <updated>2018-06-12T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A Denial-of-Service vulnerability has been identified in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC-Software.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-931064.pdf</id>
+    <title>SSA-931064 (Last Update: 2018-06-12): Authentication Bypass in SIMATIC Logon</title>
+    <updated>2018-06-12T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-931064.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for SIMATIC Logon fixes a security vulnerability that could allow attackers to circumvent user authentication under certain conditions.&lt;/p&gt;
+&lt;p&gt;SIMATIC WinCC, SIMATIC PCS 7, SIMATIC PDM, and SIMATIC IT Production Suite provide SIMATIC Logon as component of the product. Installing the SIMATIC Logon update fixes the vulnerability for all products mentioned below.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf</id>
+    <title>SSA-168644 (Last Update: 2018-05-29): Spectre and Meltdown Vulnerabilities in Industrial Products</title>
+    <updated>2018-05-29T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre and Meltdown. These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-457058.pdf</id>
+    <title>SSA-457058 (Last Update: 2018-05-23): .NET Security Vulnerability in Siveillance VMS</title>
+    <updated>2018-05-23T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-457058.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Siemens has released software updates for Siveillance VMS which fix a security vulnerability with the .NET Remoting deserialization that could allow elevation of privileges and/or causing a Denial-of-Service, if affected ports are exposed.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-914382.pdf</id>
+    <title>SSA-914382 (Last Update: 2018-05-15): Denial-of-Service Vulnerability in SIMATIC S7-400</title>
+    <updated>2018-05-15T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-914382.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;SIMATIC S7-400 CPUs are affected by a security vulnerability which could lead to a Denial-of-Service condition of the PLC if specially crafted packets are received and processed.&lt;/p&gt;
+&lt;p&gt;The affected SIMATIC S7-400 CPU hardware versions are in the product cancellation phase or already phased-out. Siemens recommends customers either upgrading to a new version or implementing specific countermeasures.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf</id>
+    <title>SSA-346262 (Last Update: 2018-05-15): Denial-of-Service in Industrial Products</title>
+    <updated>2018-05-15T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial products are affected by a vulnerability that could allow remote attackers to conduct a Denial-of-Service (DoS) attack by sending specially crafted packets to port 161/udp (SNMP).&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-203306.pdf</id>
+    <title>SSA-203306 (Last Update: 2018-05-15): Password Vulnerabilities in SIPROTEC 4 and SIPROTEC Compact Relay Families</title>
+    <updated>2018-05-15T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-203306.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;SIPROTEC 4 and SIPROTEC Compact devices could allow access authorization passwords to be reconstructed or overwritten via engineering mechanisms that involve DIGSI 4 and EN100 Ethernet communication modules.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products, and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-547990.pdf</id>
+    <title>SSA-547990 (Last Update: 2018-05-15): Information Disclosure Vulnerabilities in SIPROTEC 4 and SIPROTEC Compact</title>
+    <updated>2018-05-15T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-547990.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Information disclosure vulnerabilities in SIPROTEC 4 and SIPROTEC Compact devices could allow an attacker to extract sensitive device information under certain conditions.&lt;/p&gt;
+&lt;p&gt;Siemens has released firmware updates for EN100 Ethernet module included in SIPROTEC 4 and SIPROTEC Compact devices. Siemens has also released a firmware update for SIPROTEC Compact 7SJ80 with Ethernet Service Interface on Port A. For remaining affected devices, countermeasures are recommended. Siemens will update this advisory when new information becomes available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-689071.pdf</id>
+    <title>SSA-689071 (Last Update: 2018-05-09): DNSMasq Vulnerabilities in SCALANCE W1750D, SCALANCE M800 and SCALANCE S615</title>
+    <updated>2018-05-09T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-689071.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Multiple vulnerabilities have been identified in SCALANCE W1750D, SCALANCE M800, and SCALANCE S615 devices. The highest scored vulnerability could allow a remote attacker to crash the DNS service or execute arbitrary code. The attacker must be able to craft malicious DNS responses and inject them into the network in order to exploit the vulnerability. Siemens is working on updates for the affected devices, and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf</id>
+    <title>SSA-346262 (Last Update: 2018-05-03): Denial-of-Service in Industrial Products</title>
+    <updated>2018-05-03T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial products are affected by a vulnerability that could allow remote attackers to conduct a Denial-of-Service (DoS) attack by sending specially crafted packets to port 161/udp (SNMP).&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-293562.pdf</id>
+    <title>SSA-293562 (Last Update: 2018-05-03): Vulnerabilities in Industrial Products</title>
+    <updated>2018-05-03T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-293562.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial devices are affected by two vulnerabilities that could allow an attacker to cause a Denial-of-Service condition via PROFINET DCP network packets under certain circumstances. Precondition for this scenario is a direct Layer 2 access to the affected products. PROFIBUS interfaces are not affected.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-546832.pdf</id>
+    <title>SSA-546832 (Last Update: 2018-05-03): Vulnerabilities in Medium Voltage SINAMICS Products</title>
+    <updated>2018-05-03T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-546832.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest updates for medium voltage SINAMICS products fix two security vulnerabilities that could allow an attacker to cause a Denial-of-Service condition either via specially crafted PROFINET DCP broadcast packets or by sending specially crafted packets to port 161/udp (SNMP). Precondition for the PROFINET DCP scenario is a direct Layer 2 access to the affected products. PROFIBUS interfaces are not affected.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-468514.pdf</id>
+    <title>SSA-468514 (Last Update: 2018-05-03): Improper Certificate Validation Vulnerability in Siveillance VMS Video Mobile App for Android and iOS</title>
+    <updated>2018-05-03T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-468514.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for the Siveillance VMS Video mobile app for Android and iOS fixes a security vulnerability that could allow an attacker in a privileged network position to read data from and write data to the encrypted communication channel between the app and a server. Precondition for this scenario is that an attacker is able to intercept the communication channel between the affected app and a server, and is also able to generate a certificate that results for the validation algorithm in a checksum identical to a trusted certificate.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-457058.pdf</id>
+    <title>SSA-457058 (Last Update: 2018-05-03): .NET Security Vulnerability in Siveillance VMS</title>
+    <updated>2018-05-03T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-457058.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Siemens has released software updates for Siveillance VMS which fix a security vulnerability with the .NET Remoting deserialization that could allow elevation of privileges and/or causing a Denial-of-Service, if affected ports are exposed.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-892715.pdf</id>
+    <title>SSA-892715 (Last Update: 2018-04-18): ME, SPS and TXE Vulnerabilities in SIMATIC IPCs </title>
+    <updated>2018-04-18T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-892715.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Intel has identified vulnerabilities in Intel Management Engine (ME), Intel Server Platform Services (SPS), and Intel Trusted Execution Engine (TXE). As several Siemens Industrial PCs use Intel technology, they are also affected.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for the affected Industrial PCs.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-597741.pdf</id>
+    <title>SSA-597741 (Last Update: 2018-04-18): Vulnerability in iOS App SIMATIC WinCC OA Operator</title>
+    <updated>2018-04-18T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-597741.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The SIMATIC WinCC OA Operator iOS app is affected by a security vulnerability which could allow an attacker to read unencrypted data from the application&#8217;s directory. Precondition for this scenario is that an attacker has physical access to the mobile device.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf</id>
+    <title>SSA-348629 (Last Update: 2018-04-18): Denial-of-Service Vulnerability in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC Software</title>
+    <updated>2018-04-18T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A Denial-of-Service vulnerability has been identified in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC-Software.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf</id>
+    <title>SSA-168644 (Last Update: 2018-04-18): Spectre and Meltdown Vulnerabilities in Industrial Products</title>
+    <updated>2018-04-18T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre and Meltdown. These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-845879.pdf</id>
+    <title>SSA-845879 (Last Update: 2018-04-17): Firmware Downgrade Vulnerability in EN100 Ethernet Communication Module for SIPROTEC 4, SIPROTEC Compact and Reyrolle</title>
+    <updated>2018-04-17T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-845879.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The EN100 Ethernet communication module, which is an optional extension for SIPROTEC 4, SIPROTEC Compact and Reyrolle devices, allows an unauthenticated upload of firmware updates to the communication module in affected versions.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products, and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-203306.pdf</id>
+    <title>SSA-203306 (Last Update: 2018-04-17): Password Vulnerabilities in SIPROTEC 4 and SIPROTEC Compact Relay Families</title>
+    <updated>2018-04-17T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-203306.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;SIPROTEC 4 and SIPROTEC Compact devices could allow access authorization passwords to be reconstructed or overwritten via engineering mechanisms that involve DIGSI 4 and EN100 Ethernet communication modules.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products, and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-901333.pdf</id>
+    <title>SSA-901333 (Last Update: 2018-04-05): KRACK Attacks Vulnerabilities in Industrial Products</title>
+    <updated>2018-04-05T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-901333.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Multiple vulnerabilities affecting WPA/WPA2 implementations were identified by a researcher and publicly disclosed under the term &amp;quot;Key Reinstallation Attacks&amp;quot; (KRACK). These vulnerabilities could potentially allow an attacker within the radio range of the wireless network to decrypt, replay or inject forged network packets into the wireless communication.&lt;/p&gt;
+&lt;p&gt;Several Siemens Industrial products use WPA/WPA2 and are therefore affected by some of the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-689071.pdf</id>
+    <title>SSA-689071 (Last Update: 2018-04-05): DNSMasq Vulnerabilities in SCALANCE W1750D, SCALANCE M800 and SCALANCE S615</title>
+    <updated>2018-04-05T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-689071.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Multiple vulnerabilities have been identified in SCALANCE W1750D, SCALANCE M800, and SCALANCE S615 devices. The highest scored vulnerability could allow a remote attacker to crash the DNS service or execute arbitrary code. The attacker must be able to craft malicious DNS responses and inject them into the network in order to exploit the vulnerability. Siemens is working on updates for the affected devices, and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-727467.pdf</id>
+    <title>SSA-727467 (Last Update: 2018-04-03): Vulnerabilities in Building Technologies Products</title>
+    <updated>2018-04-03T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-727467.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The License Management System (LMS), which is used by multiple Siemens' building automation products, includes a vulnerable version of Gemalto Sentinel LDK RTE. Gemalto Sentinel LDK RTE is affected by multiple vulnerabilities that could allow remote code execution.&lt;/p&gt;
+&lt;p&gt;Siemens recommends to update the License Management System used by these products to the newest version.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-727467.pdf</id>
+    <title>SSA-727467 (Last Update: 2018-03-28): Vulnerabilities in Building Technologies Products</title>
+    <updated>2018-03-28T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-727467.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The License Management System (LMS), which is used by multiple Siemens' building automation products, includes a vulnerable version of Gemalto Sentinel LDK RTE. Gemalto Sentinel LDK RTE is affected by multiple vulnerabilities that could allow remote code execution.&lt;/p&gt;
+&lt;p&gt;Siemens recommends to update the License Management System used by these products to the newest version.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-110922.pdf</id>
+    <title>SSA-110922 (Last Update: 2018-03-27): Web Vulnerability in TIM 1531 IRC</title>
+    <updated>2018-03-27T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-110922.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for TIM 1531 IRC fixes a security vulnerability that could allow unauthorized remote attackers to perform administrative operations on the device.&lt;/p&gt;
+&lt;p&gt;Siemens recommends updating as soon as possible.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-592007.pdf</id>
+    <title>SSA-592007 (Last Update: 2018-03-27): Denial-of-Service Vulnerability in Industrial Products</title>
+    <updated>2018-03-27T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-592007.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial controllers are affected by a security vulnerability that could allow an attacker to cause a Denial-of-Service condition via PROFINET DCP network packets under certain circumstances. Precondition for this scenario is a direct OSI Layer 2 access to the affected products. PROFIBUS interfaces are not affected.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf</id>
+    <title>SSA-348629 (Last Update: 2018-03-27): Denial-of-Service Vulnerability in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC Software</title>
+    <updated>2018-03-27T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-348629.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;A Denial-of-Service vulnerability has been identified in SIMATIC PCS 7, SIMATIC WinCC, SIMATIC WinCC Runtime Professional and SIMATIC NET PC-Software.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-592007.pdf</id>
+    <title>SSA-592007 (Last Update: 2018-03-20): Denial-of-Service Vulnerability in Industrial Products</title>
+    <updated>2018-03-20T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-592007.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial controllers are affected by a security vulnerability that could allow an attacker to cause a Denial-of-Service condition via PROFINET DCP network packets under certain circumstances. Precondition for this scenario is a direct OSI Layer 2 access to the affected products. PROFIBUS interfaces are not affected.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-822928.pdf</id>
+    <title>SSA-822928 (Last Update: 2018-03-20): Access Control Vulnerability in SIMATIC WinCC OA UI Mobile App for Android and iOS</title>
+    <updated>2018-03-20T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-822928.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for the Android app and iOS app SIMATIC WinCC OA UI fix a security vulnerability which could allow read and write access from one HMI project cache folder to other HMI project cache folders within the app's sandbox on the same mobile device. This includes HMI project cache folders of other configured WinCC OA servers. Precondition for this scenario is that an attacker tricks an app user to connect to an attacker-controlled WinCC OA server.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf</id>
+    <title>SSA-168644 (Last Update: 2018-03-20): Spectre and Meltdown Vulnerabilities in Industrial Products</title>
+    <updated>2018-03-20T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre and Meltdown. These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-824231.pdf</id>
+    <title>SSA-824231 (Last Update: 2018-03-20): Unauthenticated Firmware Upload Vulnerability in Desigo PX Controllers</title>
+    <updated>2018-03-20T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-824231.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for Desigo PXC devices fixes a vulnerability that could allow unauthenticated remote attackers to upload malicious firmware without prior authentication.&lt;/p&gt;
+&lt;p&gt;Siemens recommends updating to the new version.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf</id>
+    <title>SSA-168644 (Last Update: 2018-03-15): Spectre and Meltdown Vulnerabilities in Industrial Products</title>
+    <updated>2018-03-15T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre and Meltdown. These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-470231.pdf</id>
+    <title>SSA-470231 (Last Update: 2018-03-15): TPM Vulnerability in SIMATIC IPCs</title>
+    <updated>2018-03-15T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-470231.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several SIMATIC IPCs include a version of Infineon's Trusted Platform Module (TPM) firmware that mishandles RSA key generation. This makes it easier for attackers to conduct cryptographic attacks against the key material.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for the affected Industrial PCs.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-323211.pdf</id>
+    <title>SSA-323211 (Last Update: 2018-03-15): Vulnerabilities in SIPROTEC 4 and SIPROTEC Compact Devices</title>
+    <updated>2018-03-15T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-323211.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;SIPROTEC 4 and SIPROTEC Compact devices are affected by several vulnerabilities. Two of the vulnerabilities could allow attackers to perform a denial-of-service attack under certain conditions.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products, and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-203306.pdf</id>
+    <title>SSA-203306 (Last Update: 2018-03-08): Password Vulnerabilities in SIPROTEC 4 and SIPROTEC Compact Relay Families</title>
+    <updated>2018-03-08T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-203306.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;SIPROTEC 4 and SIPROTEC Compact devices could allow access authorization passwords to be reconstructed or overwritten via engineering mechanisms that involve DIGSI 4 and EN100 Ethernet communication modules.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products, and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-845879.pdf</id>
+    <title>SSA-845879 (Last Update: 2018-03-08): Firmware Downgrade Vulnerability in EN100 Ethernet Communication Module for SIPROTEC 4, SIPROTEC Compact and Reyrolle</title>
+    <updated>2018-03-08T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-845879.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The EN100 Ethernet communication module, which is an optional extension for SIPROTEC 4, SIPROTEC Compact and Reyrolle devices, allows an unauthenticated upload of firmware updates to the communication module in affected versions.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products, and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-293562.pdf</id>
+    <title>SSA-293562 (Last Update: 2018-03-06): Vulnerabilities in Industrial Products</title>
+    <updated>2018-03-06T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-293562.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial devices are affected by two vulnerabilities that could allow an attacker to cause a Denial-of-Service condition via PROFINET DCP network packets under certain circumstances. Precondition for this scenario is a direct Layer 2 access to the affected products. PROFIBUS interfaces are not affected.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-892715.pdf</id>
+    <title>SSA-892715 (Last Update: 2018-02-22): ME, SPS and TXE Vulnerabilities in SIMATIC IPCs </title>
+    <updated>2018-02-22T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-892715.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Intel has identified vulnerabilities in Intel Management Engine (ME), Intel Server Platform Services (SPS), and Intel Trusted Execution Engine (TXE). As several Siemens Industrial PCs use Intel technology, they are also affected.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for the affected Industrial PCs.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-275839.pdf</id>
+    <title>SSA-275839 (Last Update: 2018-02-22): Denial-of-Service Vulnerability in Industrial Products</title>
+    <updated>2018-02-22T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-275839.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial products are affected by a vulnerability that could allow an attacker to cause a Denial-of-Service condition via PROFINET DCP network packets under certain circumstances. Precondition for this scenario is a direct Layer 2 access to the affected products.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-701903.pdf</id>
+    <title>SSA-701903 (Last Update: 2018-02-22): SMBv1 Vulnerabilities in Ultrasound Products from Siemens Healthineers</title>
+    <updated>2018-02-22T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-701903.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Select Ultrasound products from Siemens Healthineers are affected by the Microsoft Windows SMBv1 vulnerabilities. The exploitability of the vulnerabilities depends on the actual configuration and deployment environment of each product.&lt;/p&gt;
+&lt;p&gt;Siemens Healthineers provides updates for the affected products, and recommends specific countermeasures until patches can be applied.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-127490.pdf</id>
+    <title>SSA-127490 (Last Update: 2018-02-22): Vulnerabilities in SIMATIC WinCC Add-Ons</title>
+    <updated>2018-02-22T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-127490.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Multiple SIMATIC WinCC Add-Ons released in 2015 and earlier include a vulnerable version of Gemalto Sentinel LDK RTE. Gemalto Sentinel LDK RTE is affected by a vulnerability that could allow remote code execution. Siemens recommends to update the affected software component Gemalto Sentinel LDK RTE.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf</id>
+    <title>SSA-346262 (Last Update: 2018-02-22): Denial-of-Service in Industrial Products</title>
+    <updated>2018-02-22T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-346262.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial products are affected by a vulnerability that could allow remote attackers to conduct a Denial-of-Service (DoS) attack by sending specially crafted packets to port 161/udp (SNMP).&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, and recommends that customers update to the new version. Siemens is preparing further updates and recommends specific countermeasures until patches are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf</id>
+    <title>SSA-168644 (Last Update: 2018-02-22): Spectre and Meltdown Vulnerabilities in Industrial Products</title>
+    <updated>2018-02-22T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-168644.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Security researchers published information on vulnerabilities known as Spectre and Meltdown. These vulnerabilities affect many modern processors from different vendors to a varying degree.&lt;/p&gt;
+&lt;p&gt;Several Industrial Products include affected processors and are affected by the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-470231.pdf</id>
+    <title>SSA-470231 (Last Update: 2018-02-22): TPM Vulnerability in SIMATIC IPCs</title>
+    <updated>2018-02-22T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-470231.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several SIMATIC IPCs include a version of Infineon's Trusted Platform Module (TPM) firmware that mishandles RSA key generation. This makes it easier for attackers to conduct cryptographic attacks against the key material.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for the affected Industrial PCs.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-856721.pdf</id>
+    <title>SSA-856721 (Last Update: 2018-02-22): Vulnerability in RUGGEDCOM Discovery Protocol (RCDP) of Industrial Communication Devices</title>
+    <updated>2018-02-22T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-856721.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The RUGGEDCOM RCDP protocol is not properly configured after commissioning of RUGGEDCOM ROS based devices and some SCALANCE X switch models and could allow unauthenticated remote users to perform administrative operations. An attacker must be in the same adjacent network and the RCDP daemon must be enabled in order to exploit the vulnerability.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for all affected products and recommends that customers update to the new versions.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-824231.pdf</id>
+    <title>SSA-824231 (Last Update: 2018-02-05): Unauthenticated Firmware Upload Vulnerability in Desigo PXC</title>
+    <updated>2018-02-05T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-824231.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for Desigo PXC devices fixes a vulnerability that could allow unauthenticated remote attackers to upload malicious firmware without prior authentication.&lt;/p&gt;
+&lt;p&gt;Siemens recommends updating to the new version.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-651454.pdf</id>
+    <title>SSA-651454 (Last Update: 2018-01-25): Vulnerabilities in TeleControl Server Basic</title>
+    <updated>2018-01-25T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-651454.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;The latest update for TeleControl Server Basic resolves three vulnerabilities. One of these vulnerabilities could allow an authenticated attacker with network access to escalate his privileges and perform administrative actions.&lt;/p&gt;
+&lt;p&gt;Siemens recommends updating to the new version.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-731239.pdf</id>
+    <title>SSA-731239 (Last Update: 2018-01-24): Vulnerabilities in SIMATIC S7-300 and S7-400 CPUs</title>
+    <updated>2018-01-24T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-731239.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Two vulnerabilities have been identified in SIMATIC S7-300 and S7-400 CPU families. One vulnerability could lead to a Denial-of-Service, the other vulnerability could result in credential disclosure.&lt;/p&gt;
+&lt;p&gt;Siemens recommends specific mitigations. Siemens will update this advisory when new information becomes available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-901333.pdf</id>
+    <title>SSA-901333 (Last Update: 2018-01-24): KRACK Attacks Vulnerabilities in Industrial Products</title>
+    <updated>2018-01-24T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-901333.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Multiple vulnerabilities affecting WPA/WPA2 implementations were identified by a researcher and publicly disclosed under the term &amp;quot;Key Reinstallation Attacks&amp;quot; (KRACK). These vulnerabilities could potentially allow an attacker within the radio range of the wireless network to decrypt, replay or inject forged network packets into the wireless communication.&lt;/p&gt;
+&lt;p&gt;Several Siemens Industrial products use WPA/WPA2 and are therefore affected by some of the vulnerabilities.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-284673.pdf</id>
+    <title>SSA-284673 (Last Update: 2018-01-18): Vulnerability in Industrial Products</title>
+    <updated>2018-01-18T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-284673.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;Several industrial devices are affected by a vulnerability that could allow an attacker to cause a Denial-of-Service condition via PROFINET DCP network packets under certain circumstances. Precondition for this scenario is a direct Layer 2 access to the affected products. PROFIBUS interfaces are not affected.&lt;/p&gt;
+&lt;p&gt;Siemens has released updates for several affected products, is working on updates for the remaining affected products and recommends specific countermeasures until fixes are available.&lt;/p&gt;
+</summary>
+  </entry>
+  <entry>
+    <id>https://cert-portal.siemens.com/productcert/pdf/ssa-701708.pdf</id>
+    <title>SSA-701708 (Last Update: 2018-01-18): Local Privilege Escalation in Industrial Products</title>
+    <updated>2018-01-18T00:00:00+00:00</updated>
+    <link href="https://cert-portal.siemens.com/productcert/pdf/ssa-701708.pdf" rel="alternate"/>
+    <summary>&lt;p&gt;In non-default configurations several industrial products are affected by a vulnerability that could allow local Microsoft Windows operating system users to escalate their privileges.&lt;/p&gt;
+&lt;p&gt;Siemens provides updates for several products and a temporary fix for the remaining affected products. Siemens is working on new versions for the remaining affected products and will update this advisory when new information becomes available.&lt;/p&gt;
+</summary>
+  </entry>
+</feed>
