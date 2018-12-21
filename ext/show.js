@@ -407,14 +407,16 @@ function parseJSON(json) {
 }
 
 async function main() {
+	let url = decodeURI(window.location.search.substr(5));
+	if (url.indexOf("ext%2Brss%3A") === 0) {
+		url = decodeURIComponent(url.substr(12));
+		window.location.replace("/show.html?url=" + encodeURI(url));
+	}
+
 	setThemeSwitching();
 
 	setHotkeyNavigation();
 
-	let url = decodeURI(window.location.search.substr(5));
-	if (url.indexOf("ext%2Brss%3A") === 0) {
-		url = decodeURIComponent(url.substr(12));
-	}
 	console.log(url);
 	let resp;
 	try {
