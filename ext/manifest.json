@@ -29,5 +29,12 @@
 		"gecko": {
 			"strict_min_version": "63.0"
 		}
-	}
+	},
+	"protocol_handlers": [
+		{
+			"protocol": "ext+rss",
+			"name": "Want My RSS",
+			"uriTemplate": "/show.html?url=%s"
+		}
+	]
 }

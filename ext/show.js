@@ -410,7 +410,11 @@ async function main() {
 
 	setHotkeyNavigation();
 
-	const url = decodeURI(window.location.search.substr(5));
+	let url = decodeURI(window.location.search.substr(5));
+	if (url.indexOf("ext%2Brss%3A") === 0) {
+		url = decodeURIComponent(url.substr(12));
+	}
+	console.log(url);
 	let resp;
 	try {
 		resp = await fetch(url);
