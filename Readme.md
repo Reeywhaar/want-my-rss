@@ -19,6 +19,11 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.9
+
+* fix parsing feeds without `<?xml header`
+* registered `ext+rss` protocol handler. Feeds may be opened by typing something like `ext+rss:http://example.com/feed.rss` in an url bar.
+
 ### 0.8
 
 * show original url in extension's popup
