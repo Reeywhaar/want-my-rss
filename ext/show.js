@@ -303,9 +303,8 @@ async function setHotkeyNavigation() {
 function parseXML(string) {
 	const data = {};
 	const xmlHeaderIndex = string.indexOf("<?xml");
-	if (xmlHeaderIndex === -1) throw new Error("XML corrupted");
 	const dom = new DOMParser().parseFromString(
-		string.substr(xmlHeaderIndex),
+		string.substr(xmlHeaderIndex === -1 ? 0 : xmlHeaderIndex),
 		"text/xml"
 	);
 	if (dom.documentElement.tagName === "parsererror")
