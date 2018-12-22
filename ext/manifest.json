@@ -16,12 +16,15 @@
 	"background": {
 		"scripts": ["background.js"]
 	},
-	"permissions": ["<all_urls>"],
+	"permissions": ["<all_urls>", "storage"],
 	"page_action": {
 		"default_icon": "icons/bar-icon.svg",
 		"default_title": "Subscribe to page",
 		"browser_style": true,
 		"pinned": true
+	},
+	"options_ui": {
+		"page": "options.html"
 	},
 	"applications": {
 		"gecko": {
