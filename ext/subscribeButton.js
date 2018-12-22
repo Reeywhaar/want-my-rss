@@ -39,6 +39,12 @@ const Providers = [
 		link: feed => `https://bazqux.com/add?url=${encodeURI(feed)}`,
 		favicon: "bazqux.ico",
 	},
+	{
+		id: "feedbin",
+		name: "Feedbin",
+		link: feed => `https://feedbin.me/?subscribe=${encodeURI(feed)}`,
+		favicon: "feedbin.ico",
+	},
 ];
 
 class Provider {
