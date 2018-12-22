@@ -45,6 +45,12 @@ const Providers = [
 		link: feed => `https://feedbin.me/?subscribe=${encodeURI(feed)}`,
 		favicon: "feedbin.ico",
 	},
+	{
+		id: "g2reader",
+		name: "G2Reader",
+		link: feed => `https://g2reader.com/?add&q=${encodeURI(feed)}`,
+		favicon: "g2reader.ico",
+	},
 ];
 
 class Provider {
