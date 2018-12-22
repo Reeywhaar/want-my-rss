@@ -417,7 +417,6 @@ async function main() {
 
 	setHotkeyNavigation();
 
-	console.log(url);
 	let resp;
 	try {
 		resp = await fetch(url);
