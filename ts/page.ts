@@ -1,11 +1,13 @@
+import { Return } from "./pageReturnType.js";
+
 (() => {
-	const data = Array.from(
-		document.head.querySelectorAll("link[rel='alternate']")
-	)
+	const data = Array.from(document.head.querySelectorAll(
+		"link[rel='alternate']"
+	) as NodeListOf<HTMLLinkElement>)
 		.filter(el => {
 			if (!el.hasAttribute("type")) return false;
 			if (!el.hasAttribute("href")) return false;
-			const type = el.getAttribute("type");
+			const type = el.getAttribute("type")!;
 			if (
 				type.indexOf("rss") !== -1 ||
 				type.indexOf("atom") !== -1 ||
@@ -23,5 +25,5 @@
 	return {
 		url: window.location.href,
 		data,
-	};
+	} as Return;
 })();

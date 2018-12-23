@@ -1,40 +1,40 @@
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Subscribe</title>
-	<style>
-		body {
-			max-width: 30rem;
-		}
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Subscribe</title>
+		<script src="./js/popup.js" defer type="module"></script>
+		<style>
+			body {
+				max-width: 30rem;
+			}
 
-		.items {
-			padding: 0.2rem;
-		}
+			.items {
+				padding: 0.2rem;
+			}
 
-		.items__item-link {
-			display: block;
-			position: relative;
-			padding: 0.2rem 0.4rem;
-			color: #000;
-			text-decoration: none;
-		}
+			.items__item-link {
+				display: block;
+				position: relative;
+				padding: 0.2rem 0.4rem;
+				color: #000;
+				text-decoration: none;
+			}
 
-		.items__item-link:hover {
-			color: hsl(200, 70%, 50%);
-		}
+			.items__item-link:hover {
+				color: hsl(200, 70%, 50%);
+			}
 
-		.items__item + .items__item {
-			border-top: 1px solid rgba(0,0,0,0.1);
-		}
-	</style>
-</head>
-<body>
-	<div class="items"></div>
-	<template id="item">
-		<div class="items__item"><a class="items__item-link" href=""></a></div>
-	</template>
-	<script src="./popup.js"></script>
-</body>
+			.items__item + .items__item {
+				border-top: 1px solid rgba(0, 0, 0, 0.1);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="items"></div>
+		<template id="item">
+			<div class="items__item"><a class="items__item-link" href=""></a></div>
+		</template>
+	</body>
 </html>

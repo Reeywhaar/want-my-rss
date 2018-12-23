@@ -14,7 +14,7 @@
 		"96": "icons/icon.svg"
 	},
 	"background": {
-		"scripts": ["background.js"]
+		"scripts": ["js/background.js"]
 	},
 	"permissions": ["<all_urls>", "storage"],
 	"page_action": {

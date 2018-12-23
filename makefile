@@ -1,7 +1,13 @@
 include ./.env
 
-build:
-	make lint && web-ext build -s ext
+build: clean
+	tsc && make lint && web-ext build -s ext
+
+clean:
+	rm -r etx/js
+
+watch:
+	tsc --watch
 
 run:
 	web-ext run -s ext --firefox-profile ${WEB_EXT_FIREFOX_PROFILE}
