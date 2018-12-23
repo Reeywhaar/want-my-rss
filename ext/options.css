@@ -1,0 +1,60 @@
+/* feeds-form */
+
+.feeds-form__description {
+	opacity: 0.6;
+}
+
+.feeds-form__footer {
+	margin-top: 0.2rem;
+	display: flex;
+	justify-content: space-between;
+}
+
+/* image-placeholder */
+
+.image-placeholder {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.image-placeholder__img {
+	width: 3rem;
+	height: 3rem;
+}
+
+/* feed-item */
+
+.feed-item {
+	display: grid;
+	grid-template-areas: "name name img" "url url img" "imgurl imgurl img" ". button button";
+	grid-template-columns: 1fr 2rem 5.5rem;
+	grid-auto-rows: max-content;
+	grid-column-gap: 0.2rem;
+	grid-row-gap: 0.2rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.feed-item__name {
+	grid-area: name;
+}
+
+.feed-item__imgurl {
+	grid-area: imgurl;
+}
+
+.feed-item__url {
+	grid-area: url;
+}
+
+.feed-item__img {
+	grid-area: img;
+	box-shadow: inset 0px 0px 1px 1px rgba(0, 0, 0, 0.2);
+	border-radius: 0.2rem;
+}
+
+.feed-item__remove-button {
+	grid-area: button;
+	justify-self: end;
+}

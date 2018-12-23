@@ -28,6 +28,7 @@
 	},
 	"applications": {
 		"gecko": {
+			"id": "{4d567245-e70d-466a-bb2f-390fc7fb25c2}",
 			"strict_min_version": "63.0"
 		}
 	},
