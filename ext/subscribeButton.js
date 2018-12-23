@@ -1,4 +1,5 @@
 import store from "./storage.js";
+import { CustomProviderStoreLabel } from "./constants.js";
 
 const Providers = [
 	{
@@ -53,37 +54,64 @@ const Providers = [
 	},
 ];
 
-class Provider {
-	static get() {
-		return Providers.find(p => p.id === store.provider) || Providers[0];
-	}
+/**
+ * returns all providers: predefined, and those in browser storage
+ */
+async function getMergedProviders() {
+	const stored = (
+		(await browser.storage.sync.get(CustomProviderStoreLabel))[
+			CustomProviderStoreLabel
+		] || []
+	).map(r => {
+		return {
+			id: r.id,
+			name: r.name,
+			link: feed => r.url.replace("%s", encodeURI(feed)),
+			favicon: r.img || "./providers-icons/noname.svg",
+		};
+	});
+	const result = [
+		...Providers.map(r => {
+			const clone = { ...r };
+			clone.favicon = `./providers-icons/${r.favicon}`;
+			return clone;
+		}),
+		...stored,
+	];
+	result.get = () => {
+		return result.find(p => p.id === store.provider) || Providers[0];
+	};
 
-	static set(id) {
+	result.set = id => {
 		store.provider = id;
-	}
+	};
+
+	return result;
 }
 
 export default class SubscribeButton extends HTMLElement {
 	constructor() {
 		super();
-		const currentProvider = Provider.get();
 		const root = this.attachShadow({ mode: "open" });
+		this.init(root);
+	}
+	async init(root) {
+		const Providers = await getMergedProviders();
+		const currentProvider = Providers.get();
 		root.innerHTML = `
 			<link rel="stylesheet" href="/subscribeButton.css">
 			<div class="subscribe">
 				<span class="link">Subscribe</span><!--
 				--><div class="current-provider" tabindex="0"><!--
-					--><img class="provider-icon" title=${
-						currentProvider.name
-					} src="./providers-icons/${currentProvider.favicon}"/>
+					--><img class="provider-icon" title=${currentProvider.name} src="${
+			currentProvider.favicon
+		}"/>
 					<div class="providers hidden">
 						${Providers.map(
 							p =>
 								`<span data-id="${p.id}" class="providers__item ${
 									p.id === currentProvider.id ? "providers__item--current" : ""
-								}">${
-									p.name
-								} <img class="provider-icon" src="./providers-icons/${
+								}">${p.name} <img class="provider-icon" src="${
 									p.favicon
 								}"/></span>`
 						).join("")}
@@ -102,14 +130,15 @@ export default class SubscribeButton extends HTMLElement {
 
 		store.subscribe(prop => {
 			if (prop === "feed-provider") {
-				elements.icon.src = `./providers-icons/${Provider.get().favicon}`;
-				elements.icon.title = Provider.get().name;
+				const p = Providers.get();
+				elements.icon.src = p.favicon;
+				elements.icon.title = p.name;
 			}
 		});
 
 		elements.button.addEventListener("mouseup", e => {
 			e.preventDefault();
-			const provider = Provider.get();
+			const provider = Providers.get();
 			browser.runtime.sendMessage({
 				action: "open-tab",
 				url: provider.link(this.getAttribute("link")),
@@ -127,10 +156,10 @@ export default class SubscribeButton extends HTMLElement {
 
 		elements.providers.forEach(i => {
 			i.addEventListener("click", e => {
-				let currentProvider = Provider.get();
+				let currentProvider = Providers.get();
 				if (e.currentTarget.dataset.id === currentProvider.id) return;
-				Provider.set(e.currentTarget.dataset.id);
-				currentProvider = Provider.get();
+				Providers.set(e.currentTarget.dataset.id);
+				currentProvider = Providers.get();
 				elements.outlet.blur();
 				elements.providers.forEach(i => {
 					if (i.dataset.id === currentProvider.id) {

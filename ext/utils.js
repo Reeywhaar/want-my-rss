@@ -111,3 +111,7 @@ export function longest(...strings) {
 export function setProp(obj, prop) {
 	return val => (obj[prop] = val);
 }
+
+export function randomInt(min = 0, max = 1000) {
+	return Math.floor(Math.random() * (max - min + 1) + min);
+}

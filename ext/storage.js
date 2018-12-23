@@ -7,7 +7,7 @@ function localStorageProperty(propertyName, def) {
 		get() {
 			if (cache.has(propertyName)) return cache.get(propertyName);
 			const val = localStorage.getItem(propertyName) || def;
-			cache.set(val);
+			cache.set(propertyName, val);
 			return val;
 		},
 		set(x) {
