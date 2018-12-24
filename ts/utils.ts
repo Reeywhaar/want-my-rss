@@ -61,8 +61,8 @@ export function safe(input: string): string {
 }
 
 enum EscapeFlag {
-	Escape = 0x01,
-	Safe = 0x10,
+	Escape = 0b01,
+	Safe = 0b10,
 }
 
 /**
