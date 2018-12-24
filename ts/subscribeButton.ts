@@ -6,60 +6,20 @@ export default class SubscribeButton extends HTMLElement {
 		const root = this.attachShadow({ mode: "open" });
 		this.init(root);
 	}
-	async init(root: ShadowRoot) {
-		const [FeedReaders, currentReaderID] = await Promise.all([
-			Storage.get("feedReaders"),
-			Storage.get("feedReaderID"),
-		]);
-		const currentReader = FeedReaders.find(x => x.id === currentReaderID)!;
-		root.innerHTML = `
-			<link rel="stylesheet" href="/subscribeButton.css">
-			<div class="subscribe">
-				<span class="link">Subscribe</span><!--
-		 --><div class="current-provider" tabindex="0"><!--
-			 --><img
-						class="provider-icon"
-						title=${currentReader.name}
-						src="${currentReader.favicon}"
-					/><div class="providers hidden">
-						${FeedReaders.map(
-							p =>
-								`<span data-id="${p.id}" class="providers__item ${
-									p.id === currentReader.id ? "providers__item--current" : ""
-								}">${p.name} <img class="provider-icon" src="${
-									p.favicon
-								}"/></span>`
-						).join("")}
-					</div>
-				</div>
-			</div>
-		`;
+	private async init(root: ShadowRoot) {
+		const style = document.createElement("link");
+		style.rel = "stylesheet";
+		style.href = "/subscribeButton.css";
+		root.appendChild(style);
 
-		const elements: {
-			button: HTMLButtonElement;
-			icon: HTMLImageElement;
-			outlet: HTMLDivElement;
-			popup: HTMLDivElement;
-			providers: NodeListOf<HTMLDivElement>;
-		} = {
-			button: root.querySelector(".link") as HTMLButtonElement,
-			icon: root.querySelector(".provider-icon") as HTMLImageElement,
-			outlet: root.querySelector(".current-provider") as HTMLDivElement,
-			popup: root.querySelector(".providers") as HTMLDivElement,
-			providers: root.querySelectorAll(".providers__item") as NodeListOf<
-				HTMLDivElement
-			>,
-		};
+		const subscribeDiv = document.createElement("div");
+		subscribeDiv.className = "subscribe";
+		root.appendChild(subscribeDiv);
 
-		Storage.subscribe(async changes => {
-			if ("feedReaderID" in changes) {
-				const current = await Storage.get("currentFeedReader");
-				elements.icon.src = current.favicon;
-				elements.icon.title = current.name;
-			}
-		});
-
-		elements.button.addEventListener("mouseup", e => {
+		const titleSpan = document.createElement("span");
+		titleSpan.textContent = "Subscribe";
+		titleSpan.className = "link";
+		titleSpan.addEventListener("mouseup", e => {
 			e.preventDefault();
 			const newTab = e.metaKey || e.which === 2;
 			(async () => {
@@ -71,31 +31,78 @@ export default class SubscribeButton extends HTMLElement {
 				});
 			})();
 		});
+		subscribeDiv.appendChild(titleSpan);
 
-		elements.outlet.addEventListener("focus", () => {
-			elements.popup.classList.remove("hidden");
+		const provDiv = document.createElement("div");
+		provDiv.className = "current-provider";
+		provDiv.tabIndex = 0;
+		provDiv.addEventListener("focus", () => {
+			providersDiv.classList.remove("hidden");
 		});
-
-		elements.outlet.addEventListener("blur", () => {
-			elements.popup.classList.add("hidden");
+		provDiv.addEventListener("blur", () => {
+			providersDiv.classList.add("hidden");
 		});
+		subscribeDiv.appendChild(provDiv);
 
-		elements.providers.forEach(i => {
-			i.addEventListener("click", e => {
+		const [readers, currentReaderId] = await Promise.all([
+			Storage.get("feedReaders"),
+			Storage.get("feedReaderID"),
+		]);
+		const currentReader = readers.find(r => r.id === currentReaderId)!;
+
+		const providerIcon = document.createElement("img");
+		providerIcon.className = "provider-icon";
+		providerIcon.title = currentReader.name;
+		providerIcon.src = currentReader.favicon;
+		provDiv.appendChild(providerIcon);
+
+		const providersDiv = document.createElement("div");
+		providersDiv.className = "providers hidden";
+		provDiv.appendChild(providersDiv);
+
+		const providers = readers.map(reader => {
+			const el = document.createElement("span");
+			const isCurrent = reader.id === currentReaderId;
+			el.className = `providers__item ${
+				isCurrent ? "providers__item--current" : ""
+			}`;
+			el.dataset.id = reader.id;
+
+			const span = document.createElement("span");
+			span.textContent = reader.name + " ";
+			el.appendChild(span);
+
+			const img = document.createElement("img");
+			img.className = "provider-icon";
+			img.src = reader.favicon;
+			el.appendChild(img);
+
+			el.addEventListener("click", e => {
 				let id = (e.currentTarget as HTMLElement).dataset.id!;
 				(async () => {
 					let currentProviderID = await Storage.get("feedReaderID");
 					if (id === currentProviderID) return;
 					await Storage.set("feedReaderID", id);
 					const currentProvider = await Storage.get("currentFeedReader");
-					elements.outlet.blur();
-					elements.providers.forEach(i => {
+					provDiv.blur();
+					providers.forEach(i => {
 						const action =
 							i.dataset.id === currentProvider.id ? "add" : "remove";
 						i.classList[action]("providers__item--current");
 					});
 				})();
 			});
+
+			providersDiv.appendChild(el);
+			return el;
+		});
+
+		Storage.subscribe(async changes => {
+			if ("feedReaderID" in changes) {
+				const current = await Storage.get("currentFeedReader");
+				providerIcon.src = current.favicon;
+				providerIcon.title = current.name;
+			}
 		});
 	}
 }
