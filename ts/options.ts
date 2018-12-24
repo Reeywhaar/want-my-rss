@@ -263,7 +263,7 @@ function AdditionalControls({ className = "" }: { className?: string } = {}) {
 
 	const resetButton = document.createElement("button");
 	resetButton.textContent = "Reset";
-	resetButton.title = "Reset all options, and removes all custom feed readers";
+	resetButton.title = "Reset all options, and remove all custom feed readers";
 	resetButton.addEventListener("click", () => {
 		if (!confirm("Are you sure you want to reset")) return;
 		Storage.clear();
