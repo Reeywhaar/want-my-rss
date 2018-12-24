@@ -89,16 +89,19 @@ function webRequestHandler(
 	let reqbody = "";
 	filter.ondata = event => {
 		reqbody += decoder.decode(event.data);
-		if (reqbody.length > 100 && isFeed(reqbody)) {
-			// filter.close();
+		filter.write(event.data);
+		if (reqbody.length > 100) {
+			if (isFeed(reqbody)) {
+				browser.tabs.update(data.tabId, {
+					url: getRedirectURL(data.url),
+					loadReplace: true,
+				});
+				filter.suspend();
+				return;
+			}
 			filter.disconnect();
-			browser.tabs.update(data.tabId, {
-				url: getRedirectURL(data.url),
-				loadReplace: true,
-			});
 			return;
 		}
-		filter.write(event.data);
 	};
 	filter.onstop = () => {
 		filter.disconnect();
