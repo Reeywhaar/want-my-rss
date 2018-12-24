@@ -1,22 +1,17 @@
 import { randomInt } from "./utils.js";
-import { CustomProviderStoreLabel } from "./constants.js";
+import { Storage, StorageFeedReader } from "./storage.js";
 
-function randomID() {
+/**
+ * generates id for new feed
+ */
+function randomID(): string {
 	return btoa(randomInt(100000000000, 999999999999).toString());
 }
 
-async function getFeeds() {
-	const feeds = (await browser.storage.sync.get(CustomProviderStoreLabel))[
-		CustomProviderStoreLabel
-	];
-	return feeds || [];
-}
-
-async function setFeeds(readers) {
-	await browser.storage.sync.set({ [CustomProviderStoreLabel]: readers });
-}
-
-function TextInput({ value = "", className = "" } = {}) {
+function TextInput({
+	value = "",
+	className = "",
+}: { value?: string; className?: string } = {}): HTMLInputElement {
 	const el = document.createElement("input");
 	el.className = "text-input " + className;
 	el.type = "text";
@@ -25,18 +20,32 @@ function TextInput({ value = "", className = "" } = {}) {
 	return el;
 }
 
-function ImagePlaceholder({ url = "", className = "" } = {}) {
-	const el = document.createElement("div");
+type ImagePlaceholderElement = HTMLElement & {
+	setURL: (url: string) => void;
+};
+
+function ImagePlaceholder({
+	url = "",
+	className = "",
+}: { url?: string; className?: string } = {}): ImagePlaceholderElement {
+	const el = (document.createElement(
+		"div"
+	) as unknown) as ImagePlaceholderElement;
 	el.className = "image-placeholder " + className;
 	const img = document.createElement("img");
 	img.className = "image-placeholder__img";
 	img.src = url;
 	el.appendChild(img);
 	el.setURL = url => {
-		img.src = url;
+		img.src = url || "./providers-icons/noname.svg";
 	};
 	return el;
 }
+
+type FeedItemElement = HTMLElement & {
+	toData: () => StorageFeedReader;
+	clear: () => void;
+};
 
 function FeedItem({
 	id = "",
@@ -45,8 +54,15 @@ function FeedItem({
 	img = "",
 	onRemove = null,
 	className = "",
-} = {}) {
-	const el = document.createElement("div");
+}: {
+	id?: string;
+	url?: string;
+	name?: string;
+	img?: string;
+	onRemove?: ((e: Event, el: HTMLElement) => void) | null;
+	className?: string;
+} = {}): FeedItemElement {
+	const el = (document.createElement("div") as unknown) as FeedItemElement;
 	el.className = "feed-item " + className;
 
 	const e_id = document.createElement("input");
@@ -73,7 +89,9 @@ function FeedItem({
 	el.appendChild(e_img);
 
 	e_imgurl.addEventListener("input", e => {
-		e_img.setURL(e.target.value || "./providers-icons/noname.svg");
+		e_img.setURL(
+			(e.target as HTMLInputElement).value || "./providers-icons/noname.svg"
+		);
 	});
 
 	if (onRemove) {
@@ -81,7 +99,7 @@ function FeedItem({
 		e_remove.className = "feed-item__remove-button";
 		e_remove.textContent = "remove";
 		e_remove.addEventListener("click", e => {
-			if (e.target !== e.explicitOriginalTarget) return;
+			if (e.target !== (e as any).explicitOriginalTarget) return;
 			onRemove.bind(e_remove)(e, el);
 		});
 		el.appendChild(e_remove);
@@ -100,13 +118,26 @@ function FeedItem({
 		e_name.value = "";
 		e_url.value = "";
 		e_imgurl.value = "";
+		e_img.setURL("");
 	};
 
 	return el;
 }
 
-function FeedForm({ items = [], onSave = null } = {}) {
-	const form = document.createElement("form");
+type FeedFormElement = HTMLFormElement & {
+	setNotice: (notice: string) => void;
+	setItems: (items: StorageFeedReader[]) => void;
+	reset: () => void;
+};
+
+function FeedForm({
+	items = [],
+	onSave = null,
+}: {
+	items?: StorageFeedReader[];
+	onSave?: ((items: StorageFeedReader[]) => void) | null;
+} = {}): FeedFormElement {
+	const form = document.createElement("form") as FeedFormElement;
 	form.className = "feeds-form";
 
 	const header = document.createElement("h1");
@@ -121,7 +152,7 @@ function FeedForm({ items = [], onSave = null } = {}) {
 	const items_container = document.createElement("div");
 	form.appendChild(items_container);
 
-	let e_items = [];
+	let e_items: FeedItemElement[] = [];
 
 	form.setItems = items => {
 		e_items.forEach(x => x.remove());
@@ -131,7 +162,7 @@ function FeedForm({ items = [], onSave = null } = {}) {
 				url: x.url,
 				name: x.name,
 				img: x.img,
-				onRemove: (e, el) => {
+				onRemove: (_, el) => {
 					el.remove();
 				},
 				className: "feeds-form__item feeds-form__store-item",
@@ -186,16 +217,16 @@ function FeedForm({ items = [], onSave = null } = {}) {
 				return;
 			}
 		}
-		let data;
+		let data: StorageFeedReader[];
 		try {
-			data = Array.from(form.querySelectorAll(".feeds-form__store-item")).map(
-				x => {
-					const data = x.toData();
-					if (!data.name) throw new Error("Name required");
-					if (!data.url) throw new Error("URL required");
-					return data;
-				}
-			);
+			data = (Array.from(
+				form.querySelectorAll(".feeds-form__store-item")
+			) as FeedItemElement[]).map(x => {
+				const data = x.toData();
+				if (!data.name) throw new Error("Name required");
+				if (!data.url) throw new Error("URL required");
+				return data;
+			});
 		} catch (e) {
 			form.setNotice(e.message);
 			return;
@@ -212,7 +243,7 @@ function FeedForm({ items = [], onSave = null } = {}) {
 			newItem.id = newID;
 			data.push(newItem);
 		}
-		onSave(data);
+		onSave && onSave(data);
 	});
 
 	form.reset = () => {
@@ -222,18 +253,40 @@ function FeedForm({ items = [], onSave = null } = {}) {
 	return form;
 }
 
+function AdditionalControls({ className = "" }: { className?: string } = {}) {
+	const root = document.createElement("div");
+	root.className = "options " + className;
+
+	const header = document.createElement("h1");
+	header.textContent = "Additional Options";
+	root.appendChild(header);
+
+	const resetButton = document.createElement("button");
+	resetButton.textContent = "Reset";
+	resetButton.title = "Reset all options, and removes all custom feed readers";
+	resetButton.addEventListener("click", () => {
+		if (!confirm("Are you sure you want to reset")) return;
+		Storage.clear();
+		location.reload();
+	});
+	root.appendChild(resetButton);
+
+	return root;
+}
+
 async function main() {
-	const feeds = await getFeeds();
+	const feeds = await Storage.get("customFeedReaders");
 	const form = FeedForm({
 		items: feeds,
 		onSave: items => {
-			setFeeds(items);
+			Storage.set("customFeedReaders", items);
 			form.setItems(items);
 			form.setNotice("Saved!");
 			form.reset();
 		},
 	});
 	document.body.appendChild(form);
+	document.body.appendChild(AdditionalControls());
 }
 
 main().catch(e => {

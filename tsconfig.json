@@ -1,0 +1,22 @@
+{
+	"compilerOptions": {
+		"lib": ["es2017", "dom"],
+		"rootDir": "./ts",
+		"outDir": "./ext/js",
+		"target": "es2017",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"noImplicitReturns": true,
+		"noImplicitAny": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"strict": true,
+		"baseUrl": "./",
+		"alwaysStrict": true,
+		"forceConsistentCasingInFileNames": true,
+		"typeRoots": ["node_modules/@types", "node_modules/web-ext-types"]
+	},
+	"include": ["./ts/**/*.ts"],
+	"exclude": ["node_modules"],
+	"typeAcquisition": { "enable": true }
+}

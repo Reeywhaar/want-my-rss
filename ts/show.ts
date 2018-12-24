@@ -1,48 +1,24 @@
 import SubscribeButton from "./subscribeButton.js";
 import RelativeDate from "./relativeDate.js";
-import store from "./storage.js";
+import { Storage } from "./storage.js";
+import { Sorting, Sortings, SortingObjects } from "./sortings.js";
 import { vif, t, longest, setProp } from "./utils.js";
+import { RSSData, RSSDataItem } from "./rssDataType.js";
+import { setTheme, getTheme } from "./theme.js";
 
 window.customElements.define("subscribe-button", SubscribeButton);
 window.customElements.define("relative-date", RelativeDate, {
 	extends: "time",
 });
 
-const Sortings = {
-	none: {
-		label: "None",
-		fn: (a, b) => {
-			try {
-				const pa = parseInt(a.dataset.index, 10);
-				const pb = parseInt(b.dataset.index, 10);
-				if (pa == pb) return 0;
-				return pa < pb ? -1 : 1;
-			} catch (e) {
-				return 0;
-			}
-		},
-	},
-	"date desc": {
-		label: "Newest",
-		fn: (a, b) => {
-			try {
-				const pa = parseInt(a.dataset.datetime, 10);
-				const pb = parseInt(b.dataset.datetime, 10);
-				if (pa == pb) return 0;
-				return pa < pb ? 1 : -1;
-			} catch (e) {
-				return 0;
-			}
-		},
-	},
-	"date asc": {
-		label: "Oldest",
-		fn: (a, b) => Sortings["date desc"].fn(a, b) * -1,
-	},
-};
-const SortingsList = ["none", "date desc", "date asc"];
-
-function render({ data, url }) {
+async function render({
+	data,
+	url,
+}: {
+	data: RSSData;
+	url: string;
+}): Promise<string> {
+	const store = await Storage.getAll();
 	return `
 		<header class="header body__header">
 			${vif(() => data.image, url => `<img class="header__image" src="${url}"/>`)}
@@ -75,17 +51,17 @@ function render({ data, url }) {
 			<div class="controls main__controls">
 				<label class="items-sort">
 					<span class="items-sort__label">Sort:</span> <select class="items-sort__select">
-						${SortingsList.map(
+						${Sortings.map(
 							sort =>
 								`<option value="${sort}" ${
 									sort === store.sort ? "selected" : ""
-								}>${Sortings[sort].label}</option>`
+								}>${SortingObjects[sort].label}</option>`
 						).join("")}
 					<select>
 				</label>
 				<div class="controls__spacer"></div>
 				<label class="controls__relative-time-switch"><input class="relative-time-checkbox controls__relative-time-checkbox" type="checkbox" ${
-					store.useRelativeTime === "true" ? "checked" : ""
+					store.useRelativeTime === true ? "checked" : ""
 				}>relative time</label>
 			</div>
 			<div class="items" id="items">
@@ -93,7 +69,7 @@ function render({ data, url }) {
 					.map(
 						(item, index) => `
 							<article class="item items__item" data-index="${index}" data-datetime="${vif(
-							() => item.date.getTime(),
+							() => item.date!.getTime(),
 							date => date,
 							() => 0
 						)}">
@@ -112,7 +88,7 @@ function render({ data, url }) {
 									</h2>
 									<p class="item__info">
 										${vif(
-											() => item.date.toLocaleString(),
+											() => item.date!.toLocaleString(),
 											date => `
 												<time
 													is="relative-date"
@@ -137,19 +113,18 @@ function render({ data, url }) {
 								${vif(
 									() => item.media,
 									media => {
-										if (media.type.indexOf("image/") === 0) {
+										if (media!.type.indexOf("image/") === 0) {
 											return `
 												<div class="item__media">
 													<h4 class="item__media-title">Media</h4>
 													<img
 														class="item__media-element item__media-element-image"
-														src="${t(media, ".url", "", t.escape)}"
+														src="${t(media as any, ".url", "", t.escape)}"
 													/>
 												</div>`;
 										}
-										const strtype = media.type.indexOf("audio/" === 0)
-											? "audio"
-											: "video";
+										const strtype =
+											media!.type.indexOf("audio/") === 0 ? "audio" : "video";
 										return `
 											<div class="item__media">
 													<h4 class="item__media-title">Media</h4>
@@ -157,8 +132,8 @@ function render({ data, url }) {
 														controls
 														class="item__media-element item__media-element-${strtype}"
 														preload="none"
-														src="${t(media, ".url", "", t.escape)}"
-														type="${t(media, ".type", "", t.escape)}"
+														src="${t(media as any, ".url", "", t.escape)}"
+														type="${t(media as any, ".type", "", t.escape)}"
 													/>
 											</div>`;
 									}
@@ -180,70 +155,35 @@ function render({ data, url }) {
 	`;
 }
 
-const Themes = {
-	day: {
-		id: "day",
-		img: "moon.svg",
-	},
-	night: {
-		id: "night",
-		img: "sun.svg",
-	},
-};
-
-async function setThemeSwitching() {
-	const getTheme = () => {
-		return Themes[store.theme];
-	};
-
-	let switchCounter = 0;
-
-	const setTheme = themeName => {
-		store.theme = themeName;
-		document.documentElement.classList.add("switch-transition");
-		++switchCounter;
-		setTimeout(() => {
-			document.documentElement.dataset.theme = themeName;
-		}, 10);
-		setTimeout(() => {
-			--switchCounter;
-			if (switchCounter < 1) {
-				document.documentElement.classList.remove("switch-transition");
-			}
-		}, 1500);
-	};
-
+async function setThemeSwitching(): Promise<void> {
 	const switcher = document.createElement("div");
 	switcher.classList.add("theme-switch");
 	document.body.appendChild(switcher);
 
-	store.subscribe((prop, v) => {
-		if (prop === theme) {
-			document.documentElement.dataset.theme = v;
-		}
-	});
-
-	const theme = getTheme();
+	const theme = await getTheme();
 	document.documentElement.dataset.theme = theme.id;
 	const themeImg = document.createElement("img");
 	themeImg.classList.add("theme-switch__img");
 	themeImg.src = "./icons/" + theme.img;
 
-	window.addEventListener("focus", () => {
-		const theme = getTheme();
-		document.documentElement.dataset.theme = theme.id;
-		themeImg.src = "./icons/" + theme.img;
+	Storage.subscribe(async changes => {
+		if (changes.theme) {
+			const theme = await getTheme();
+			document.documentElement.dataset.theme = theme.id;
+			themeImg.src = "./icons/" + theme.img;
+		}
 	});
 
 	switcher.appendChild(themeImg);
-	switcher.addEventListener("click", () => {
-		const nt = getTheme().id === "day" ? "night" : "day";
+	switcher.addEventListener("click", async () => {
+		const nt = (await getTheme()).id === "day" ? "night" : "day";
 		setTheme(nt);
-		themeImg.src = "./icons/" + Themes[nt].img;
+		const theme = await getTheme();
+		themeImg.src = "./icons/" + theme.img;
 	});
 }
 
-function findCurrentArticle() {
+function findCurrentArticle(): HTMLElement | null {
 	const center = document.body.clientWidth / 2;
 	const height = document.body.clientHeight;
 	let startPosition = 0;
@@ -251,13 +191,13 @@ function findCurrentArticle() {
 		const target = document
 			.elementsFromPoint(center, startPosition)
 			.find(x => x.matches(".item"));
-		if (target) return target;
+		if (target) return target as HTMLElement;
 		startPosition += 10;
 	}
 	return null;
 }
 
-async function setHotkeyNavigation() {
+async function setHotkeyNavigation(): Promise<void> {
 	document.addEventListener("keydown", e => {
 		switch (e.keyCode) {
 			// <-, j
@@ -267,7 +207,8 @@ async function setHotkeyNavigation() {
 				const currentEl = findCurrentArticle();
 				if (!currentEl) return;
 				const rect = currentEl.getBoundingClientRect();
-				const next = rect.y < -2 ? currentEl : currentEl.previousElementSibling;
+				const next =
+					(rect as any).y < -2 ? currentEl : currentEl.previousElementSibling;
 				if (!next) {
 					window.scrollTo({
 						top: 0,
@@ -285,7 +226,8 @@ async function setHotkeyNavigation() {
 				const currentEl = findCurrentArticle();
 				if (!currentEl) return;
 				const rect = currentEl.getBoundingClientRect();
-				const next = rect.y > 2 ? currentEl : currentEl.nextElementSibling;
+				const next =
+					(rect as any).y > 2 ? currentEl : currentEl.nextElementSibling;
 				if (next) {
 					next.scrollIntoView({ behavior: "smooth", block: "start" });
 				} else {
@@ -300,8 +242,8 @@ async function setHotkeyNavigation() {
 	});
 }
 
-function parseXML(string) {
-	const data = {};
+function parseXML(string: string): RSSData {
+	const data = {} as RSSData;
 	const xmlHeaderIndex = string.indexOf("<?xml");
 	const dom = new DOMParser().parseFromString(
 		string.substr(xmlHeaderIndex === -1 ? 0 : xmlHeaderIndex),
@@ -327,7 +269,7 @@ function parseXML(string) {
 
 	data.items =
 		items.map(item => {
-			const parsed = {};
+			const parsed = {} as RSSDataItem;
 			vif(
 				() =>
 					t(item, ">pubDate:") || t(item, ">published:") || t(item, ">date:"),
@@ -367,9 +309,12 @@ function parseXML(string) {
 			vif(
 				() => t(item, ">enclosure"),
 				media => {
-					const out = {};
-					out.type = t(media, "^type");
-					out.url = t(media, "^url");
+					const out = {} as {
+						type?: string;
+						url?: string;
+					};
+					out.type = t(media as any, "^type");
+					out.url = t(media as any, "^url");
 					setProp(parsed, "media")(out);
 				}
 			);
@@ -380,15 +325,15 @@ function parseXML(string) {
 	return data;
 }
 
-function parseJSON(json) {
-	const data = {};
+function parseJSON(json: any): RSSData {
+	const data = {} as RSSData;
 	data.title = t(json, ".title", "Untitled");
 	vif(() => json.home_page_url, setProp(data, "url"));
 	vif(() => json.icon, setProp(data, "image"));
 
 	try {
-		data.items = json.items.map(item => {
-			const out = {};
+		data.items = json.items.map((item: any) => {
+			const out = {} as RSSDataItem;
 			out.title = t(item, ".title", "Untitled");
 			vif(() => item.url, setProp(out, "url"));
 			vif(() => item.image, setProp(out, "image"));
@@ -406,7 +351,7 @@ function parseJSON(json) {
 	return data;
 }
 
-async function main() {
+async function main(): Promise<void> {
 	let url = decodeURI(window.location.search.substr(5));
 	if (url.indexOf("ext%2Brss%3A") === 0) {
 		url = decodeURIComponent(url.substr(12));
@@ -417,7 +362,7 @@ async function main() {
 
 	setHotkeyNavigation();
 
-	let resp;
+	let resp: Response;
 	try {
 		resp = await fetch(url);
 		if (resp.status >= 400) {
@@ -444,12 +389,12 @@ async function main() {
 		return;
 	}
 
-	let data;
+	let data: RSSData;
 	try {
 		const type = resp.headers.get("Content-Type");
-		if (type.includes("xml")) {
+		if (type!.includes("xml")) {
 			data = parseXML(await resp.text());
-		} else if (type.includes("json")) {
+		} else if (type!.includes("json")) {
 			data = parseJSON(await resp.json());
 		} else {
 			throw new Error("Unsopported format");
@@ -472,44 +417,46 @@ async function main() {
 	const container = document.body;
 	vif(
 		() => data.title || data.description,
-		description => (document.title = description)
+		description => (document.title = description!)
 	);
 	const fr = document.createElement("template");
-	fr.innerHTML = render({ data, url });
+	fr.innerHTML = await render({ data, url });
 	container.append(fr.content);
 
-	const sortArticles = sort => {
-		const articleContainer = document.getElementById("items");
+	const sortArticles = (sort: Sorting) => {
+		const articleContainer = document.getElementById("items")!;
 		const articles = articleContainer.querySelectorAll(":scope > .item");
 
 		Array.from(articles)
-			.sort(Sortings[sort].fn)
+			.sort(SortingObjects[sort].fn as any)
 			.forEach((x, i) => {
-				x.dataset.sortIndex = i;
+				(x as HTMLElement).dataset.sortIndex = i.toString();
 				articleContainer.appendChild(x);
 			});
 	};
-	if (store.sort !== "none") sortArticles(store.sort);
+	const sort = await Storage.get("sort");
+	if (sort !== "none") sortArticles(sort);
 
-	store.subscribe((prop, value) => {
-		if (prop === "use-relative-time") {
+	Storage.subscribe(changes => {
+		if (changes.hasOwnProperty("useRelativeTime")) {
 			document.querySelectorAll("time[is='relative-date']").forEach(el => {
-				el.dataset.relative = value;
+				(el as HTMLElement).dataset.relative = changes.useRelativeTime!.newValue.toString();
 			});
 		}
 	});
 
 	document
-		.querySelector(".relative-time-checkbox")
-		.addEventListener("change", e => {
-			store.useRelativeTime = e.target.checked.toString();
+		.querySelector(".relative-time-checkbox")!
+		.addEventListener("change", async e => {
+			Storage.set("useRelativeTime", (e.target as HTMLInputElement).checked);
 		});
 
 	document
-		.querySelector(".items-sort__select")
-		.addEventListener("change", e => {
-			store.sort = e.target.value;
-			sortArticles(e.target.value);
+		.querySelector(".items-sort__select")!
+		.addEventListener("change", async e => {
+			const sort = (e.target as HTMLInputElement).value as Sorting;
+			Storage.set("sort", sort);
+			sortArticles(sort);
 		});
 }
 

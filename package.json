@@ -1,0 +1,23 @@
+{
+  "name": "want-my-rss",
+  "version": "1.0.0",
+  "description": "[Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/want-my-rss/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reeywhaar/want-my-rss.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Reeywhaar/want-my-rss/issues"
+  },
+  "homepage": "https://github.com/Reeywhaar/want-my-rss#readme",
+  "devDependencies": {
+    "web-ext-types": "^3.0.0"
+  }
+}

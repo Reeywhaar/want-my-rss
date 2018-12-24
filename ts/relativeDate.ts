@@ -1,12 +1,11 @@
-const now = new Date().getTime();
-const second = 1000;
-const minute = 60 * second;
-const hour = 60 * minute;
-const day = 24 * hour;
-const week = 7 * day;
-const month = 31 * day;
+const now: number = new Date().getTime();
+const second: number = 1000;
+const minute: number = 60 * second;
+const hour: number = 60 * minute;
+const day: number = 24 * hour;
+const month: number = 31 * day;
 
-function pluralize(n, label) {
+function pluralize(n: number, label: string): string {
 	if (n === 1) {
 		switch (label) {
 			case "second":
@@ -22,7 +21,7 @@ function pluralize(n, label) {
 	return `${nstr} ${label}s`;
 }
 
-function relativeDate(dateString) {
+function relativeDate(dateString: string): string {
 	try {
 		const timestamp = Date.parse(dateString);
 		const time = new Date(timestamp).toLocaleString();
@@ -48,7 +47,7 @@ export default class RelativeDate extends HTMLTimeElement {
 		super();
 		this.attributeChangedCallback();
 	}
-	attributeChangedCallback(name, oldValue, newValue) {
+	attributeChangedCallback() {
 		if (this.dataset.relative === "true") {
 			this.textContent = relativeDate(this.dateTime);
 		} else {

@@ -1,38 +1,35 @@
-const links = JSON.parse(
-	decodeURIComponent(window.location.search.substr("7"))
+import { findParent } from "./utils.js";
+import { Data as PageData } from "./pageReturnType.js";
+
+const links: PageData[] = JSON.parse(
+	decodeURIComponent(window.location.search.substr(7))
 );
 
 const template = document.getElementById("item");
 
-const types = {
+const types: { [key: string]: string } = {
 	"application/rss+xml": "rss",
 	"application/atom+xml": "atom",
 	"application/json": "json",
 };
 
-function findParent(el, selector) {
-	while (!el.matches(selector)) {
-		if (el === document.body) return null;
-		el = el.parentElement;
-	}
-	return el;
-}
-
 document.addEventListener("click", e => {
 	if (!(e.which === 1 || e.which === 2)) return;
-	const el = findParent(e.target, ".items__item-link");
+	const el = findParent(e.target as HTMLElement, ".items__item-link");
 	if (!el) return;
 	e.preventDefault();
 	browser.runtime.sendMessage({
 		action: "open-tab",
-		url: browser.runtime.getURL(el.dataset.url),
+		url: browser.runtime.getURL(el.dataset.url!),
 		newTab: e.which === 2 || e.metaKey,
 	});
 });
 
 const elements = links.map(el => {
-	const content = template.content.cloneNode(true);
-	const link = content.querySelector(".items__item-link");
+	const content = (template as HTMLTemplateElement).content.cloneNode(
+		true
+	) as HTMLElement;
+	const link = content.querySelector(".items__item-link") as HTMLLinkElement;
 	const extURL = browser.runtime.getURL(`show.html?url=${encodeURI(el.url)}`);
 	link.href = el.url;
 	link.dataset.url = extURL;
@@ -49,4 +46,4 @@ elements.forEach(el => {
 	fragment.appendChild(el);
 });
 
-document.querySelector(".items").appendChild(fragment);
+document.querySelector(".items")!.appendChild(fragment);
