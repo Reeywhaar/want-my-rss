@@ -7,18 +7,21 @@ export default class SubscribeButton extends HTMLElement {
 		this.init(root);
 	}
 	async init(root: ShadowRoot) {
-		const FeedReaders = await Storage.get("feedReaders");
-		const currentReaderID = await Storage.get("feedReaderID");
+		const [FeedReaders, currentReaderID] = await Promise.all([
+			Storage.get("feedReaders"),
+			Storage.get("feedReaderID"),
+		]);
 		const currentReader = FeedReaders.find(x => x.id === currentReaderID)!;
 		root.innerHTML = `
 			<link rel="stylesheet" href="/subscribeButton.css">
 			<div class="subscribe">
 				<span class="link">Subscribe</span><!--
-				--><div class="current-provider" tabindex="0"><!--
-					--><img class="provider-icon" title=${currentReader.name} src="${
-			currentReader.favicon
-		}"/>
-					<div class="providers hidden">
+		 --><div class="current-provider" tabindex="0"><!--
+			 --><img
+						class="provider-icon"
+						title=${currentReader.name}
+						src="${currentReader.favicon}"
+					/><div class="providers hidden">
 						${FeedReaders.map(
 							p =>
 								`<span data-id="${p.id}" class="providers__item ${
