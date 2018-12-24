@@ -19,6 +19,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.10
+
+* migrated to TypeScript
+* added G2Reader and Feedbin
+* added options page which includes ability to define custom feed reader and reset options
+
 ### 0.9
 
 * add "summary" tag to content lookup tags.
