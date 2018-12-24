@@ -92,7 +92,10 @@ function webRequestHandler(
 		if (reqbody.length > 100 && isFeed(reqbody)) {
 			// filter.close();
 			filter.disconnect();
-			browser.tabs.update(data.tabId, { url: getRedirectURL(data.url) });
+			browser.tabs.update(data.tabId, {
+				url: getRedirectURL(data.url),
+				loadReplace: true,
+			});
 			return;
 		}
 		filter.write(event.data);
