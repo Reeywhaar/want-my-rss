@@ -21,9 +21,10 @@ Contributions are welcome. Fill issues, make prs!
 
 ### 0.10
 
-* migrated to TypeScript
 * added G2Reader and Feedbin
 * added options page which includes ability to define custom feed reader and reset options
+* option to open hyperlinks to feeds in extension's viewer directly
+* migrated to TypeScript (helped to spot some errors)
 
 ### 0.9
 
