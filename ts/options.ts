@@ -182,15 +182,15 @@ function FeedForm({
 	e_footer.className = "feeds-form__footer";
 	form.appendChild(e_footer);
 
-	const e_notice = document.createElement("div");
-	e_footer.appendChild(e_notice);
-
-	e_footer.appendChild(document.createElement("div"));
-
 	const e_submit = document.createElement("input");
 	e_submit.type = "submit";
 	e_submit.value = "save";
 	e_footer.appendChild(e_submit);
+
+	e_footer.appendChild(document.createElement("div"));
+
+	const e_notice = document.createElement("div");
+	e_footer.appendChild(e_notice);
 
 	let noticeCounter = 0;
 	form.setNotice = e => {

@@ -27,8 +27,8 @@
 
 .feed-item {
 	display: grid;
-	grid-template-areas: "name name img" "url url img" "imgurl imgurl img" ". button button";
-	grid-template-columns: 1fr 2rem 5.5rem;
+	grid-template-areas: "img name name" "img url url" "img imgurl imgurl" "button button .";
+	grid-template-columns: 5.5rem 2rem 1fr;
 	grid-auto-rows: max-content;
 	grid-column-gap: 0.2rem;
 	grid-row-gap: 0.2rem;
@@ -56,5 +56,5 @@
 
 .feed-item__remove-button {
 	grid-area: button;
-	justify-self: end;
+	justify-self: start;
 }
