@@ -58,3 +58,9 @@
 	grid-area: button;
 	justify-self: start;
 }
+
+/* options */
+
+.options__reset-button {
+	margin-top: 2rem;
+}

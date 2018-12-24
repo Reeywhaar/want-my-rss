@@ -14,9 +14,10 @@
 		"96": "icons/icon.svg"
 	},
 	"background": {
-		"scripts": ["js/background.js"]
+		"page": "background.html"
 	},
-	"permissions": ["<all_urls>", "storage"],
+	"permissions": ["<all_urls>", "storage", "webRequest", "webRequestBlocking"],
+	"web_accessible_resources": ["show.html"],
 	"page_action": {
 		"default_icon": "icons/bar-icon.svg",
 		"default_title": "Subscribe to page",

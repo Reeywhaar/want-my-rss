@@ -20,6 +20,7 @@ type RawStorageProperties = {
 	feedReaderID: string;
 	useRelativeTime: boolean;
 	customFeedReaders: StorageFeedReader[];
+	redirectRequests: boolean;
 };
 
 type RawStorageChange = {
@@ -35,24 +36,8 @@ const storageDefaults: RawStorageProperties = {
 	feedReaderID: FeedReaders[0].id,
 	useRelativeTime: true,
 	customFeedReaders: [],
+	redirectRequests: true,
 };
-
-function mergeReaders(readers: StorageFeedReader[]): FeedReader[] {
-	const custom = readers.map(r => {
-		return {
-			id: r.id,
-			name: r.name,
-			link: (feed: string) => r.url.replace("%s", encodeURI(feed)),
-			favicon: r.img || "./providers-icons/noname.svg",
-		};
-	});
-	const predefined = FeedReaders.map(r => {
-		const clone = { ...r };
-		clone.favicon = `./providers-icons/${r.favicon}`;
-		return clone;
-	});
-	return [...predefined, ...custom];
-}
 
 /**
  * Raw storage wrapper around browser.storage.sync
@@ -61,10 +46,11 @@ export class RawStorage {
 	static async get<T extends keyof RawStorageProperties>(
 		label: T
 	): Promise<RawStorageProperties[T]> {
-		return (
-			((await internalStorage.get(label))[label] as StorageProperties[T]) ||
-			storageDefaults[label]
-		);
+		const val = (await internalStorage.get(label))[
+			label
+		] as StorageProperties[T];
+		if (typeof val === "undefined") return storageDefaults[label];
+		return val;
 	}
 
 	static async getAll(): Promise<RawStorageProperties> {
@@ -112,6 +98,23 @@ export class RawStorage {
 	static clear(): Promise<void> {
 		return internalStorage.clear();
 	}
+}
+
+function mergeReaders(readers: StorageFeedReader[]): FeedReader[] {
+	const custom = readers.map(r => {
+		return {
+			id: r.id,
+			name: r.name,
+			link: (feed: string) => r.url.replace("%s", encodeURI(feed)),
+			favicon: r.img || "./providers-icons/noname.svg",
+		};
+	});
+	const predefined = FeedReaders.map(r => {
+		const clone = { ...r };
+		clone.favicon = `./providers-icons/${r.favicon}`;
+		return clone;
+	});
+	return [...predefined, ...custom];
 }
 
 /**
