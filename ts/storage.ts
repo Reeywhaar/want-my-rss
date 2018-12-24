@@ -86,9 +86,9 @@ export class RawStorage {
 			for (let key of Object.keys(changes)) {
 				if ((changes as any)[key].oldValue !== (changes as any)[key].newValue) {
 					(fChanges as any)[key] = (changes as any)[key];
+					if (!("newValue" in (fChanges as any)[key]))
+						(fChanges as any)[key].newValue = (storageDefaults as any)[key];
 				}
-				if (!("newValue" in (fChanges as any)[key]))
-					(fChanges as any)[key].newValue = (storageDefaults as any)[key];
 			}
 			handler(fChanges);
 		};
