@@ -100,7 +100,8 @@ function webRequestHandler(
 	filter.ondata = event => {
 		reqbody += decoder.decode(event.data);
 		filter.write(event.data);
-		if (reqbody.length > 150 && process(reqbody)) filter.disconnect();
+		if (reqbody.length > 150 && process(reqbody)) filter.close();
+		if (reqbody.length > 150) filter.disconnect();
 	};
 	filter.onstop = () => {
 		process(reqbody);
