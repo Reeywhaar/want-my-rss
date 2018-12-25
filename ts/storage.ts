@@ -77,9 +77,7 @@ export class RawStorage {
 			area: browser.storage.StorageName
 		) => {
 			if (area !== "sync") return;
-			/**
-			 * filtered changes
-			 */
+			/** filtered changes */
 			let fChanges = {} as RawStorageChange;
 			for (let key of Object.keys(changes) as (keyof RawStorageProperties)[]) {
 				if (changes[key]!.oldValue !== changes[key]!.newValue) {
