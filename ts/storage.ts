@@ -24,7 +24,7 @@ type RawStorageProperties = {
 };
 
 type RawStorageChange = {
-	[P in keyof RawStorageProperties]: {
+	[P in keyof RawStorageProperties]?: {
 		oldValue: RawStorageProperties[P];
 		newValue: RawStorageProperties[P];
 	}
@@ -71,23 +71,21 @@ export class RawStorage {
 		});
 	}
 
-	static subscribe(
-		handler: (changes: Partial<RawStorageChange>) => void
-	): void {
+	static subscribe(handler: (changes: RawStorageChange) => void): void {
 		const fn = (
-			changes: Partial<RawStorageChange>,
+			changes: RawStorageChange,
 			area: browser.storage.StorageName
 		) => {
 			if (area !== "sync") return;
 			/**
 			 * filtered changes
 			 */
-			let fChanges = {} as Partial<RawStorageChange>;
-			for (let key of Object.keys(changes)) {
-				if ((changes as any)[key].oldValue !== (changes as any)[key].newValue) {
-					(fChanges as any)[key] = (changes as any)[key];
-					if (!("newValue" in (fChanges as any)[key]))
-						(fChanges as any)[key].newValue = (storageDefaults as any)[key];
+			let fChanges = {} as RawStorageChange;
+			for (let key of Object.keys(changes) as (keyof RawStorageProperties)[]) {
+				if (changes[key]!.oldValue !== changes[key]!.newValue) {
+					fChanges[key] = (changes as any)[key];
+					if (!("newValue" in fChanges[key]!))
+						fChanges[key]!.newValue = storageDefaults[key];
 				}
 			}
 			handler(fChanges);
