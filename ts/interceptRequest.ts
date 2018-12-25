@@ -87,23 +87,23 @@ function webRequestHandler(
 	const filter = browser.webRequest.filterResponseData(data.requestId);
 	const decoder = new TextDecoder();
 	let reqbody = "";
+	const process = (body: string): boolean => {
+		if (!isFeed(body)) return false;
+		browser.tabs.update(data.tabId, {
+			url: getRedirectURL(data.url),
+			loadReplace: true,
+		});
+		filter.suspend();
+		return true;
+	};
+
 	filter.ondata = event => {
 		reqbody += decoder.decode(event.data);
 		filter.write(event.data);
-		if (reqbody.length > 100) {
-			if (isFeed(reqbody)) {
-				browser.tabs.update(data.tabId, {
-					url: getRedirectURL(data.url),
-					loadReplace: true,
-				});
-				filter.suspend();
-				return;
-			}
-			filter.disconnect();
-			return;
-		}
+		if (reqbody.length > 100 && process(reqbody)) filter.disconnect();
 	};
 	filter.onstop = () => {
+		process(reqbody);
 		filter.disconnect();
 	};
 	filter.onerror = () => {
