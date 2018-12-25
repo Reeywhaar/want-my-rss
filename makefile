@@ -4,7 +4,7 @@ build: clean
 	tsc && make lint && web-ext build -s ext
 
 clean:
-	rm -r etx/js
+	rm -r ext/js
 
 watch:
 	tsc --watch
