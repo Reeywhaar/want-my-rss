@@ -19,6 +19,11 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.11
+
+* added link to media
+* increased color difference of visited and unvisited links
+
 ### 0.10
 
 * added G2Reader and Feedbin
