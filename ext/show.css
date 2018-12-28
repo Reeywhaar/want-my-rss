@@ -267,6 +267,7 @@ a.header__main-url:visited:hover {
 	margin-top: 0.5rem;
 	height: 1rem;
 	display: block;
+	border-bottom-style: solid;
 	border-bottom-width: 0.5rem;
 	width: 100%;
 	padding-left: 1rem;
