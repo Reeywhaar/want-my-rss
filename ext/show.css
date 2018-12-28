@@ -59,27 +59,26 @@ body {
 
 a {
 	color: var(--link-color);
-	text-decoration: none;
-	border-bottom: 0.1em solid var(--link-underline-color);
+	text-decoration-color: var(--link-underline-color);
 }
 
 a:hover {
 	color: var(--link-hover-color);
-	border-bottom-color: var(--link-hover-underline-color);
+	text-decoration-color: var(--link-hover-underline-color);
 }
 
 a:visited {
 	color: var(--link-visited-color);
-	border-bottom-color: var(--link-visited-underline-color);
+	text-decoration-color: var(--link-visited-underline-color);
 }
 
 a:visited:hover {
 	color: var(--link-visited-hover-color);
-	border-bottom-color: var(--link-visited-hover-underline-color);
+	text-decoration-color: var(--link-visited-hover-underline-color);
 }
 
 a.noline:not(:hover) {
-	border-bottom-color: transparent;
+	text-decoration: none;
 }
 
 hr {
