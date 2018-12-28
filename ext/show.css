@@ -41,6 +41,7 @@
 	--item-border-radius: 0.2rem;
 	--item-background-color: #fff;
 	--line-color: rgba(0, 0, 0, 0.09);
+	--media-title-color: rgba(0, 0, 0, 0.6);
 }
 
 html {
@@ -238,7 +239,11 @@ a.header__main-url:visited:hover {
 
 .item__media-title {
 	margin-bottom: 0.2rem;
-	opacity: 0.6;
+	color: var(--media-title-color);
+}
+
+.item__media-title a {
+	border: none;
 }
 
 .item__media-element-image {
@@ -386,4 +391,5 @@ html[data-theme="night"] {
 	--item-border-radius: 0;
 	--item-background-color: hsl(30, 20%, 10%);
 	--line-color: rgba(255, 255, 255, 0.4);
+	--media-title-color: rgba(255, 255, 255, 0.6);
 }

@@ -8,6 +8,7 @@ export type RSSDataItem = {
 	media?: {
 		type: string | "";
 		url: string | "";
+		name: string | "";
 	};
 };
 

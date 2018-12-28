@@ -114,9 +114,11 @@ async function render({
 									() => item.media,
 									media => {
 										if (media!.type.indexOf("image/") === 0) {
+											const link = `<a href="${media!.url || ""}">${media!
+												.name || "link"}</a>`;
 											return `
 												<div class="item__media">
-													<h4 class="item__media-title">Media</h4>
+													<h4 class="item__media-title">Media ${link}</h4>
 													<img
 														class="item__media-element item__media-element-image"
 														src="${t(media as any, ".url", "", t.escape)}"
@@ -125,9 +127,11 @@ async function render({
 										}
 										const strtype =
 											media!.type.indexOf("audio/") === 0 ? "audio" : "video";
+										const link = `<a href="${media!.url || ""}">${media!.name ||
+											"link"}</a>`;
 										return `
 											<div class="item__media">
-													<h4 class="item__media-title">Media</h4>
+													<h4 class="item__media-title">Media ${link}</h4>
 													<${strtype}
 														controls
 														class="item__media-element item__media-element-${strtype}"
@@ -310,18 +314,24 @@ function parseXML(string: string): RSSData {
 				() => t(item, ">enclosure"),
 				media => {
 					const out = {} as {
-						type?: string;
-						url?: string;
+						type: string | "";
+						url: string | "";
+						name: string | "";
 					};
 					out.type = t(media as any, "^type");
 					out.url = t(media as any, "^url");
-					setProp(parsed, "media")(out);
+					out.name = !out.url
+						? ""
+						: new URL(out.url).pathname
+								.split("/")
+								.reverse()
+								.find(x => x.length > 0) || "";
+					parsed.media = out;
 				}
 			);
 
 			return parsed;
 		}) || [];
-
 	return data;
 }
 
