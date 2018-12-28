@@ -114,20 +114,22 @@ async function render({
 									() => item.media,
 									media => {
 										if (media!.type.indexOf("image/") === 0) {
-											const link = `<a href="${media!.url || ""}">${media!
-												.name || "link"}</a>`;
+											const eurl = t(media as any, ".url", "", t.escape);
+											const link = `<a href="${eurl}">${media!.name ||
+												"link"}</a>`;
 											return `
 												<div class="item__media">
 													<h4 class="item__media-title">Media ${link}</h4>
 													<img
 														class="item__media-element item__media-element-image"
-														src="${t(media as any, ".url", "", t.escape)}"
+														src="${eurl}"
 													/>
 												</div>`;
 										}
 										const strtype =
 											media!.type.indexOf("audio/") === 0 ? "audio" : "video";
-										const link = `<a href="${media!.url || ""}">${media!.name ||
+										const eurl = t(media as any, ".url", "", t.escape);
+										const link = `<a href="${eurl}">${media!.name ||
 											"link"}</a>`;
 										return `
 											<div class="item__media">
@@ -136,7 +138,7 @@ async function render({
 														controls
 														class="item__media-element item__media-element-${strtype}"
 														preload="none"
-														src="${t(media as any, ".url", "", t.escape)}"
+														src="${eurl}"
 														type="${t(media as any, ".type", "", t.escape)}"
 													/>
 											</div>`;
