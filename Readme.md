@@ -14,10 +14,19 @@ Firefox extension that restores some of RSS functionality which Firefox abandone
 ## Add Feed Reader
 If you want to add feed reader of your choice, see [following link](https://github.com/Reeywhaar/want-my-rss/issues/6)
 
+Also you can add your preferred reader in extension's preferences.
+
 ## Contributing
 Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
+
+### 0.12
+
+*CSS issues of Balton Brando*
+
+* restored bottom item link color
+* wider item shadow in dark mode
 
 ### 0.11
 
