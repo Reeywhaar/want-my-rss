@@ -387,7 +387,7 @@ html[data-theme="night"] {
 	--main-url-color: var(--main-color);
 	--main-url-underline-color: rgba(255, 255, 255, 0.001);
 
-	--item-shadow: 0px 0px 1px 1px rgba(255, 255, 255, 0.5);
+	--item-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.5);
 	--item-border-radius: 0;
 	--item-background-color: hsl(30, 20%, 10%);
 	--line-color: rgba(255, 255, 255, 0.4);
