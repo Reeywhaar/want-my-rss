@@ -257,15 +257,15 @@ function AdditionalControls({ className = "" }: { className?: string } = {}) {
 	const root = document.createElement("div");
 	root.className = "options " + className;
 
+	const header = document.createElement("h1");
+	header.textContent = "Additional Options";
+	root.appendChild(header);
+
 	const interceptLabel = (() => {
 		const div = document.createElement("div");
 		const label = document.createElement("label");
 		label.title = "Redirect url which look like feeds to show page";
 		div.appendChild(label);
-
-		const header = document.createElement("h1");
-		header.textContent = "Additional Options";
-		root.appendChild(header);
 
 		const checkbox = document.createElement("input");
 		checkbox.type = "checkbox";
@@ -282,6 +282,28 @@ function AdditionalControls({ className = "" }: { className?: string } = {}) {
 		return div;
 	})();
 	root.appendChild(interceptLabel);
+
+	const newTabLabel = (() => {
+		const div = document.createElement("div");
+		const label = document.createElement("label");
+		label.title = "Open links to feeds in popup in new tab";
+		div.appendChild(label);
+
+		const checkbox = document.createElement("input");
+		checkbox.type = "checkbox";
+		Storage.get("openInNewTab").then(val => (checkbox.checked = val));
+		label.appendChild(checkbox);
+		checkbox.addEventListener("change", () => {
+			Storage.set("openInNewTab", checkbox.checked);
+		});
+
+		const span = document.createElement("span");
+		span.textContent = "Open popup feeds in new tab";
+		label.appendChild(span);
+
+		return div;
+	})();
+	root.appendChild(newTabLabel);
 
 	const resetButton = document.createElement("button");
 	resetButton.className = "options__reset-button";

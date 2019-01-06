@@ -1,5 +1,6 @@
 import { findParent } from "./utils.js";
 import { Data as PageData } from "./pageReturnType.js";
+import { Storage } from "./storage.js";
 
 const links: PageData[] = JSON.parse(
 	decodeURIComponent(window.location.search.substr(7))
@@ -13,6 +14,18 @@ const types: { [key: string]: string } = {
 	"application/json": "json",
 };
 
+let openInNewTab: boolean = false;
+
+Storage.get("openInNewTab").then(v => {
+	openInNewTab = v;
+});
+
+Storage.subscribe(changes => {
+	if (changes.hasOwnProperty("openInNewTab")) {
+		openInNewTab = changes.openInNewTab!.newValue;
+	}
+});
+
 document.addEventListener("click", e => {
 	if (!(e.which === 1 || e.which === 2)) return;
 	const el = findParent(e.target as HTMLElement, ".items__item-link");
@@ -21,7 +34,7 @@ document.addEventListener("click", e => {
 	browser.runtime.sendMessage({
 		action: "open-tab",
 		url: browser.runtime.getURL(el.dataset.url!),
-		newTab: e.which === 2 || e.metaKey,
+		newTab: openInNewTab || e.which === 2 || e.metaKey,
 	});
 });
 

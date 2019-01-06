@@ -21,6 +21,7 @@ type RawStorageProperties = {
 	useRelativeTime: boolean;
 	customFeedReaders: StorageFeedReader[];
 	redirectRequests: boolean;
+	openInNewTab: boolean;
 };
 
 type RawStorageChange = {
@@ -37,6 +38,7 @@ const storageDefaults: RawStorageProperties = {
 	useRelativeTime: true,
 	customFeedReaders: [],
 	redirectRequests: true,
+	openInNewTab: false,
 };
 
 /**
