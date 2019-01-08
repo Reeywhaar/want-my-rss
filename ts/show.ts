@@ -283,7 +283,8 @@ function parseXML(
 	let string = utfdec.decode(input);
 	const data = {} as RSSData;
 	const xmlHeaderIndex = string.indexOf("<?xml");
-	const xmlHeaderEndIndex = xmlHeaderIndex === -1 ? null : string.indexOf("?>");
+	const xmlHeaderEndIndex =
+		xmlHeaderIndex === -1 ? null : string.indexOf("?>", xmlHeaderIndex);
 	const xmlTag =
 		xmlHeaderIndex === -1
 			? null
