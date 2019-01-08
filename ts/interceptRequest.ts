@@ -40,6 +40,11 @@ function getRedirectObject(url: string): browser.webRequest.BlockingResponse {
 function isFeed(body: string): boolean {
 	if (body.indexOf("<feed") !== -1) return true;
 	if (body.indexOf("<rss") !== -1) return true;
+	if (
+		body.indexOf("<rdf:RDF") !== -1 &&
+		body.indexOf('xmlns="http://purl.org/rss/1.0/"') !== -1
+	)
+		return true;
 	return false;
 }
 
