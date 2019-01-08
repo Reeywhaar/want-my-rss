@@ -23,6 +23,8 @@ Contributions are welcome. Fill issues, make prs!
 
 ### 0.13
 
+*Solomon's Key features*
+
 * option to open feed links in new tab
 * fix hover color of subscribe button in dark mode
 * fix wrong url (not properly encoded) of popup.html
