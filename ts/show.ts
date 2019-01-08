@@ -292,7 +292,6 @@ function parseXML(
 	// convert input again if presumed encoding and xml header encoding don't match
 	if (xmlTag) {
 		const enc = getXMLCharset(xmlTag);
-		console.log(enc, presumedCharset);
 		if (enc !== presumedCharset) {
 			const dec = getSafeDecoder(enc);
 			try {
