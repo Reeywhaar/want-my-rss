@@ -21,6 +21,10 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.13
+
+* option to open feed links in new tab
+
 ### 0.12
 
 *CSS issues of Balton Brando*
