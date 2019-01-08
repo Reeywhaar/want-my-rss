@@ -7,7 +7,7 @@ function setAction(tabId: number, data: PageData[]) {
 	if (data.length > 0) {
 		browser.pageAction.setPopup({
 			tabId,
-			popup: `./popup.html?links=${decodeURIComponent(JSON.stringify(data))}`,
+			popup: `./popup.html?links=${encodeURIComponent(JSON.stringify(data))}`,
 		});
 		browser.pageAction.show(tabId);
 	} else {
