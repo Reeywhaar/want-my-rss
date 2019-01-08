@@ -25,7 +25,7 @@ Contributions are welcome. Fill issues, make prs!
 
 * option to open feed links in new tab
 * fix hover color of subscribe button in dark mode
-* fix wrong url of popup.html
+* fix wrong url (not properly encoded) of popup.html
 
 ### 0.12
 
