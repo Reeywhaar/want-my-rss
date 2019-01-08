@@ -21,7 +21,7 @@
 }
 
 .link:hover {
-	background-color: hsla(210, 70%, 50%, 0.3);
+	background-color: hsla(210, 70%, 90%, 1);
 }
 
 .current-provider {
@@ -36,7 +36,7 @@
 
 .current-provider:hover,
 .current-provider:focus {
-	background-color: hsla(210, 70%, 50%, 0.3);
+	background-color: hsla(210, 70%, 90%, 1);
 }
 
 .current-provider:focus {
