@@ -20,6 +20,7 @@ export default class SubscribeButton extends HTMLElement {
 		titleSpan.textContent = "Subscribe";
 		titleSpan.className = "link";
 		titleSpan.addEventListener("mouseup", e => {
+			if (e.which !== 1 && e.which !== 2) return;
 			e.preventDefault();
 			const newTab = e.metaKey || e.which === 2;
 			(async () => {
