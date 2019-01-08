@@ -6,6 +6,8 @@ import { vif, t, longest, setProp } from "./utils.js";
 import { RSSData, RSSDataItem } from "./rssDataType.js";
 import { setTheme, getTheme } from "./theme.js";
 
+const DEFAULT_CHARSET = "utf-8";
+
 window.customElements.define("subscribe-button", SubscribeButton);
 window.customElements.define("relative-date", RelativeDate, {
 	extends: "time",
@@ -248,9 +250,57 @@ async function setHotkeyNavigation(): Promise<void> {
 	});
 }
 
-function parseXML(string: string): RSSData {
+/**
+ *
+ * @param tag xml tag (i.e "<?xml encoding="UTF-8"?>)
+ */
+function getXMLCharset(tag: string): string {
+	const reg = /encoding="(\S*)?"/i;
+	const matches = tag.match(reg);
+	if (!matches) return DEFAULT_CHARSET;
+	if (matches.length < 2) return DEFAULT_CHARSET;
+	return matches[1].toLocaleLowerCase();
+}
+
+/**
+ * Tries to instantiate TextDecoder, and returns utf-8 decoder on fail
+ *
+ * @param enc encoding
+ */
+function getSafeDecoder(enc: string): TextDecoder {
+	try {
+		return new TextDecoder(enc);
+	} catch {
+		return new TextDecoder("utf-8");
+	}
+}
+
+function parseXML(
+	input: ArrayBuffer,
+	presumedCharset: string = DEFAULT_CHARSET
+): RSSData {
+	const utfdec = getSafeDecoder(presumedCharset);
+	let string = utfdec.decode(input);
 	const data = {} as RSSData;
 	const xmlHeaderIndex = string.indexOf("<?xml");
+	const xmlHeaderEndIndex = xmlHeaderIndex === -1 ? null : string.indexOf("?>");
+	const xmlTag =
+		xmlHeaderIndex === -1
+			? null
+			: string.substr(xmlHeaderIndex, xmlHeaderEndIndex! + 2);
+
+	// convert input again if presumed encoding and xml header encoding don't match
+	if (xmlTag) {
+		const enc = getXMLCharset(xmlTag);
+		console.log(enc, presumedCharset);
+		if (enc !== presumedCharset) {
+			const dec = getSafeDecoder(enc);
+			try {
+				string = dec.decode(input);
+			} catch {}
+		}
+	}
+
 	const dom = new DOMParser().parseFromString(
 		string.substr(xmlHeaderIndex === -1 ? 0 : xmlHeaderIndex),
 		"text/xml"
@@ -363,6 +413,20 @@ function parseJSON(json: any): RSSData {
 	return data;
 }
 
+/**
+ * Parses charset out of Content-Type header;
+ *
+ * @param input content-type header (i.e. "application/xml; charset=ISO-8859-1")
+ */
+function getCharset(input: string | null): string {
+	if (!input) return DEFAULT_CHARSET;
+	const reg = /charset=(.*)$/i;
+	const matches = input.match(reg);
+	if (!matches) return DEFAULT_CHARSET;
+	if (matches.length < 2) return DEFAULT_CHARSET;
+	return matches[1].toLocaleLowerCase();
+}
+
 async function main(): Promise<void> {
 	let url = decodeURI(window.location.search.substr(5));
 	if (url.indexOf("ext%2Brss%3A") === 0) {
@@ -405,7 +469,10 @@ async function main(): Promise<void> {
 	try {
 		const type = resp.headers.get("Content-Type");
 		if (type!.includes("xml")) {
-			data = parseXML(await resp.text());
+			data = parseXML(
+				await resp.arrayBuffer(),
+				getCharset(resp.headers.get("content-type"))
+			);
 		} else if (type!.includes("json")) {
 			data = parseJSON(await resp.json());
 		} else {
