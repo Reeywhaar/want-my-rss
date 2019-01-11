@@ -56,4 +56,11 @@ export const FeedReaders: FeedReader[] = [
 		link: feed => `https://g2reader.com/?add&q=${encodeURI(feed)}`,
 		favicon: "g2reader.ico",
 	},
+	{
+		id: "commafeed",
+		name: "CommaFeed",
+		link: feed =>
+			`https://www.commafeed.com/rest/feed/subscribe?url=${encodeURI(feed)}`,
+		favicon: "commafeed.ico",
+	},
 ];
