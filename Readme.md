@@ -21,6 +21,10 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.14
+
+* CommaFeed added
+
 ### 0.13
 
 *Solomon's Key features*
