@@ -90,7 +90,7 @@ async function render({
 									</h2>
 									<p class="item__info">
 										${vif(
-											() => item.date!.toLocaleString(),
+											() => item.date!,
 											date => `
 												<time
 													is="relative-date"
