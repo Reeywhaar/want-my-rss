@@ -23,6 +23,7 @@ Contributions are welcome. Fill issues, make prs!
 
 ### 0.14
 
+* Fix "Invalid Date" in non En/Us Firefox
 * CommaFeed added
 
 ### 0.13
