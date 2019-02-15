@@ -63,4 +63,11 @@ export const FeedReaders: FeedReader[] = [
 			`https://www.commafeed.com/rest/feed/subscribe?url=${encodeURI(feed)}`,
 		favicon: "commafeed.ico",
 	},
+	{
+		id: "nooshub",
+		name: "Nooshub",
+		link: feed =>
+			`https://www.nooshub.com/me/feeds/new?url=%s${encodeURI(feed)}`,
+		favicon: "nooshub.ico",
+	},
 ];
