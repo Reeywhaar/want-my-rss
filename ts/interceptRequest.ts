@@ -1,8 +1,10 @@
 import { Storage } from "./storage.js";
 
-type Handler = (
-	message: { action: "open-tab"; newTab: boolean; url: string }
-) => void;
+type Handler = (message: {
+	action: "open-tab";
+	newTab: boolean;
+	url: string;
+}) => void;
 
 (browser.runtime.onMessage.addListener as (handler: Handler) => void)(
 	message => {

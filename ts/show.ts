@@ -440,7 +440,13 @@ async function main(): Promise<void> {
 
 	let resp: Response;
 	try {
-		resp = await fetch(url);
+		resp = await fetch(url, {
+			headers: {
+				"Cache-Control": "no-cache",
+				"If-None-Match": "",
+				Pragma: "no-cache",
+			},
+		});
 		if (resp.status >= 400) {
 			const notFound = document.createElement("div");
 			notFound.innerHTML = `
