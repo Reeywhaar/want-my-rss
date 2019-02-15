@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.16
+
+*Alan Hewston is critical*
+
+* fix Nooshub subscribe url
+
 ### 0.15
 
 *Lorenzo can't believe it's not butterfly*
