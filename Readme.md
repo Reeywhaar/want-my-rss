@@ -23,6 +23,8 @@ Contributions are welcome. Fill issues, make prs!
 
 ### 0.15
 
+*Lorenzo can't believe it's not butterfly*
+
 * Add additional headers preventing feed caching
 * Nooshub added
 
