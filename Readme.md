@@ -21,6 +21,11 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.15
+
+* Add additional headers preventing feed caching
+* Nooshub added
+
 ### 0.14
 
 *Ivan's Localized harpsichord*
