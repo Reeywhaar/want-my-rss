@@ -66,8 +66,7 @@ export const FeedReaders: FeedReader[] = [
 	{
 		id: "nooshub",
 		name: "Nooshub",
-		link: feed =>
-			`https://www.nooshub.com/me/feeds/new?url=%s${encodeURI(feed)}`,
+		link: feed => `https://www.nooshub.com/me/feeds/new?url=${encodeURI(feed)}`,
 		favicon: "nooshub.ico",
 	},
 ];
