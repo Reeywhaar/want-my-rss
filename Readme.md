@@ -21,6 +21,18 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.17
+
+*Stig comes to rescue*
+
+* fix unescaped subscription url (by https://github.com/StigNygaard)
+
+### 0.16
+
+*Alan Hewston is critical*
+
+* fix Nooshub subscribe url
+
 ### 0.16
 
 *Alan Hewston is critical*
