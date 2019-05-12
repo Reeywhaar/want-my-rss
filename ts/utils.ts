@@ -128,7 +128,7 @@ export function longest(...strings: string[]): string {
 	return longest;
 }
 
-export function setProp<A, B extends object>(
+export function createSetter<A, B extends object>(
 	obj: B,
 	prop: keyof B
 ): (item: A) => void {

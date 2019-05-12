@@ -2,7 +2,7 @@ import SubscribeButton from "./subscribeButton.js";
 import RelativeDate from "./relativeDate.js";
 import { Storage } from "./storage.js";
 import { Sorting, Sortings, SortingObjects } from "./sortings.js";
-import { vif, t, longest, setProp } from "./utils.js";
+import { vif, t, longest, createSetter } from "./utils.js";
 import { RSSData, RSSDataItem } from "./rssDataType.js";
 import { setTheme, getTheme } from "./theme.js";
 
@@ -307,17 +307,17 @@ function parseXML(
 	);
 	if (dom.documentElement.tagName === "parsererror")
 		throw new Error("XML corrupted");
-	vif(() => t(dom, ">image>url:"), setProp(data, "image"));
+	vif(() => t(dom, ">image>url:"), createSetter(data, "image"));
 	vif(
 		() =>
 			t(dom, ">link\\:not([rel]):") || t(dom, ">link:") || t(dom, ">link^href"),
-		setProp(data, "url")
+		createSetter(data, "url")
 	);
 	data.title = t(dom, ">title:", "Untitled");
 
 	vif(
 		() => longest(t(dom, ">description:", ""), t(dom, ">subtitle:", "")),
-		setProp(data, "description")
+		createSetter(data, "description")
 	);
 
 	let items = Array.from(dom.querySelectorAll("item"));
@@ -329,7 +329,7 @@ function parseXML(
 			vif(
 				() =>
 					t(item, ">pubDate:") || t(item, ">published:") || t(item, ">date:"),
-				date => setProp(parsed, "date")(new Date(date))
+				date => createSetter(parsed, "date")(new Date(date))
 			);
 
 			vif(
@@ -337,7 +337,7 @@ function parseXML(
 					t(item, ">link:") ||
 					t(item, ">guid[isPermalink='true']:") ||
 					t(item, ">link^href"),
-				setProp(parsed, "url")
+				createSetter(parsed, "url")
 			);
 
 			let baseURL = "";
@@ -356,7 +356,7 @@ function parseXML(
 					t(item, ">author>email:") ||
 					t(item, ">author:") ||
 					t(item, ">creator:"),
-				setProp(parsed, "author")
+				createSetter(parsed, "author")
 			);
 
 			vif(
@@ -410,20 +410,20 @@ function parseXML(
 function parseJSON(json: any): RSSData {
 	const data = {} as RSSData;
 	data.title = t(json, ".title", "Untitled");
-	vif(() => json.home_page_url, setProp(data, "url"));
-	vif(() => json.icon, setProp(data, "image"));
+	vif(() => json.home_page_url, createSetter(data, "url"));
+	vif(() => json.icon, createSetter(data, "image"));
 
 	try {
 		data.items = json.items.map((item: any) => {
 			const out = {} as RSSDataItem;
 			out.title = t(item, ".title", "Untitled");
-			vif(() => item.url, setProp(out, "url"));
-			vif(() => item.image, setProp(out, "image"));
+			vif(() => item.url, createSetter(out, "url"));
+			vif(() => item.image, createSetter(out, "image"));
 			vif(
 				() => item.date_published || item.date_modified,
-				date => setProp(out, "date")(new Date(date))
+				date => createSetter(out, "date")(new Date(date))
 			);
-			vif(() => item.content_html, setProp(out, "content"));
+			vif(() => item.content_html, createSetter(out, "content"));
 			return out;
 		});
 	} catch (e) {
