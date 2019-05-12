@@ -1,43 +1,43 @@
 {
-  "manifest_version": 2,
-  "name": "Want My RSS",
-  "version": "0.17",
-  "description": "RSS features for Firefox",
-  "author": "Mikhail Vyrtsev",
-  "developer": {
-    "name": "Mikhail Vyrtsev",
-    "url": "https://github.com/Reeywhaar/want-my-rss"
-  },
-  "homepage_url": "https://github.com/Reeywhaar/want-my-rss",
-  "icons": {
-    "48": "icons/icon.svg",
-    "96": "icons/icon.svg"
-  },
-  "background": {
-    "page": "background.html"
-  },
-  "permissions": ["<all_urls>", "storage", "webRequest", "webRequestBlocking"],
-  "web_accessible_resources": ["show.html"],
-  "page_action": {
-    "default_icon": "icons/bar-icon.svg",
-    "default_title": "Subscribe to page",
-    "browser_style": true,
-    "pinned": true
-  },
-  "options_ui": {
-    "page": "options.html"
-  },
-  "applications": {
-    "gecko": {
-      "id": "{4d567245-e70d-466a-bb2f-390fc7fb25c2}",
-      "strict_min_version": "63.0"
-    }
-  },
-  "protocol_handlers": [
-    {
-      "protocol": "ext+rss",
-      "name": "Want My RSS",
-      "uriTemplate": "/show.html?url=%s"
-    }
-  ]
+	"manifest_version": 2,
+	"name": "Want My RSS",
+	"version": "0.18",
+	"description": "RSS features for Firefox",
+	"author": "Mikhail Vyrtsev",
+	"developer": {
+		"name": "Mikhail Vyrtsev",
+		"url": "https://github.com/Reeywhaar/want-my-rss"
+	},
+	"homepage_url": "https://github.com/Reeywhaar/want-my-rss",
+	"icons": {
+		"48": "icons/icon.svg",
+		"96": "icons/icon.svg"
+	},
+	"background": {
+		"page": "background.html"
+	},
+	"permissions": ["<all_urls>", "storage", "webRequest", "webRequestBlocking"],
+	"web_accessible_resources": ["show.html"],
+	"page_action": {
+		"default_icon": "icons/bar-icon.svg",
+		"default_title": "Subscribe to page",
+		"browser_style": true,
+		"pinned": true
+	},
+	"options_ui": {
+		"page": "options.html"
+	},
+	"applications": {
+		"gecko": {
+			"id": "{4d567245-e70d-466a-bb2f-390fc7fb25c2}",
+			"strict_min_version": "63.0"
+		}
+	},
+	"protocol_handlers": [
+		{
+			"protocol": "ext+rss",
+			"name": "Want My RSS",
+			"uriTemplate": "/show.html?url=%s"
+		}
+	]
 }
