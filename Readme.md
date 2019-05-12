@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.18
+
+*Yellow brickroad quality*
+
+* fix rss content with relative urls
+
 ### 0.17
 
 *Stig comes to rescue*
