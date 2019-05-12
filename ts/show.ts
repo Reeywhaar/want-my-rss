@@ -340,6 +340,14 @@ function parseXML(
 				setProp(parsed, "url")
 			);
 
+			let baseURL = "";
+			if (parsed.url) {
+				const url = new URL(parsed.url);
+				baseURL = url.origin;
+			}
+
+			console.log(baseURL);
+
 			parsed.title = t(item, ">title:", "Untitled");
 
 			vif(
@@ -359,7 +367,19 @@ function parseXML(
 						t(item, ">content:"),
 						t(item, ">summary:")
 					),
-				setProp(parsed, "content")
+				content => {
+					const doc = document.implementation.createHTMLDocument();
+					const base = document.createElement("base");
+					base.href = baseURL;
+					doc.head.appendChild(base);
+					doc.body.innerHTML = content;
+					const links = doc.body.querySelectorAll("a");
+					for (let link of Array.from(links)) {
+						// transforming relative url to absolute url
+						link.href = link.href;
+					}
+					parsed.content = doc.body.innerHTML;
+				}
 			);
 
 			vif(
