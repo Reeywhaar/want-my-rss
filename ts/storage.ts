@@ -103,7 +103,7 @@ function mergeReaders(readers: StorageFeedReader[]): FeedReader[] {
 		return {
 			id: r.id,
 			name: r.name,
-			link: (feed: string) => r.url.replace("%s", encodeURI(feed)),
+			link: (feed: string) => r.url.replace("%s", encodeURIComponent(feed)),
 			favicon: r.img || "./providers-icons/noname.svg",
 		};
 	});
