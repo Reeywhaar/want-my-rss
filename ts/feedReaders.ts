@@ -22,13 +22,13 @@ export const FeedReaders: FeedReader[] = [
 	{
 		id: "inoreader",
 		name: "Inoreader",
-		link: feed => `http://www.inoreader.com/feed/${encodeURIComponent(feed)}`,
+		link: feed => `https://www.inoreader.com/feed/${encodeURIComponent(feed)}`,
 		favicon: "inoreader.ico",
 	},
 	{
 		id: "newsblur",
 		name: "News Blur",
-		link: feed => `http://www.newsblur.com/?url=${encodeURIComponent(feed)}`,
+		link: feed => `https://www.newsblur.com/?url=${encodeURIComponent(feed)}`,
 		favicon: "newsblur.png",
 	},
 	{
