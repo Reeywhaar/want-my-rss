@@ -1,0 +1,43 @@
+name: "Release"
+on:
+  push:
+    tags:
+      - '*.*'
+
+jobs:
+  release:
+    name: "Release"
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout"
+        uses: actions/checkout@v1
+
+      - name: "NPM Install"
+        run: npm install
+
+      - name: "Compile"
+        run: npm run compile
+
+      - name: "web-ext build"
+        id: web-ext-build
+        uses: kewisch/action-web-ext@a28b4ba2f491cc36c67a714a716ca54218440056
+        with:
+          cmd: build
+          source: ext
+
+      - name: "web-ext sign"
+        id: web-ext-sign
+        uses: kewisch/action-web-ext@a28b4ba2f491cc36c67a714a716ca54218440056
+        with:
+          cmd: sign
+          source: ${{ steps.web-ext-build.outputs.target }}
+          channel: listed
+          apiKey: ${{ secrets.FIREFOX_API_KEY }}
+          apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
+
+      - name: "Create Release"
+        uses: softprops/action-gh-release@9a608daa21a42b09b06af7e0b917716fac3b0f6f
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: ${{ steps.web-ext-sign.outputs.target || steps.web-ext-build.outputs.target }}
