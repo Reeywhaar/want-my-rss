@@ -20,6 +20,7 @@
 	"homepage": "https://github.com/Reeywhaar/want-my-rss#readme",
 	"devDependencies": {
 		"typescript": "^3.7.4",
+		"web-ext": "^4.0.0",
 		"web-ext-types": "^3.2.1"
 	}
 }
