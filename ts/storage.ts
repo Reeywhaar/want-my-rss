@@ -28,7 +28,7 @@ type RawStorageChange = {
 	[P in keyof RawStorageProperties]?: {
 		oldValue: RawStorageProperties[P];
 		newValue: RawStorageProperties[P];
-	}
+	};
 };
 
 const storageDefaults: RawStorageProperties = {
@@ -131,13 +131,17 @@ export class Storage extends RawStorage {
 		label: T
 	): Promise<StorageProperties[T]> {
 		if (label === "feedReaders")
-			return mergeReaders(await super.get("customFeedReaders"));
+			return mergeReaders(
+				await super.get("customFeedReaders")
+			) as StorageProperties[T];
 		if (label === "currentFeedReader") {
 			const readers = await this.get("feedReaders");
 			const id = await this.get("feedReaderID");
-			return readers.find(x => x.id === id)!;
+			return readers.find(x => x.id === id)! as StorageProperties[T];
 		}
-		return RawStorage.get(label as keyof RawStorageProperties);
+		return (RawStorage.get(
+			label as keyof RawStorageProperties
+		) as unknown) as StorageProperties[T];
 	}
 
 	static async getAll(): Promise<StorageProperties> {
