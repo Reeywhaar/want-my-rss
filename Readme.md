@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.19
+
+*Roman the Technician*
+
+* technical release
+
 ### 0.18
 
 *Yellow brickroad quality*
