@@ -56,7 +56,8 @@ export class RawStorage {
 	}
 
 	static async getAll(): Promise<RawStorageProperties> {
-		const data = ((await internalStorage.get()) as unknown) as RawStorageProperties;
+		const data =
+			(await internalStorage.get()) as unknown as RawStorageProperties;
 		for (let key of Object.keys(storageDefaults)) {
 			if (!data.hasOwnProperty(key))
 				(data as any)[key] = (storageDefaults as any)[key];
@@ -99,7 +100,7 @@ export class RawStorage {
 }
 
 function mergeReaders(readers: StorageFeedReader[]): FeedReader[] {
-	const custom = readers.map(r => {
+	const custom = readers.map((r) => {
 		return {
 			id: r.id,
 			name: r.name,
@@ -107,7 +108,7 @@ function mergeReaders(readers: StorageFeedReader[]): FeedReader[] {
 			favicon: r.img || "./providers-icons/noname.svg",
 		};
 	});
-	const predefined = FeedReaders.map(r => {
+	const predefined = FeedReaders.map((r) => {
 		const clone = { ...r };
 		clone.favicon = `./providers-icons/${r.favicon}`;
 		return clone;
@@ -137,11 +138,11 @@ export class Storage extends RawStorage {
 		if (label === "currentFeedReader") {
 			const readers = await this.get("feedReaders");
 			const id = await this.get("feedReaderID");
-			return readers.find(x => x.id === id)! as StorageProperties[T];
+			return readers.find((x) => x.id === id)! as StorageProperties[T];
 		}
-		return (RawStorage.get(
+		return RawStorage.get(
 			label as keyof RawStorageProperties
-		) as unknown) as StorageProperties[T];
+		) as unknown as StorageProperties[T];
 	}
 
 	static async getAll(): Promise<StorageProperties> {

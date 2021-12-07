@@ -19,7 +19,7 @@ export default class SubscribeButton extends HTMLElement {
 		const titleSpan = document.createElement("span");
 		titleSpan.textContent = "Subscribe";
 		titleSpan.className = "link";
-		titleSpan.addEventListener("mouseup", e => {
+		titleSpan.addEventListener("mouseup", (e) => {
 			if (e.which !== 1 && e.which !== 2) return;
 			e.preventDefault();
 			const newTab = e.metaKey || e.which === 2;
@@ -49,7 +49,7 @@ export default class SubscribeButton extends HTMLElement {
 			Storage.get("feedReaders"),
 			Storage.get("feedReaderID"),
 		]);
-		const currentReader = readers.find(r => r.id === currentReaderId)!;
+		const currentReader = readers.find((r) => r.id === currentReaderId)!;
 
 		const providerIcon = document.createElement("img");
 		providerIcon.className = "provider-icon";
@@ -61,7 +61,7 @@ export default class SubscribeButton extends HTMLElement {
 		providersDiv.className = "providers hidden";
 		provDiv.appendChild(providersDiv);
 
-		const providers = readers.map(reader => {
+		const providers = readers.map((reader) => {
 			const el = document.createElement("span");
 			const isCurrent = reader.id === currentReaderId;
 			el.className = `providers__item ${
@@ -78,7 +78,7 @@ export default class SubscribeButton extends HTMLElement {
 			img.src = reader.favicon;
 			el.appendChild(img);
 
-			el.addEventListener("click", e => {
+			el.addEventListener("click", (e) => {
 				let id = (e.currentTarget as HTMLElement).dataset.id!;
 				(async () => {
 					let currentProviderID = await Storage.get("feedReaderID");
@@ -86,7 +86,7 @@ export default class SubscribeButton extends HTMLElement {
 					await Storage.set("feedReaderID", id);
 					const currentProvider = await Storage.get("currentFeedReader");
 					provDiv.blur();
-					providers.forEach(i => {
+					providers.forEach((i) => {
 						const action =
 							i.dataset.id === currentProvider.id ? "add" : "remove";
 						i.classList[action]("providers__item--current");
@@ -98,7 +98,7 @@ export default class SubscribeButton extends HTMLElement {
 			return el;
 		});
 
-		Storage.subscribe(async changes => {
+		Storage.subscribe(async (changes) => {
 			if ("feedReaderID" in changes) {
 				const current = await Storage.get("currentFeedReader");
 				providerIcon.src = current.favicon;

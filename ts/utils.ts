@@ -8,7 +8,7 @@
 export function vif<T, C, B>(
 	predicate: () => T,
 	fn: (input: T) => C,
-	fnNot: () => B = () => ("" as unknown) as B
+	fnNot: () => B = () => "" as unknown as B
 ): C | B {
 	let l;
 	try {
@@ -28,8 +28,8 @@ const accessMappers: {
 } = {
 	">": (el, prop) => el.querySelector(":scope " + prop),
 	"^": (el, prop) => el.getAttribute(prop),
-	":": el => el.textContent!.trim(),
-	"%": el => el.innerHTML!.trim(),
+	":": (el) => el.textContent!.trim(),
+	"%": (el) => el.innerHTML!.trim(),
 	".": (el, prop) => (el as any)[prop],
 };
 
@@ -48,7 +48,7 @@ const entityMap: { [key: string]: string } = {
  * Escapes html
  */
 export function escapeHtml(input: string): string {
-	return input.replace(/[&<>"'`=\/]/g, s => entityMap[s]);
+	return input.replace(/[&<>"'`=\/]/g, (s) => entityMap[s]);
 }
 
 /**

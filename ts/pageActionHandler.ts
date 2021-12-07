@@ -43,12 +43,12 @@ export function attach(): void {
 		.query({
 			active: true,
 		})
-		.then(tabs => {
+		.then((tabs) => {
 			for (const tab of tabs) {
 				tab.id && handler(tab.id);
 			}
 		});
 
-	browser.tabs.onActivated.addListener(info => handler(info.tabId));
-	browser.tabs.onUpdated.addListener(id => handler(id));
+	browser.tabs.onActivated.addListener((info) => handler(info.tabId));
+	browser.tabs.onUpdated.addListener((id) => handler(id));
 }

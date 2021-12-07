@@ -7,7 +7,7 @@ type Handler = (message: {
 }) => void;
 
 (browser.runtime.onMessage.addListener as (handler: Handler) => void)(
-	message => {
+	(message) => {
 		switch (message.action) {
 			case "open-tab":
 				if (message.newTab && message.newTab === true) {
@@ -74,7 +74,7 @@ function webRequestHandler(
 	)
 		return;
 	const contentTypeHeader = data.responseHeaders!.find(
-		x => x.name.toLocaleLowerCase() === "content-type"
+		(x) => x.name.toLocaleLowerCase() === "content-type"
 	);
 	if (!contentTypeHeader) return;
 	const type = contentTypeHeader.value;
@@ -104,7 +104,7 @@ function webRequestHandler(
 		return true;
 	};
 
-	filter.ondata = event => {
+	filter.ondata = (event) => {
 		reqbody += decoder.decode(event.data);
 		filter.write(event.data);
 		if (reqbody.length > 150 && process(reqbody)) filter.close();
@@ -153,7 +153,7 @@ export async function attach() {
 	const redirectRequests = await Storage.get("redirectRequests");
 	if (redirectRequests) RequestInterceptor.on();
 
-	Storage.subscribe(changes => {
+	Storage.subscribe((changes) => {
 		if ("redirectRequests" in changes) {
 			changes.redirectRequests!.newValue
 				? RequestInterceptor.on()

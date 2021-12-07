@@ -23,10 +23,13 @@ async function render({
 	const store = await Storage.getAll();
 	return `
 		<header class="header body__header">
-			${vif(() => data.image, url => `<img class="header__image" src="${url}"/>`)}
+			${vif(
+				() => data.image,
+				(url) => `<img class="header__image" src="${url}"/>`
+			)}
 			${vif(
 				() => t(data, ".url", null, t.escape),
-				mainUrl =>
+				(mainUrl) =>
 					`<h1 class="header__title"><a class="header__main-url" href="${mainUrl}">${t(
 						data,
 						".title",
@@ -46,7 +49,7 @@ async function render({
 			</div>
 			${vif(
 				() => t(data, ".description", null, t.escape),
-				description => `<p class="header__description">${description}</p>`
+				(description) => `<p class="header__description">${description}</p>`
 			)}
 		</header>
 		<main class="main body__main">
@@ -54,7 +57,7 @@ async function render({
 				<label class="items-sort">
 					<span class="items-sort__label">Sort:</span> <select class="items-sort__select">
 						${Sortings.map(
-							sort =>
+							(sort) =>
 								`<option value="${sort}" ${
 									sort === store.sort ? "selected" : ""
 								}>${SortingObjects[sort].label}</option>`
@@ -72,15 +75,18 @@ async function render({
 						(item, index) => `
 							<article class="item items__item" data-index="${index}" data-datetime="${vif(
 							() => item.date!.getTime(),
-							date => date,
+							(date) => date,
 							() => 0
 						)}">
 								<header class="item__header">
-									${vif(() => item.image, url => `<img class="item__image" src="${url}"/>`)}
+									${vif(
+										() => item.image,
+										(url) => `<img class="item__image" src="${url}"/>`
+									)}
 									<h2 class="item__title">
 										${vif(
 											() => t(item, ".url", null, t.escape),
-											link => `
+											(link) => `
 												<a class="noline" href="${link}">
 													${t(item, ".title", "Untitled", t.escape)}
 												</a>
@@ -91,7 +97,7 @@ async function render({
 									<p class="item__info">
 										${vif(
 											() => item.date!,
-											date => `
+											(date) => `
 												<time
 													is="relative-date"
 													data-relative="${store.useRelativeTime}"
@@ -105,7 +111,8 @@ async function render({
 										)}
 										${vif(
 											() => t(item, ".author", null, t.escape),
-											author => `<span class="item__author">by ${author}</span>`
+											(author) =>
+												`<span class="item__author">by ${author}</span>`
 										)}
 									</p>
 									<div style="clear: both;"></div>
@@ -114,11 +121,12 @@ async function render({
 								<div style="clear: both;"></div>
 								${vif(
 									() => item.media,
-									media => {
+									(media) => {
 										if (media!.type.indexOf("image/") === 0) {
 											const eurl = t(media as any, ".url", "", t.escape);
-											const link = `<a href="${eurl}">${media!.name ||
-												"link"}</a>`;
+											const link = `<a href="${eurl}">${
+												media!.name || "link"
+											}</a>`;
 											return `
 												<div class="item__media">
 													<h4 class="item__media-title">Media ${link}</h4>
@@ -131,8 +139,9 @@ async function render({
 										const strtype =
 											media!.type.indexOf("audio/") === 0 ? "audio" : "video";
 										const eurl = t(media as any, ".url", "", t.escape);
-										const link = `<a href="${eurl}">${media!.name ||
-											"link"}</a>`;
+										const link = `<a href="${eurl}">${
+											media!.name || "link"
+										}</a>`;
 										return `
 											<div class="item__media">
 													<h4 class="item__media-title">Media ${link}</h4>
@@ -148,7 +157,7 @@ async function render({
 								)}
 								${vif(
 									() => t(item, ".url", "", t.escape),
-									link => `<a class="item__bottom-link" href="${link}"></a>`
+									(link) => `<a class="item__bottom-link" href="${link}"></a>`
 								)}
 							</article>
 				`
@@ -174,7 +183,7 @@ async function setThemeSwitching(): Promise<void> {
 	themeImg.classList.add("theme-switch__img");
 	themeImg.src = "./icons/" + theme.img;
 
-	Storage.subscribe(async changes => {
+	Storage.subscribe(async (changes) => {
 		if (changes.theme) {
 			const theme = await getTheme();
 			document.documentElement.dataset.theme = theme.id;
@@ -198,7 +207,7 @@ function findCurrentArticle(): HTMLElement | null {
 	while (startPosition <= height) {
 		const target = document
 			.elementsFromPoint(center, startPosition)
-			.find(x => x.matches(".item"));
+			.find((x) => x.matches(".item"));
 		if (target) return target as HTMLElement;
 		startPosition += 10;
 	}
@@ -206,7 +215,7 @@ function findCurrentArticle(): HTMLElement | null {
 }
 
 async function setHotkeyNavigation(): Promise<void> {
-	document.addEventListener("keydown", e => {
+	document.addEventListener("keydown", (e) => {
 		switch (e.keyCode) {
 			// <-, j
 			case 37:
@@ -324,12 +333,12 @@ function parseXML(
 	if (items.length === 0) items = Array.from(dom.querySelectorAll("entry"));
 
 	data.items =
-		items.map(item => {
+		items.map((item) => {
 			const parsed = {} as RSSDataItem;
 			vif(
 				() =>
 					t(item, ">pubDate:") || t(item, ">published:") || t(item, ">date:"),
-				date => createSetter(parsed, "date")(new Date(date))
+				(date) => createSetter(parsed, "date")(new Date(date))
 			);
 
 			vif(
@@ -367,7 +376,7 @@ function parseXML(
 						t(item, ">content:"),
 						t(item, ">summary:")
 					),
-				content => {
+				(content) => {
 					const doc = document.implementation.createHTMLDocument();
 					const base = document.createElement("base");
 					base.href = baseURL;
@@ -384,7 +393,7 @@ function parseXML(
 
 			vif(
 				() => t(item, ">enclosure"),
-				media => {
+				(media) => {
 					const out = {} as {
 						type: string | "";
 						url: string | "";
@@ -397,7 +406,7 @@ function parseXML(
 						: new URL(out.url).pathname
 								.split("/")
 								.reverse()
-								.find(x => x.length > 0) || "";
+								.find((x) => x.length > 0) || "";
 					parsed.media = out;
 				}
 			);
@@ -421,7 +430,7 @@ function parseJSON(json: any): RSSData {
 			vif(() => item.image, createSetter(out, "image"));
 			vif(
 				() => item.date_published || item.date_modified,
-				date => createSetter(out, "date")(new Date(date))
+				(date) => createSetter(out, "date")(new Date(date))
 			);
 			vif(() => item.content_html, createSetter(out, "content"));
 			return out;
@@ -522,7 +531,7 @@ async function main(): Promise<void> {
 	const container = document.body;
 	vif(
 		() => data.title || data.description,
-		description => (document.title = description!)
+		(description) => (document.title = description!)
 	);
 	const fr = document.createElement("template");
 	fr.innerHTML = await render({ data, url });
@@ -542,29 +551,30 @@ async function main(): Promise<void> {
 	const sort = await Storage.get("sort");
 	if (sort !== "none") sortArticles(sort);
 
-	Storage.subscribe(changes => {
+	Storage.subscribe((changes) => {
 		if (changes.hasOwnProperty("useRelativeTime")) {
-			document.querySelectorAll("time[is='relative-date']").forEach(el => {
-				(el as HTMLElement).dataset.relative = changes.useRelativeTime!.newValue.toString();
+			document.querySelectorAll("time[is='relative-date']").forEach((el) => {
+				(el as HTMLElement).dataset.relative =
+					changes.useRelativeTime!.newValue.toString();
 			});
 		}
 	});
 
 	document
 		.querySelector(".relative-time-checkbox")!
-		.addEventListener("change", async e => {
+		.addEventListener("change", async (e) => {
 			Storage.set("useRelativeTime", (e.target as HTMLInputElement).checked);
 		});
 
 	document
 		.querySelector(".items-sort__select")!
-		.addEventListener("change", async e => {
+		.addEventListener("change", async (e) => {
 			const sort = (e.target as HTMLInputElement).value as Sorting;
 			Storage.set("sort", sort);
 			sortArticles(sort);
 		});
 }
 
-main().catch(e => {
+main().catch((e) => {
 	console.error(e);
 });

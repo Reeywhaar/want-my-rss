@@ -16,17 +16,17 @@ const types: { [key: string]: string } = {
 
 let openInNewTab: boolean = false;
 
-Storage.get("openInNewTab").then(v => {
+Storage.get("openInNewTab").then((v) => {
 	openInNewTab = v;
 });
 
-Storage.subscribe(changes => {
+Storage.subscribe((changes) => {
 	if (changes.hasOwnProperty("openInNewTab")) {
 		openInNewTab = changes.openInNewTab!.newValue;
 	}
 });
 
-document.addEventListener("click", e => {
+document.addEventListener("click", (e) => {
 	if (!(e.which === 1 || e.which === 2)) return;
 	const el = findParent(e.target as HTMLElement, ".items__item-link");
 	if (!el) return;
@@ -38,7 +38,7 @@ document.addEventListener("click", e => {
 	});
 });
 
-const elements = links.map(el => {
+const elements = links.map((el) => {
 	const content = (template as HTMLTemplateElement).content.cloneNode(
 		true
 	) as HTMLElement;
@@ -55,7 +55,7 @@ const elements = links.map(el => {
 });
 
 const fragment = document.createDocumentFragment();
-elements.forEach(el => {
+elements.forEach((el) => {
 	fragment.appendChild(el);
 });
 

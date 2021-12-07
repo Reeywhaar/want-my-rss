@@ -28,15 +28,15 @@ function ImagePlaceholder({
 	url = "",
 	className = "",
 }: { url?: string; className?: string } = {}): ImagePlaceholderElement {
-	const el = (document.createElement(
+	const el = document.createElement(
 		"div"
-	) as unknown) as ImagePlaceholderElement;
+	) as unknown as ImagePlaceholderElement;
 	el.className = "image-placeholder " + className;
 	const img = document.createElement("img");
 	img.className = "image-placeholder__img";
 	img.src = url;
 	el.appendChild(img);
-	el.setURL = url => {
+	el.setURL = (url) => {
 		img.src = url || "./providers-icons/noname.svg";
 	};
 	return el;
@@ -62,7 +62,7 @@ function FeedItem({
 	onRemove?: ((e: Event, el: HTMLElement) => void) | null;
 	className?: string;
 } = {}): FeedItemElement {
-	const el = (document.createElement("div") as unknown) as FeedItemElement;
+	const el = document.createElement("div") as unknown as FeedItemElement;
 	el.className = "feed-item " + className;
 
 	const e_id = document.createElement("input");
@@ -88,7 +88,7 @@ function FeedItem({
 	});
 	el.appendChild(e_img);
 
-	e_imgurl.addEventListener("input", e => {
+	e_imgurl.addEventListener("input", (e) => {
 		e_img.setURL(
 			(e.target as HTMLInputElement).value || "./providers-icons/noname.svg"
 		);
@@ -98,7 +98,7 @@ function FeedItem({
 		const e_remove = document.createElement("button");
 		e_remove.className = "feed-item__remove-button";
 		e_remove.textContent = "remove";
-		e_remove.addEventListener("click", e => {
+		e_remove.addEventListener("click", (e) => {
 			if (e.target !== (e as any).explicitOriginalTarget) return;
 			onRemove.bind(e_remove)(e, el);
 		});
@@ -154,9 +154,9 @@ function FeedForm({
 
 	let e_items: FeedItemElement[] = [];
 
-	form.setItems = items => {
-		e_items.forEach(x => x.remove());
-		e_items = items.map(x =>
+	form.setItems = (items) => {
+		e_items.forEach((x) => x.remove());
+		e_items = items.map((x) =>
 			FeedItem({
 				id: x.id,
 				url: x.url,
@@ -168,7 +168,7 @@ function FeedForm({
 				className: "feeds-form__item feeds-form__store-item",
 			})
 		);
-		e_items.forEach(x => items_container.appendChild(x));
+		e_items.forEach((x) => items_container.appendChild(x));
 	};
 
 	form.setItems(items);
@@ -193,7 +193,7 @@ function FeedForm({
 	e_footer.appendChild(e_notice);
 
 	let noticeCounter = 0;
-	form.setNotice = e => {
+	form.setNotice = (e) => {
 		e_notice.textContent = e;
 		++noticeCounter;
 		setTimeout(() => {
@@ -204,7 +204,7 @@ function FeedForm({
 		}, 3000);
 	};
 
-	form.addEventListener("submit", e => {
+	form.addEventListener("submit", (e) => {
 		e.preventDefault();
 		const newItem = e_new.toData();
 		if (newItem.name || newItem.url) {
@@ -219,9 +219,11 @@ function FeedForm({
 		}
 		let data: StorageFeedReader[];
 		try {
-			data = (Array.from(
-				form.querySelectorAll(".feeds-form__store-item")
-			) as FeedItemElement[]).map(x => {
+			data = (
+				Array.from(
+					form.querySelectorAll(".feeds-form__store-item")
+				) as FeedItemElement[]
+			).map((x) => {
 				const data = x.toData();
 				if (!data.name) throw new Error("Name required");
 				if (!data.url) throw new Error("URL required");
@@ -234,7 +236,7 @@ function FeedForm({
 		if (newItem.name || newItem.url) {
 			const newID = (() => {
 				let id = randomID();
-				const ids = data.map(x => x.id);
+				const ids = data.map((x) => x.id);
 				while (ids.indexOf(id) !== -1) {
 					id = randomID();
 				}
@@ -269,7 +271,7 @@ function AdditionalControls({ className = "" }: { className?: string } = {}) {
 
 		const checkbox = document.createElement("input");
 		checkbox.type = "checkbox";
-		Storage.get("redirectRequests").then(val => (checkbox.checked = val));
+		Storage.get("redirectRequests").then((val) => (checkbox.checked = val));
 		label.appendChild(checkbox);
 		checkbox.addEventListener("change", () => {
 			Storage.set("redirectRequests", checkbox.checked);
@@ -291,7 +293,7 @@ function AdditionalControls({ className = "" }: { className?: string } = {}) {
 
 		const checkbox = document.createElement("input");
 		checkbox.type = "checkbox";
-		Storage.get("openInNewTab").then(val => (checkbox.checked = val));
+		Storage.get("openInNewTab").then((val) => (checkbox.checked = val));
 		label.appendChild(checkbox);
 		checkbox.addEventListener("change", () => {
 			Storage.set("openInNewTab", checkbox.checked);
@@ -323,7 +325,7 @@ async function main() {
 	const feeds = await Storage.get("customFeedReaders");
 	const form = FeedForm({
 		items: feeds,
-		onSave: items => {
+		onSave: (items) => {
 			Storage.set("customFeedReaders", items);
 			form.setItems(items);
 			form.setNotice("Saved!");
@@ -334,6 +336,6 @@ async function main() {
 	document.body.appendChild(AdditionalControls());
 }
 
-main().catch(e => {
+main().catch((e) => {
 	console.error(e);
 });

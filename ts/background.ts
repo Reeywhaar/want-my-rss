@@ -6,6 +6,6 @@ async function main() {
 	attachRequestInterception();
 }
 
-main().catch(e => {
+main().catch((e) => {
 	console.error(e);
 });
