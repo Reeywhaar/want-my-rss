@@ -230,7 +230,11 @@ function FeedForm({
 				return data;
 			});
 		} catch (e) {
-			form.setNotice(e.message);
+			if (e instanceof Error) {
+				form.setNotice(e.message);
+			} else {
+				form.setNotice("Unknown error");
+			}
 			return;
 		}
 		if (newItem.name || newItem.url) {
