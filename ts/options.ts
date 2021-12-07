@@ -145,7 +145,8 @@ function FeedForm({
 	form.appendChild(header);
 
 	const description = document.createElement("p");
-	description.textContent = "%s will be interpolated into feed url";
+	description.innerHTML =
+		"%s will be interpolated into escaped feed url<br/>%r will be interpolated into raw feed url";
 	description.className = "feeds-form__description";
 	form.appendChild(description);
 
