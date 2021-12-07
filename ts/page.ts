@@ -1,6 +1,4 @@
-import { Return } from "./pageReturnType.js";
-
-(() => {
+(function () {
 	const data = Array.from(
 		document.head.querySelectorAll(
 			"link[rel='alternate']"
@@ -27,5 +25,5 @@ import { Return } from "./pageReturnType.js";
 	return {
 		url: window.location.href,
 		data,
-	} as Return;
+	} as import("./pageReturnType.js").Return;
 })();
