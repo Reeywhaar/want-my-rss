@@ -21,6 +21,14 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.20
+
+*Return of Hi-Fi*
+
+* Updated code dependencies
+* Fixed charset extraction
+* Added %r interpolation placeholder
+
 ### 0.19
 
 *Roman the Technician*
