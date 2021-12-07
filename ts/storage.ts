@@ -104,7 +104,7 @@ function mergeReaders(readers: StorageFeedReader[]): FeedReader[] {
 		return {
 			id: r.id,
 			name: r.name,
-			link: (feed: string) => r.url.replace("%s", encodeURIComponent(feed)),
+			link: (feed: string) => buildReaderLink(r, feed),
 			favicon: r.img || "./providers-icons/noname.svg",
 		};
 	});
@@ -114,6 +114,12 @@ function mergeReaders(readers: StorageFeedReader[]): FeedReader[] {
 		return clone;
 	});
 	return [...predefined, ...custom];
+}
+
+function buildReaderLink(reader: StorageFeedReader, feed: string): string {
+	let link = reader.url.replace("%s", encodeURIComponent(feed));
+	link = link.replace("%r", feed);
+	return link;
 }
 
 /**
