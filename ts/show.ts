@@ -263,12 +263,12 @@ async function setHotkeyNavigation(): Promise<void> {
  *
  * @param tag xml tag (i.e "<?xml encoding="UTF-8"?>)
  */
-function getXMLCharset(tag: string): string {
-	const reg = /encoding="(\S*)?"/i;
+function getXMLCharset(tag: string): string | null {
+	const reg = /encoding=("|')(\S*)?("|')/i;
 	const matches = tag.match(reg);
-	if (!matches) return DEFAULT_CHARSET;
-	if (matches.length < 2) return DEFAULT_CHARSET;
-	return matches[1].toLocaleLowerCase();
+	if (!matches) return null;
+	if (matches.length < 3) return null;
+	return matches[2].toLocaleLowerCase();
 }
 
 /**
@@ -302,7 +302,7 @@ function parseXML(
 	// convert input again if presumed encoding and xml header encoding don't match
 	if (xmlTag) {
 		const enc = getXMLCharset(xmlTag);
-		if (enc !== presumedCharset) {
+		if (enc && enc !== presumedCharset) {
 			const dec = getSafeDecoder(enc);
 			try {
 				string = dec.decode(input);
@@ -449,7 +449,7 @@ function parseJSON(json: any): RSSData {
  */
 function getCharset(input: string | null): string {
 	if (!input) return DEFAULT_CHARSET;
-	const reg = /charset=(.*)$/i;
+	const reg = /charset='?(.*?)'?$/i;
 	const matches = input.match(reg);
 	if (!matches) return DEFAULT_CHARSET;
 	if (matches.length < 2) return DEFAULT_CHARSET;
