@@ -1,8 +1,6 @@
 # ![icon](ext/icons/icon-color.svg) WANT MY RSS
 
-[Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/want-my-rss/)
-
-Firefox extension that restores some of RSS functionality which Firefox abandoned. Functionality includes:
+An [extension for Firefox](https://addons.mozilla.org/addon/want-my-rss/) that restores some of RSS functionality which Firefox abandoned. Functionality includes:
 
 * Show indicator in the url bar if feed link available
 * Show preview page with rss feed
