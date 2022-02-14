@@ -284,6 +284,7 @@ a.header__main-url:visited:hover {
 
 .content img {
 	max-width: 100%;
+	height: auto;
 	object-fit: scale-down;
 	padding: 0.2rem;
 	box-sizing: border-box;
