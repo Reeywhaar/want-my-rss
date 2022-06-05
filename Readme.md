@@ -19,6 +19,13 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.21
+
+*In the search of path*
+
+* Updated code dependencies
+* Link to rss are now searched in entire document https://github.com/Reeywhaar/want-my-rss/pull/49
+
 ### 0.20
 
 *Return of Hi-Fi*
