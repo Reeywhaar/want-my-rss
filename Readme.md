@@ -19,6 +19,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.22
+
+*Pixel Pixie*
+
+* Updated bar icon to make it play nicely with firefox style
+
 ### 0.21
 
 *In the search of path*
