@@ -12,6 +12,7 @@ const types: { [key: string]: string } = {
 	"application/rss+xml": "rss",
 	"application/atom+xml": "atom",
 	"application/json": "json",
+	"application/feed+json": "json",
 };
 
 let openInNewTab: boolean = false;
