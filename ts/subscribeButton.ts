@@ -17,20 +17,28 @@ export default class SubscribeButton extends HTMLElement {
 		root.appendChild(subscribeDiv);
 
 		const titleSpan = document.createElement("span");
+		titleSpan.tabIndex = 0;
 		titleSpan.textContent = "Subscribe";
 		titleSpan.className = "link";
-		titleSpan.addEventListener("mouseup", (e) => {
+		const handler = async (newTab: boolean) => {
+			const currentFeedReader = await Storage.get("currentFeedReader");
+			browser.runtime.sendMessage({
+				action: "open-tab",
+				url: currentFeedReader.link(this.getAttribute("link")!),
+				newTab,
+			});
+		};
+		titleSpan.addEventListener("click", (e) => {
 			if (e.which !== 1 && e.which !== 2) return;
 			e.preventDefault();
 			const newTab = e.metaKey || e.which === 2;
-			(async () => {
-				const currentFeedReader = await Storage.get("currentFeedReader");
-				browser.runtime.sendMessage({
-					action: "open-tab",
-					url: currentFeedReader.link(this.getAttribute("link")!),
-					newTab,
-				});
-			})();
+			handler(newTab)
+		});
+		titleSpan.addEventListener("keydown", (e) => {
+			if("keyCode" in e && e.keyCode !== 13) return;
+			e.preventDefault();
+			const newTab = e.metaKey;
+			handler(newTab)
 		});
 		subscribeDiv.appendChild(titleSpan);
 
