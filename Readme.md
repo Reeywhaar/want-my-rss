@@ -19,6 +19,13 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.23
+
+*Long Time Run*
+
+* Updated packages
+* Subscribe button now can be activated by enter button
+
 ### 0.22
 
 *Pixel Pixie*
