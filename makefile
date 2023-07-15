@@ -1,7 +1,7 @@
 include ./.env
 
 build: clean
-	node_modules/.bin/tsc && make lint && web-ext build -s ext
+	node_modules/.bin/tsc && make lint && node_modules/.bin/web-ext build -s ext
 
 clean:
 	rm -rf ext/js
