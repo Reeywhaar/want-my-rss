@@ -61,6 +61,7 @@ export function safe(input: string): string {
 }
 
 enum EscapeFlag {
+	None = 0b00,
 	Escape = 0b01,
 	Safe = 0b10,
 }
@@ -75,7 +76,7 @@ export function t<T extends object>(
 	el: T,
 	query: string,
 	def: any = "",
-	escape: EscapeFlag = 0
+	escape: EscapeFlag = EscapeFlag.None
 ): string {
 	try {
 		let action: ((el: object, prop: string) => any) | undefined;

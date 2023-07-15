@@ -5,7 +5,9 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"compile": "tsc"
+		"compile": "tsc",
+		"tscheck": "tsc --noEmit",
+		"tscheck:watch": "tsc --noEmit --watch"
 	},
 	"repository": {
 		"type": "git",
@@ -19,7 +21,7 @@
 	},
 	"homepage": "https://github.com/Reeywhaar/want-my-rss#readme",
 	"devDependencies": {
-		"typescript": "^4.5.2",
+		"typescript": "^5.1.6",
 		"web-ext": "^6.6.0",
 		"web-ext-types": "^3.2.1"
 	}
