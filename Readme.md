@@ -19,6 +19,13 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.24
+
+*New Windows*
+
+* Fixed middle click on popup link
+* Shadow replaced with border on item in dark mode
+
 ### 0.23
 
 *Long Time Run*
