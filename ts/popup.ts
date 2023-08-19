@@ -3,7 +3,7 @@ import { Data as PageData } from "./pageReturnType.js";
 import { Storage } from "./storage.js";
 
 const links: PageData[] = JSON.parse(
-	decodeURIComponent(window.location.search.substr(7))
+	decodeURIComponent(window.location.search.substring(7))
 );
 
 const template = document.getElementById("item");
@@ -28,7 +28,7 @@ Storage.subscribe((changes) => {
 });
 
 document.addEventListener("click", (e) => {
-	if (!(e.which === 1 || e.which === 2)) return;
+	if (e.which !== 1 && e.which !== 2) return;
 	const el = findParent(e.target as HTMLElement, ".items__item-link");
 	if (!el) return;
 	e.preventDefault();
@@ -37,6 +37,17 @@ document.addEventListener("click", (e) => {
 		url: browser.runtime.getURL(el.dataset.url!),
 		newTab: openInNewTab || e.which === 2 || e.metaKey,
 	});
+});
+
+document.addEventListener("mousedown", (e) => {
+	if (e.which !== 2) return;
+	const el = findParent(
+		e.target as HTMLElement,
+		".items__item-link"
+	) as HTMLLinkElement;
+	if (!el) return;
+	el.dataset.originalHref = el.href;
+	el.href = el.dataset.url!;
 });
 
 const elements = links.map((el) => {
