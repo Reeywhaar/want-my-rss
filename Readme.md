@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.25
+
+_What colors_
+
+- Fixed bar icon presentation
+
 ### 0.24
 
 _New Windows_
