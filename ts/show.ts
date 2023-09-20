@@ -578,9 +578,12 @@ async function main(): Promise<void> {
 
 	unwrapVisibleItems(data.items);
 
-	window.addEventListener("scroll", () => {
-		unwrapVisibleItems(data.items);
-	});
+	window.addEventListener(
+		"scroll",
+		throttle(() => {
+			unwrapVisibleItems(data.items);
+		}, 150)
+	);
 }
 
 function unwrapVisibleItems(rssitems: RSSDataItem[]) {
@@ -614,6 +617,29 @@ function elementIsVisible(el: HTMLElement) {
 		rect.right <= (window.innerWidth || document.documentElement.clientWidth)
 	);
 }
+
+const throttle = (fn: () => void, delay: number): (() => void) => {
+	let wait = false;
+	let trailing = false;
+	return () => {
+		trailing = true;
+		if (wait) return;
+
+		const val = fn();
+
+		wait = true;
+
+		window.setTimeout(() => {
+			wait = false;
+			if (trailing) {
+				fn();
+				trailing = false;
+			}
+		}, delay);
+
+		return val;
+	};
+};
 
 main().catch((e) => {
 	console.error(e);
