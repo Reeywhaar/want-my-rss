@@ -578,12 +578,12 @@ async function main(): Promise<void> {
 
 	unwrapVisibleItems(data.items);
 
-	window.addEventListener(
-		"scroll",
-		throttle(() => {
-			unwrapVisibleItems(data.items);
-		}, 150)
-	);
+	const resizeScrollHandler = throttle(() => {
+		unwrapVisibleItems(data.items);
+	}, 150);
+
+	window.addEventListener("scroll", resizeScrollHandler);
+	window.addEventListener("resize", resizeScrollHandler);
 }
 
 function unwrapVisibleItems(rssitems: RSSDataItem[]) {
