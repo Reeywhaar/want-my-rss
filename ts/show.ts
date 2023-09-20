@@ -117,7 +117,9 @@ async function render({
 									</p>
 									<div style="clear: both;"></div>
 								</header>
-								<div class="content item__content">${t(item, ".content", "", t.safe)}</div>
+								<div class="content item__content" data-content="${encodeHTMLArgument(
+									t(item, ".content", "", t.safe)
+								)}"></div>
 								<div style="clear: both;"></div>
 								${vif(
 									() => item.media,
@@ -573,6 +575,52 @@ async function main(): Promise<void> {
 			Storage.set("sort", sort);
 			sortArticles(sort);
 		});
+
+	unwrapVisibleItems();
+
+	window.addEventListener("scroll", () => {
+		unwrapVisibleItems();
+	});
+}
+
+function unwrapVisibleItems() {
+	const items = Array.from(
+		document.querySelectorAll(".item")
+	) as HTMLDivElement[];
+	for (const item of items) {
+		if (elementIsVisible(item)) {
+			unwrapVisibleContent(item);
+		}
+	}
+}
+
+function unwrapVisibleContent(item: HTMLDivElement) {
+	const contentEl = item.querySelector(".item__content") as HTMLDivElement;
+	if (!contentEl) return;
+	let data = contentEl.dataset.content;
+	if (!data) return;
+	data = decodeHTMLArgument(data);
+	contentEl.innerHTML = data!;
+	delete contentEl.dataset.content;
+}
+
+function elementIsVisible(el: HTMLElement) {
+	const rect = el.getBoundingClientRect();
+	return (
+		rect.top >= 0 &&
+		rect.left >= 0 &&
+		rect.bottom <=
+			(window.innerHeight || document.documentElement.clientHeight) &&
+		rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+	);
+}
+
+function encodeHTMLArgument(arg: string): string {
+	return arg.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
+}
+
+function decodeHTMLArgument(arg: string): string {
+	return arg.replace(/&quot;/g, '"').replace(/&amp;/g, "&");
 }
 
 main().catch((e) => {
