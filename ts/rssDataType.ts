@@ -1,4 +1,5 @@
 export type RSSDataItem = {
+	id: string;
 	title: string;
 	date?: Date;
 	url?: string;

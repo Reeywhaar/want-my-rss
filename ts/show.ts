@@ -117,9 +117,7 @@ async function render({
 									</p>
 									<div style="clear: both;"></div>
 								</header>
-								<div class="content item__content" data-content="${encodeHTMLArgument(
-									t(item, ".content", "", t.safe)
-								)}"></div>
+								<div class="content item__content" data-content="${item.id}"></div>
 								<div style="clear: both;"></div>
 								${vif(
 									() => item.media,
@@ -336,7 +334,9 @@ function parseXML(
 
 	data.items =
 		items.map((item) => {
-			const parsed = {} as RSSDataItem;
+			const parsed = {
+				id: Math.random().toFixed(16).substring(2),
+			} as RSSDataItem;
 			vif(
 				() =>
 					t(item, ">pubDate:") || t(item, ">published:") || t(item, ">date:"),
@@ -576,31 +576,31 @@ async function main(): Promise<void> {
 			sortArticles(sort);
 		});
 
-	unwrapVisibleItems();
+	unwrapVisibleItems(data.items);
 
 	window.addEventListener("scroll", () => {
-		unwrapVisibleItems();
+		unwrapVisibleItems(data.items);
 	});
 }
 
-function unwrapVisibleItems() {
+function unwrapVisibleItems(rssitems: RSSDataItem[]) {
 	const items = Array.from(
 		document.querySelectorAll(".item")
 	) as HTMLDivElement[];
 	for (const item of items) {
 		if (elementIsVisible(item)) {
-			unwrapVisibleContent(item);
+			unwrapVisibleContent(item, rssitems);
 		}
 	}
 }
 
-function unwrapVisibleContent(item: HTMLDivElement) {
+function unwrapVisibleContent(item: HTMLDivElement, rssitems: RSSDataItem[]) {
 	const contentEl = item.querySelector(".item__content") as HTMLDivElement;
 	if (!contentEl) return;
-	let data = contentEl.dataset.content;
+	const id = contentEl.dataset.content;
+	const data = rssitems.find((x) => x.id === id);
 	if (!data) return;
-	data = decodeHTMLArgument(data);
-	contentEl.innerHTML = data!;
+	contentEl.innerHTML = data.content ?? "";
 	delete contentEl.dataset.content;
 }
 
@@ -613,14 +613,6 @@ function elementIsVisible(el: HTMLElement) {
 			(window.innerHeight || document.documentElement.clientHeight) &&
 		rect.right <= (window.innerWidth || document.documentElement.clientWidth)
 	);
-}
-
-function encodeHTMLArgument(arg: string): string {
-	return arg.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
-}
-
-function decodeHTMLArgument(arg: string): string {
-	return arg.replace(/&quot;/g, '"').replace(/&amp;/g, "&");
 }
 
 main().catch((e) => {
