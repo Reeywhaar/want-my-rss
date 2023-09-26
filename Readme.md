@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.26
+
+_You don't clutch no straw_
+
+- Added lazy loading for articles
+
 ### 0.25
 
 _What colors_
