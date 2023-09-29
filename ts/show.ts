@@ -533,7 +533,7 @@ async function main(): Promise<void> {
 	const container = document.body;
 	vif(
 		() => data.title || data.description,
-		(description) => (document.title = description!)
+		(description) => (document.title = description)
 	);
 	const fr = document.createElement("template");
 	fr.innerHTML = await render({ data, url });

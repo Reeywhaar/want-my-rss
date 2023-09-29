@@ -7,7 +7,7 @@
  */
 export function vif<T, C, B>(
 	predicate: () => T,
-	fn: (input: T) => C,
+	fn: (input: NonNullable<T>) => C,
 	fnNot: () => B = () => "" as unknown as B
 ): C | B {
 	let l;
