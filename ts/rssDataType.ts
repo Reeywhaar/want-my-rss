@@ -13,11 +13,10 @@ export type RSSDataItem = {
   };
 };
 
-export type RSSData = {
+export type RSSDataHeader = {
   title: string;
   feedUrl: string;
   image?: string;
   url?: string;
   description?: string;
-  items: RSSDataItem[];
 };
