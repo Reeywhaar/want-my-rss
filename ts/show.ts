@@ -3,7 +3,7 @@ import RelativeDate from "./relativeDate.js";
 import { Storage } from "./storage.js";
 import { Sorting, Sortings, SortingObjects } from "./sortings.js";
 import { vif, t, longest, createSetter } from "./utils.js";
-import { RSSData, RSSDataItem } from "./rssDataType.js";
+import { RSSDataHeader, RSSDataItem } from "./rssDataType.js";
 import { setTheme, getTheme } from "./theme.js";
 
 const DEFAULT_CHARSET = "utf-8";
@@ -13,166 +13,189 @@ window.customElements.define("relative-date", RelativeDate, {
   extends: "time",
 });
 
-async function render({
-  data,
-  url,
-}: {
-  data: RSSData;
-  url: string;
-}): Promise<string> {
-  const store = await Storage.getAll();
-  return `
-    <header class="header body__header">
-      ${vif(
-        () => data.image,
-        (url) => `<img class="header__image" src="${url}"/>`
-      )}
-      ${vif(
-        () => t(data, ".url", null, t.escape),
-        (mainUrl) =>
-          `<h1 class="header__title"><a class="header__main-url" href="${mainUrl}">${t(
-            data,
-            ".title",
-            "",
-            t.escape
-          )}</a><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`,
-        () =>
-          `<h1 class="header__title"><span class="header__title-span">${t(
-            data,
-            ".title",
-            "",
-            t.escape
-          )}</span><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`
-      )}
-      <div class="header__links">
-        <a class="header__original-url" href="${url}">${url}</a><a class="header__original-url-source" href="view-source:${url}">source</a>
-      </div>
-      ${vif(
-        () => t(data, ".description", null, t.escape),
-        (description) => `<p class="header__description">${description}</p>`
-      )}
-    </header>
-    <main class="main body__main">
-      <div class="controls main__controls">
-        <label class="items-sort">
-          <span class="items-sort__label">Sort:</span> <select class="items-sort__select">
-            ${Sortings.map(
-              (sort) =>
-                `<option value="${sort}" ${
-                  sort === store.sort ? "selected" : ""
-                }>${SortingObjects[sort].label}</option>`
-            ).join("")}
-          <select>
-        </label>
-        <div class="controls__spacer"></div>
-        <label class="controls__relative-time-switch"><input class="relative-time-checkbox controls__relative-time-checkbox" type="checkbox" ${
-          store.useRelativeTime === true ? "checked" : ""
-        }>relative time</label>
-      </div>
-      <div class="items" id="items">
-        ${data.items
-          .map(
-            (item, index) => `
-              <article class="item items__item" data-index="${index}" data-datetime="${vif(
-              () => item.date!.getTime(),
-              (date) => date,
-              () => 0
-            )}">
-                <header class="item__header">
-                  ${vif(
-                    () => item.image,
-                    (url) => `<img class="item__image" src="${url}"/>`
-                  )}
-                  <h2 class="item__title">
-                    ${vif(
-                      () => t(item, ".url", null, t.escape),
-                      (link) => `
-                        <a class="noline" href="${link}">
-                          ${t(item, ".title", "Untitled", t.escape)}
-                        </a>
-                      `,
-                      () => t(item, ".title", "Untitled", t.escape)
-                    )}
-                  </h2>
-                  <p class="item__info">
-                    ${vif(
-                      () => item.date!,
-                      (date) => `
-                        <time
-                          is="relative-date"
-                          data-relative="${store.useRelativeTime}"
-                          class="item__pubDate"
-                          datetime="${date}"
-                          title="${date}"
-                        >
-                          ${date}
-                        </time>
-                      `
-                    )}
-                    ${vif(
-                      () => t(item, ".author", null, t.escape),
-                      (author) =>
-                        `<span class="item__author">by ${author}</span>`
-                    )}
-                  </p>
-                  <div style="clear: both;"></div>
-                </header>
-                <div class="content item__content" data-content="${
-                  item.id
-                }"></div>
-                <div style="clear: both;"></div>
-                ${vif(
-                  () => item.media,
-                  (media) => {
-                    if (media!.type.indexOf("image/") === 0) {
-                      const eurl = t(media as any, ".url", "", t.escape);
-                      const link = `<a href="${eurl}">${
-                        media!.name || "link"
-                      }</a>`;
-                      return `
-                        <div class="item__media">
-                          <h4 class="item__media-title">Media ${link}</h4>
-                          <img
-                            class="item__media-element item__media-element-image"
-                            src="${eurl}"
-                          />
-                        </div>`;
-                    }
-                    const strtype =
-                      media!.type.indexOf("audio/") === 0 ? "audio" : "video";
-                    const eurl = t(media as any, ".url", "", t.escape);
-                    const link = `<a href="${eurl}">${
-                      media!.name || "link"
-                    }</a>`;
-                    return `
-                      <div class="item__media">
-                          <h4 class="item__media-title">Media ${link}</h4>
-                          <${strtype}
-                            controls
-                            class="item__media-element item__media-element-${strtype}"
-                            preload="none"
-                            src="${eurl}"
-                            type="${t(media as any, ".type", "", t.escape)}"
-                          />
-                      </div>`;
-                  }
-                )}
-                ${vif(
-                  () => t(item, ".url", "", t.escape),
-                  (link) => `<a class="item__bottom-link" href="${link}"></a>`
-                )}
-              </article>
-        `
-          )
-          .join("")}
-      </div>
-    </main>
-    <footer class="footer body__footer">
-      <hr/>
-      <a href="https://github.com/Reeywhaar/want-my-rss">Want My RSS</a>
-    </footer>
+const createRenderer = async (
+  container: HTMLElement,
+  url: string,
+  items: RSSDataItem[]
+) => {
+  const createTemplate = async () => {
+    const store = await Storage.getAll();
+    const tpl = `<header class="header body__header">
+      </header>
+      <main class="main body__main">
+        <div class="controls main__controls">
+          <label class="items-sort">
+            <span class="items-sort__label">Sort:</span> <select class="items-sort__select">
+              ${Sortings.map(
+                (sort) =>
+                  `<option value="${sort}" ${
+                    sort === store.sort ? "selected" : ""
+                  }>${SortingObjects[sort].label}</option>`
+              ).join("")}
+            <select>
+          </label>
+          <div class="controls__spacer"></div>
+          <label class="controls__relative-time-switch"><input class="relative-time-checkbox controls__relative-time-checkbox" type="checkbox" ${
+            store.useRelativeTime === true ? "checked" : ""
+          }>relative time</label>
+        </div>
+        <div class="items" id="items"></div>
+      </main>
+      <footer class="footer body__footer">
+        <hr/>
+        <a href="https://github.com/Reeywhaar/want-my-rss">Want My RSS</a>
+      </footer>
   `;
-}
+    const fr = document.createElement("template");
+    fr.innerHTML = tpl;
+    container.append(fr.content);
+  };
+
+  const templatePromise = createTemplate();
+
+  return async (item: ParseItem) => {
+    const store = await Storage.getAll();
+
+    if (item.type === "header") {
+      await templatePromise;
+      const data = item.header;
+
+      vif(
+        () => data.title || data.description,
+        (description) => (document.title = description)
+      );
+
+      const header = container.querySelector(".header")!;
+      header.innerHTML = `
+        ${vif(
+          () => data.image,
+          (url) => `<img class="header__image" src="${url}"/>`
+        )}
+        ${vif(
+          () => t(data, ".url", null, t.escape),
+          (mainUrl) =>
+            `<h1 class="header__title"><a class="header__main-url" href="${mainUrl}">${t(
+              data,
+              ".title",
+              "",
+              t.escape
+            )}</a><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`,
+          () =>
+            `<h1 class="header__title"><span class="header__title-span">${t(
+              data,
+              ".title",
+              "",
+              t.escape
+            )}</span><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`
+        )}
+        <div class="header__links">
+          <a class="header__original-url" href="${url}">${url}</a><a class="header__original-url-source" href="view-source:${url}">source</a>
+        </div>
+        ${vif(
+          () => t(data, ".description", null, t.escape),
+          (description) => `<p class="header__description">${description}</p>`
+        )}
+      `;
+    }
+
+    if (item.type === "item") {
+      const itemsCnt = container.querySelector(".items")!;
+      const itemData = item.item;
+      const index = item.index;
+
+      items.push(itemData);
+
+      const tpl = `
+        <article class="item items__item" data-index="${index}" data-datetime="${vif(
+        () => itemData.date!.getTime(),
+        (date) => date,
+        () => 0
+      )}">
+        <header class="item__header">
+          ${vif(
+            () => itemData.image,
+            (url) => `<img class="item__image" src="${url}"/>`
+          )}
+          <h2 class="item__title">
+          ${vif(
+            () => t(itemData, ".url", null, t.escape),
+            (link) => `
+            <a class="noline" href="${link}">
+              ${t(itemData, ".title", "Untitled", t.escape)}
+            </a>
+            `,
+            () => t(itemData, ".title", "Untitled", t.escape)
+          )}
+          </h2>
+          <p class="item__info">
+          ${vif(
+            () => itemData.date!,
+            (date) => `
+              <time
+                is="relative-date"
+                data-relative="${store.useRelativeTime}"
+                class="item__pubDate"
+                datetime="${date}"
+                title="${date}"
+              >
+              ${date}
+              </time>
+            `
+          )}
+          ${vif(
+            () => t(itemData, ".author", null, t.escape),
+            (author) => `<span class="item__author">by ${author}</span>`
+          )}
+          </p>
+          <div style="clear: both;"></div>
+        </header>
+        <div class="content item__content" data-content="${itemData.id}"></div>
+        <div style="clear: both;"></div>
+        ${vif(
+          () => itemData.media,
+          (media) => {
+            if (media!.type.indexOf("image/") === 0) {
+              const eurl = t(media as any, ".url", "", t.escape);
+              const link = `<a href="${eurl}">${media!.name || "link"}</a>`;
+              return `
+                <div class="item__media">
+                  <h4 class="item__media-title">Media ${link}</h4>
+                  <img
+                    class="item__media-element item__media-element-image"
+                    src="${eurl}"
+                  />
+                </div>`;
+            }
+            const strtype =
+              media!.type.indexOf("audio/") === 0 ? "audio" : "video";
+            const eurl = t(media as any, ".url", "", t.escape);
+            const link = `<a href="${eurl}">${media!.name || "link"}</a>`;
+            return `
+              <div class="item__media">
+                <h4 class="item__media-title">Media ${link}</h4>
+                <${strtype}
+                  controls
+                  class="item__media-element item__media-element-${strtype}"
+                  preload="none"
+                  src="${eurl}"
+                  type="${t(media as any, ".type", "", t.escape)}"
+                />
+              </div>`;
+          }
+        )}
+        ${vif(
+          () => t(itemData, ".url", "", t.escape),
+          (link) => `<a class="item__bottom-link" href="${link}"></a>`
+        )}
+        </article>
+      `;
+
+      const fr = document.createElement("template");
+      fr.innerHTML = tpl;
+      itemsCnt.appendChild(fr.content);
+    }
+  };
+};
 
 async function setThemeSwitching(): Promise<void> {
   const switcher = document.createElement("div");
@@ -286,13 +309,25 @@ function getSafeDecoder(enc: string): TextDecoder {
   }
 }
 
+type ParseItem =
+  | {
+      type: "header";
+      header: RSSDataHeader;
+    }
+  | {
+      type: "item";
+      item: RSSDataItem;
+      index: number;
+    };
+
 function parseXML(
   input: ArrayBuffer,
-  presumedCharset: string = DEFAULT_CHARSET
-): RSSData {
+  presumedCharset: string = DEFAULT_CHARSET,
+  onItem: (item: ParseItem) => unknown
+) {
   const utfdec = getSafeDecoder(presumedCharset);
   let string = utfdec.decode(input);
-  const data = {} as RSSData;
+  const data = {} as RSSDataHeader;
   const xmlHeaderIndex = string.indexOf("<?xml");
   const xmlHeaderEndIndex =
     xmlHeaderIndex === -1 ? null : string.indexOf("?>", xmlHeaderIndex);
@@ -331,119 +366,112 @@ function parseXML(
     createSetter(data, "description")
   );
 
+  onItem({ type: "header", header: data });
+
   let items = Array.from(dom.querySelectorAll("item"));
   if (items.length === 0) items = Array.from(dom.querySelectorAll("entry"));
 
-  data.items =
-    items.map((item) => {
-      const parsed = {
-        id: Math.random().toFixed(16).substring(2),
-      } as RSSDataItem;
-      vif(
-        () =>
-          t(item, ">pubDate:") || t(item, ">published:") || t(item, ">date:"),
-        (date) => createSetter(parsed, "date")(new Date(date))
-      );
+  items.forEach((item, index) => {
+    const parsed = {
+      id: Math.random().toFixed(16).substring(2),
+    } as RSSDataItem;
+    vif(
+      () => t(item, ">pubDate:") || t(item, ">published:") || t(item, ">date:"),
+      (date) => createSetter(parsed, "date")(new Date(date))
+    );
 
-      vif(
-        () =>
-          t(item, ">link:") ||
-          t(item, ">guid[isPermalink='true']:") ||
-          t(item, ">link^href"),
-        createSetter(parsed, "url")
-      );
+    vif(
+      () =>
+        t(item, ">link:") ||
+        t(item, ">guid[isPermalink='true']:") ||
+        t(item, ">link^href"),
+      createSetter(parsed, "url")
+    );
 
-      let baseURL = "";
-      if (parsed.url) {
-        const url = new URL(parsed.url);
-        baseURL = url.origin;
+    let baseURL = "";
+    if (parsed.url) {
+      const url = new URL(parsed.url);
+      baseURL = url.origin;
+    }
+
+    parsed.title = t(item, ">title:", "Untitled");
+
+    vif(
+      () =>
+        t(item, ">author>name:") ||
+        t(item, ">author>email:") ||
+        t(item, ">author:") ||
+        t(item, ">creator:"),
+      createSetter(parsed, "author")
+    );
+
+    vif(
+      () =>
+        longest(
+          t(item, ">encoded:"),
+          t(item, ">description:"),
+          t(item, ">content:"),
+          t(item, ">summary:")
+        ),
+      (content) => {
+        const doc = document.implementation.createHTMLDocument();
+        const base = document.createElement("base");
+        base.href = baseURL;
+        doc.head.appendChild(base);
+        doc.body.innerHTML = content;
+        const links = doc.body.querySelectorAll("a");
+        for (let link of Array.from(links)) {
+          // transforming relative url to absolute url
+          link.href = link.href;
+        }
+        parsed.content = doc.body.innerHTML;
       }
+    );
 
-      console.log(baseURL);
+    vif(
+      () => t(item, ">enclosure"),
+      (media) => {
+        const out = {} as {
+          type: string | "";
+          url: string | "";
+          name: string | "";
+        };
+        out.type = t(media as any, "^type");
+        out.url = t(media as any, "^url");
+        out.name = !out.url
+          ? ""
+          : new URL(out.url).pathname
+              .split("/")
+              .reverse()
+              .find((x) => x.length > 0) || "";
+        parsed.media = out;
+      }
+    );
 
-      parsed.title = t(item, ">title:", "Untitled");
-
-      vif(
-        () =>
-          t(item, ">author>name:") ||
-          t(item, ">author>email:") ||
-          t(item, ">author:") ||
-          t(item, ">creator:"),
-        createSetter(parsed, "author")
-      );
-
-      vif(
-        () =>
-          longest(
-            t(item, ">encoded:"),
-            t(item, ">description:"),
-            t(item, ">content:"),
-            t(item, ">summary:")
-          ),
-        (content) => {
-          const doc = document.implementation.createHTMLDocument();
-          const base = document.createElement("base");
-          base.href = baseURL;
-          doc.head.appendChild(base);
-          doc.body.innerHTML = content;
-          const links = doc.body.querySelectorAll("a");
-          for (let link of Array.from(links)) {
-            // transforming relative url to absolute url
-            link.href = link.href;
-          }
-          parsed.content = doc.body.innerHTML;
-        }
-      );
-
-      vif(
-        () => t(item, ">enclosure"),
-        (media) => {
-          const out = {} as {
-            type: string | "";
-            url: string | "";
-            name: string | "";
-          };
-          out.type = t(media as any, "^type");
-          out.url = t(media as any, "^url");
-          out.name = !out.url
-            ? ""
-            : new URL(out.url).pathname
-                .split("/")
-                .reverse()
-                .find((x) => x.length > 0) || "";
-          parsed.media = out;
-        }
-      );
-
-      return parsed;
-    }) || [];
-  return data;
+    onItem({ type: "item", item: parsed, index });
+  });
 }
 
-function parseJSON(json: any): RSSData {
-  const data = {} as RSSData;
+function parseJSON(json: any, onItem: (item: ParseItem) => unknown) {
+  const data = {} as RSSDataHeader;
   data.title = t(json, ".title", "Untitled");
   vif(() => json.home_page_url, createSetter(data, "url"));
   vif(() => json.icon, createSetter(data, "image"));
 
-  try {
-    data.items = json.items.map((item: any) => {
-      const out = {} as RSSDataItem;
-      out.title = t(item, ".title", "Untitled");
-      vif(() => item.url, createSetter(out, "url"));
-      vif(() => item.image, createSetter(out, "image"));
-      vif(
-        () => item.date_published || item.date_modified,
-        (date) => createSetter(out, "date")(new Date(date))
-      );
-      vif(() => item.content_html, createSetter(out, "content"));
-      return out;
-    });
-  } catch (e) {
-    data.items = [];
-  }
+  onItem({ type: "header", header: data });
 
-  return data;
+  (json.items as any[]).forEach((item, index) => {
+    const out = {} as RSSDataItem;
+    out.title = t(item, ".title", "Untitled");
+    vif(() => item.url, createSetter(out, "url"));
+    vif(() => item.image, createSetter(out, "image"));
+    vif(
+      () => item.date_published || item.date_modified,
+      (date) => createSetter(out, "date")(new Date(date))
+    );
+    vif(() => item.content_html, createSetter(out, "content"));
+    onItem({ type: "item", item: out, index });
+  });
 }
 
 /**
@@ -471,6 +499,19 @@ async function main(): Promise<void> {
 
   setHotkeyNavigation();
 
+  const handleError = (message: string, e: Error) => {
+    const error = document.createElement("div");
+    error.innerHTML = `
+        <div>
+          <h1>Error</h1>
+          <p>${message}</p>
+          <a href="${url}">${url}</a>
+        </div>
+      `;
+    document.body.appendChild(error);
+    console.error(e);
+  };
+
   let resp: Response;
   try {
     resp = await fetch(url, {
@@ -491,55 +532,31 @@ async function main(): Promise<void> {
       document.body.appendChild(notFound);
       return;
     }
-  } catch (e) {
-    const error = document.createElement("div");
-    error.innerHTML = `
-        <div>
-          <h1>Error</h1>
-          <p>Error while fetching feed</p>
-          <a href="${url}">${url}</a>
-        </div>
-      `;
-    document.body.appendChild(error);
-    return;
-  }
-
-  let data: RSSData;
-  try {
-    const type = resp.headers.get("Content-Type");
-    if (type!.includes("xml")) {
-      data = parseXML(
-        await resp.arrayBuffer(),
-        getCharset(resp.headers.get("content-type"))
-      );
-    } else if (type!.includes("json")) {
-      data = parseJSON(await resp.json());
-    } else {
-      throw new Error("Unsopported format");
-    }
-    data.feedUrl = url;
-  } catch (e) {
-    const error = document.createElement("div");
-    error.innerHTML = `
-        <div>
-          <h1>Error</h1>
-          <p>Error while parsing feed</p>
-          <a href="${url}">${url}</a>
-        </div>
-      `;
-    document.body.appendChild(error);
-    console.error(e);
+  } catch (e: any) {
+    handleError("Error while fetching feed", e);
     return;
   }
 
   const container = document.body;
-  vif(
-    () => data.title || data.description,
-    (description) => (document.title = description)
-  );
-  const fr = document.createElement("template");
-  fr.innerHTML = await render({ data, url });
-  container.append(fr.content);
+
+  let items: RSSDataItem[] = [];
+  try {
+    const type = resp.headers.get("Content-Type");
+    if (type?.includes("xml")) {
+      parseXML(
+        await resp.arrayBuffer(),
+        getCharset(resp.headers.get("content-type")),
+        await createRenderer(container, url, items)
+      );
+    } else if (type?.includes("json")) {
+      parseJSON(await resp.json(), await createRenderer(container, url, items));
+    } else {
+      throw new Error("Unsopported format");
+    }
+  } catch (e: any) {
+    handleError("Error while parsing feed", e);
+    return;
+  }
 
   const sortArticles = (sort: Sorting) => {
     const articleContainer = document.getElementById("items")!;
@@ -578,10 +595,10 @@ async function main(): Promise<void> {
       sortArticles(sort);
     });
 
-  unwrapVisibleItems(data.items);
+  unwrapVisibleItems(items);
 
   const resizeScrollHandler = throttle(() => {
-    unwrapVisibleItems(data.items);
+    unwrapVisibleItems(items);
   }, 150);
 
   window.addEventListener("scroll", resizeScrollHandler);
