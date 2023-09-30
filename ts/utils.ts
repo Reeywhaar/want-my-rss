@@ -6,64 +6,64 @@
  * used as rendering helper
  */
 export function vif<T, C, B>(
-	predicate: () => T,
-	fn: (input: NonNullable<T>) => C,
-	fnNot: () => B = () => "" as unknown as B
+  predicate: () => T,
+  fn: (input: NonNullable<T>) => C,
+  fnNot: () => B = () => "" as unknown as B
 ): C | B {
-	let l;
-	try {
-		l = predicate();
-	} catch (e) {}
-	if (l) {
-		return fn(l);
-	}
-	return fnNot();
+  let l;
+  try {
+    l = predicate();
+  } catch (e) {}
+  if (l) {
+    return fn(l);
+  }
+  return fnNot();
 }
 
 /**
  * mappers for query params for "t" function
  */
 const accessMappers: {
-	[key: string]: (el: HTMLElement, prop: string) => any;
+  [key: string]: (el: HTMLElement, prop: string) => any;
 } = {
-	">": (el, prop) => el.querySelector(":scope " + prop),
-	"^": (el, prop) => el.getAttribute(prop),
-	":": (el) => el.textContent!.trim(),
-	"%": (el) => el.innerHTML!.trim(),
-	".": (el, prop) => (el as any)[prop],
+  ">": (el, prop) => el.querySelector(":scope " + prop),
+  "^": (el, prop) => el.getAttribute(prop),
+  ":": (el) => el.textContent!.trim(),
+  "%": (el) => el.innerHTML!.trim(),
+  ".": (el, prop) => (el as any)[prop],
 };
 
 const entityMap: { [key: string]: string } = {
-	"&": "&amp;",
-	"<": "&lt;",
-	">": "&gt;",
-	'"': "&quot;",
-	"'": "&#39;",
-	"/": "&#x2F;",
-	"`": "&#x60;",
-	"=": "&#x3D;",
+  "&": "&amp;",
+  "<": "&lt;",
+  ">": "&gt;",
+  '"': "&quot;",
+  "'": "&#39;",
+  "/": "&#x2F;",
+  "`": "&#x60;",
+  "=": "&#x3D;",
 };
 
 /**
  * Escapes html
  */
 export function escapeHtml(input: string): string {
-	return input.replace(/[&<>"'`=\/]/g, (s) => entityMap[s]);
+  return input.replace(/[&<>"'`=\/]/g, (s) => entityMap[s]);
 }
 
 /**
  * Escapes html by appending it to temporary element.
  */
 export function safe(input: string): string {
-	const el = document.createElement("div");
-	el.innerHTML = input;
-	return el.innerHTML;
+  const el = document.createElement("div");
+  el.innerHTML = input;
+  return el.innerHTML;
 }
 
 enum EscapeFlag {
-	None = 0b00,
-	Escape = 0b01,
-	Safe = 0b10,
+  None = 0b00,
+  Escape = 0b01,
+  Safe = 0b10,
 }
 
 /**
@@ -73,41 +73,41 @@ enum EscapeFlag {
  *
  */
 export function t<T extends object>(
-	el: T,
-	query: string,
-	def: any = "",
-	escape: EscapeFlag = EscapeFlag.None
+  el: T,
+  query: string,
+  def: any = "",
+  escape: EscapeFlag = EscapeFlag.None
 ): string {
-	try {
-		let action: ((el: object, prop: string) => any) | undefined;
-		let current: string | undefined;
-		let isEscape: boolean = false;
-		for (let char of query) {
-			if (char === "\\") {
-				isEscape = true;
-				continue;
-			}
-			if (accessMappers.hasOwnProperty(char) && !isEscape) {
-				if (typeof action !== "undefined") {
-					el = action(el, current!);
-					current = undefined;
-				}
-				action = accessMappers[char] as any;
-			} else {
-				if (typeof current === "undefined") current = "";
-				current += char;
-			}
-			isEscape = false;
-		}
+  try {
+    let action: ((el: object, prop: string) => any) | undefined;
+    let current: string | undefined;
+    let isEscape: boolean = false;
+    for (let char of query) {
+      if (char === "\\") {
+        isEscape = true;
+        continue;
+      }
+      if (accessMappers.hasOwnProperty(char) && !isEscape) {
+        if (typeof action !== "undefined") {
+          el = action(el, current!);
+          current = undefined;
+        }
+        action = accessMappers[char] as any;
+      } else {
+        if (typeof current === "undefined") current = "";
+        current += char;
+      }
+      isEscape = false;
+    }
 
-		let out = action!(el, current!);
-		if (!out) return def;
-		if (escape & t.escape) out = escapeHtml(out);
-		if (escape & t.safe) out = safe(out);
-		return out || def;
-	} catch (e) {
-		return def;
-	}
+    let out = action!(el, current!);
+    if (!out) return def;
+    if (escape & t.escape) out = escapeHtml(out);
+    if (escape & t.safe) out = safe(out);
+    return out || def;
+  } catch (e) {
+    return def;
+  }
 }
 
 /**
@@ -122,31 +122,31 @@ t.escape = EscapeFlag.Escape;
 t.safe = EscapeFlag.Safe;
 
 export function longest(...strings: string[]): string {
-	let longest = strings[0];
-	for (let i = 1; i < strings.length; i++) {
-		if (strings[i].length > longest.length) longest = strings[i];
-	}
-	return longest;
+  let longest = strings[0];
+  for (let i = 1; i < strings.length; i++) {
+    if (strings[i].length > longest.length) longest = strings[i];
+  }
+  return longest;
 }
 
 export function createSetter<A, B extends object>(
-	obj: B,
-	prop: keyof B
+  obj: B,
+  prop: keyof B
 ): (item: A) => void {
-	return (val: A) => ((obj as any)[prop] = val);
+  return (val: A) => ((obj as any)[prop] = val);
 }
 
 export function randomInt(min: number = 0, max: number = 1000): number {
-	return Math.floor(Math.random() * (max - min + 1) + min);
+  return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 export function findParent(
-	el: HTMLElement,
-	selector: string
+  el: HTMLElement,
+  selector: string
 ): HTMLElement | null {
-	while (!el.matches(selector)) {
-		if (el === document.body) return null;
-		el = el.parentElement!;
-	}
-	return el;
+  while (!el.matches(selector)) {
+    if (el === document.body) return null;
+    el = el.parentElement!;
+  }
+  return el;
 }
