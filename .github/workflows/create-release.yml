@@ -2,7 +2,7 @@ name: "Release"
 on:
   push:
     tags:
-      - '*.*'
+      - "*.*"
 
 jobs:
   release:
@@ -36,7 +36,7 @@ jobs:
           apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
 
       - name: "Create Release"
-        uses: softprops/action-gh-release@78c309ef59fdb9557cd6574f2e0be552936ed728
+        uses: softprops/action-gh-release@810bfa2cd5f7c2bd4138fa75005d437ba562db81
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
