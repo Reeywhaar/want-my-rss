@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.27
+
+_Spring clean for the May queen_
+
+- Updated dependencies
+
 ### 0.26
 
 _You don't clutch no straw_
