@@ -36,7 +36,7 @@ jobs:
           apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
 
       - name: "Create Release"
-        uses: softprops/action-gh-release@810bfa2cd5f7c2bd4138fa75005d437ba562db81
+        uses: softprops/action-gh-release@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
