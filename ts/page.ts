@@ -1,7 +1,7 @@
 (function () {
   const data = Array.from(
     document.querySelectorAll(
-      "link[rel='alternate'][href]:is([type*=atom],[type*=rss],[type='application/json'],[type='application/feed+json'])"
+      "link[rel*=alternate][href]:is([type*=atom],[type*=rss],[type='application/json'],[type='application/feed+json'])"
     ) as NodeListOf<HTMLLinkElement>
   ).map((el) => ({
     type: el.getAttribute("type"),
