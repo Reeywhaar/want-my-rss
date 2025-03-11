@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.28
+
+_They hold no quarter_
+
+- Fixed links selection on page, thanks to @oleastre
+
 ### 0.27
 
 _Spring clean for the May queen_
