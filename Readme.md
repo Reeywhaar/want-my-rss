@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.29
+
+_Crucify_
+
+- Fixed feedly url (#75)
+
 ### 0.28
 
 _They hold no quarter_
