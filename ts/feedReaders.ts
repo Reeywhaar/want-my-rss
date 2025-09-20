@@ -10,7 +10,7 @@ export const FeedReaders: FeedReader[] = [
     id: "feedly",
     name: "Feedly",
     link: (feed) =>
-      `https://feedly.com/i/subscription/feed/${encodeURIComponent(feed)}`,
+      `https://feedly.com/i/subscription/feed${encodeURIComponent(`/${feed}`)}`,
     favicon: "feedly.svg",
   },
   {
