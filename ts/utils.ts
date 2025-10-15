@@ -129,13 +129,6 @@ export function longest(...strings: string[]): string {
   return longest;
 }
 
-export function createSetter<A, B extends object>(
-  obj: B,
-  prop: keyof B
-): (item: A) => void {
-  return (val: A) => ((obj as any)[prop] = val);
-}
-
 export function randomInt(min: number = 0, max: number = 1000): number {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
