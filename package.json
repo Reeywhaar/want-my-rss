@@ -22,7 +22,7 @@
 	"homepage": "https://github.com/Reeywhaar/want-my-rss#readme",
 	"devDependencies": {
 		"typescript": "^5.5.2",
-		"web-ext": "^8.2.0",
+		"web-ext": "^9.0.0",
 		"web-ext-types": "^3.2.1"
 	}
 }
