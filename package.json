@@ -1,35 +1,35 @@
 {
-	"name": "want-my-rss",
-	"version": "1.0.0",
-	"description": "[Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/want-my-rss/)",
-	"main": "index.js",
-	"scripts": {
-		"clean": "rm -rf ext/js",
-		"watch": "env-cmd --silent -- tsc --watch",
-		"run": "env-cmd --silent -- web-ext run -s ext",
-		"run:nightly": "env-cmd --silent -- web-ext run -f nightly -s ext",
-		"webext:lint": "env-cmd --silent -- web-ext lint -s ext",
-		"webext:build": "env-cmd --silent -- tsc && npm run lint && web-ext build -s ext",
-		"data:serve": "env-cmd --silent -- cd testdata && python3 -m http.server",
-		"compile": "env-cmd --silent -- tsc",
-		"tscheck": "env-cmd --silent -- tsc --noEmit",
-		"tscheck:watch": "env-cmd --silent -- tsc --noEmit --watch"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/Reeywhaar/want-my-rss.git"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/Reeywhaar/want-my-rss/issues"
-	},
-	"homepage": "https://github.com/Reeywhaar/want-my-rss#readme",
-	"devDependencies": {
-		"env-cmd": "^11.0.0",
-		"typescript": "^5.5.2",
-		"web-ext": "^9.0.0",
-		"web-ext-types": "^3.2.1"
-	}
+  "name": "want-my-rss",
+  "version": "1.0.0",
+  "description": "[Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/want-my-rss/)",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf ext/js",
+    "watch": "env-cmd --silent -- tsc --watch",
+    "run": "env-cmd --silent -- web-ext run -s ext",
+    "run:nightly": "env-cmd --silent -- web-ext run -f nightly -s ext",
+    "webext:lint": "env-cmd --silent -- web-ext lint -s ext",
+    "webext:build": "env-cmd --silent -- tsc && npm run lint && web-ext build -s ext",
+    "data:serve": "env-cmd --silent -- cd testdata && python3 -m http.server",
+    "compile": "env-cmd --silent -- tsc",
+    "tscheck": "env-cmd --silent -- tsc --noEmit",
+    "tscheck:watch": "env-cmd --silent -- tsc --noEmit --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reeywhaar/want-my-rss.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Reeywhaar/want-my-rss/issues"
+  },
+  "homepage": "https://github.com/Reeywhaar/want-my-rss#readme",
+  "devDependencies": {
+    "env-cmd": "^11.0.0",
+    "typescript": "^5.5.2",
+    "web-ext": "^9.0.0",
+    "web-ext-types": "^3.2.1"
+  }
 }
