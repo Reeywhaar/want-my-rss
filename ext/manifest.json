@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "Want My RSS",
-  "version": "0.29",
+  "version": "0.30",
   "description": "RSS features for Firefox",
   "author": "Mikhail Vyrtsev",
   "developer": {
@@ -16,8 +16,15 @@
   "background": {
     "page": "background.html"
   },
-  "permissions": ["<all_urls>", "storage", "webRequest", "webRequestBlocking"],
-  "web_accessible_resources": ["show.html"],
+  "permissions": [
+    "<all_urls>",
+    "storage",
+    "webRequest",
+    "webRequestBlocking"
+  ],
+  "web_accessible_resources": [
+    "show.html"
+  ],
   "page_action": {
     "default_icon": "icons/bar-icon.svg",
     "default_title": "Subscribe to page",

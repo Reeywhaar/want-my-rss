@@ -21,6 +21,13 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.30
+
+_Radio of the storm_
+
+- Applied lazy loading to article images
+- Long articles are collapsed
+
 ### 0.29
 
 _Crucify_
