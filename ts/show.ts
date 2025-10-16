@@ -2,7 +2,7 @@ import SubscribeButton from "./subscribeButton.js";
 import RelativeDate from "./relativeDate.js";
 import { Storage } from "./storage.js";
 import { Sorting, Sortings, SortingObjects } from "./sortings.js";
-import { vif, t, longest } from "./utils.js";
+import { vif, t, longest, findParent } from "./utils.js";
 import { RSSData, RSSDataItem } from "./rssDataType.js";
 import { setTheme, getTheme } from "./theme.js";
 
@@ -12,6 +12,135 @@ window.customElements.define("subscribe-button", SubscribeButton);
 window.customElements.define("relative-date", RelativeDate, {
   extends: "time",
 });
+
+async function main(): Promise<void> {
+  let url = decodeURI(window.location.search.substr(5));
+  if (url.indexOf("ext%2Brss%3A") === 0) {
+    url = decodeURIComponent(url.substr(12));
+    window.location.replace("/show.html?url=" + encodeURI(url));
+  }
+
+  setThemeSwitching();
+  setExpansion();
+
+  setHotkeyNavigation();
+
+  let resp: Response;
+  try {
+    resp = await fetch(url, {
+      headers: {
+        "Cache-Control": "no-cache",
+        "If-None-Match": "",
+        Pragma: "no-cache",
+      },
+    });
+    if (resp.status >= 400) {
+      const notFound = document.createElement("div");
+      notFound.innerHTML = `
+        <div>
+          <h1>404</h1>
+          <p>Feed <a href="${url}">${url}</a> not found</p>
+        </div>
+      `;
+      document.body.appendChild(notFound);
+      return;
+    }
+  } catch (e) {
+    const error = document.createElement("div");
+    error.innerHTML = `
+        <div>
+          <h1>Error</h1>
+          <p>Error while fetching feed</p>
+          <a href="${url}">${url}</a>
+        </div>
+      `;
+    document.body.appendChild(error);
+    return;
+  }
+
+  let data: RSSData;
+  try {
+    const type = resp.headers.get("Content-Type");
+    if (type!.includes("xml")) {
+      data = parseXML(
+        await resp.arrayBuffer(),
+        getCharset(resp.headers.get("content-type"))
+      );
+    } else if (type!.includes("json")) {
+      data = parseJSON(await resp.json());
+    } else {
+      throw new Error("Unsopported format");
+    }
+    data.feedUrl = url;
+  } catch (e) {
+    const error = document.createElement("div");
+    error.innerHTML = `
+        <div>
+          <h1>Error</h1>
+          <p>Error while parsing feed</p>
+          <a href="${url}">${url}</a>
+        </div>
+      `;
+    document.body.appendChild(error);
+    console.error(e);
+    return;
+  }
+
+  const container = document.body;
+  vif(
+    () => data.title || data.description,
+    (description) => (document.title = description)
+  );
+  const fr = document.createElement("template");
+  fr.innerHTML = await render({ data, url });
+  container.append(fr.content);
+
+  const sortArticles = (sort: Sorting) => {
+    const articleContainer = document.getElementById("items")!;
+    const articles = articleContainer.querySelectorAll(":scope > .item");
+
+    Array.from(articles)
+      .sort(SortingObjects[sort].fn as any)
+      .forEach((x, i) => {
+        (x as HTMLElement).dataset.sortIndex = i.toString();
+        articleContainer.appendChild(x);
+      });
+  };
+  const sort = await Storage.get("sort");
+  if (sort !== "none") sortArticles(sort);
+
+  Storage.subscribe((changes) => {
+    if (changes.hasOwnProperty("useRelativeTime")) {
+      document.querySelectorAll("time[is='relative-date']").forEach((el) => {
+        (el as HTMLElement).dataset.relative =
+          changes.useRelativeTime!.newValue.toString();
+      });
+    }
+  });
+
+  document
+    .querySelector(".relative-time-checkbox")!
+    .addEventListener("change", async (e) => {
+      Storage.set("useRelativeTime", (e.target as HTMLInputElement).checked);
+    });
+
+  document
+    .querySelector(".items-sort__select")!
+    .addEventListener("change", async (e) => {
+      const sort = (e.target as HTMLInputElement).value as Sorting;
+      Storage.set("sort", sort);
+      sortArticles(sort);
+    });
+
+  unwrapVisibleItems(data.items);
+
+  const resizeScrollHandler = throttle(() => {
+    unwrapVisibleItems(data.items);
+  }, 150);
+
+  window.addEventListener("scroll", resizeScrollHandler);
+  window.addEventListener("resize", resizeScrollHandler);
+}
 
 async function render({
   data,
@@ -73,7 +202,7 @@ async function render({
         ${data.items
           .map(
             (item, index) => `
-              <article class="item items__item" data-index="${index}" data-datetime="${vif(
+              <article class="item items__item" data-index="${index}" data-collapsed="true" data-datetime="${vif(
               () => item.date!.getTime(),
               (date) => date,
               () => 0
@@ -121,6 +250,8 @@ async function render({
                   item.id
                 }"></div>
                 <div style="clear: both;"></div>
+                <div class="item__bottom-spacer"></div>
+                <div class="item__expand">Expand</div>
                 ${vif(
                   () => item.media,
                   (media) => {
@@ -158,6 +289,7 @@ async function render({
                       </div>`;
                   }
                 )}
+                <div class="item__bottom-spacer"></div>
                 ${vif(
                   () => t(item, ".url", "", t.escape),
                   (link) => `<a class="item__bottom-link" href="${link}"></a>`
@@ -215,6 +347,55 @@ function findCurrentArticle(): HTMLElement | null {
     startPosition += 10;
   }
   return null;
+}
+
+function setExpansion() {
+  document.body.addEventListener("click", (e) => {
+    if (e.target instanceof HTMLDivElement === false) return;
+    if (!e.target.matches(".item__expand")) return;
+    const parent = findParent(e.target, ".item");
+    if (!parent) throw new Error("Parent not found");
+    parent.dataset.collapsed =
+      parent.dataset.collapsed === "true" ? "false" : "true";
+  });
+
+  const iobs = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        console.log("sms1 intersection", entry);
+        const itemEl = findParent(entry.target as HTMLElement, ".item");
+        if (!itemEl) throw new Error("Parent not found");
+        const contentEl =
+          itemEl.querySelector<HTMLDivElement>(".item__content");
+        if (!contentEl) throw new Error("Content element not found");
+        setTimeout(() => {
+          if (contentEl.scrollHeight - contentEl.clientHeight <= 100) {
+            itemEl.dataset.collapsed = "false";
+          }
+        }, 1000);
+      }
+    },
+    { root: null }
+  );
+
+  const observedElements = new WeakSet<Element>();
+
+  document.querySelectorAll(".item__expand").forEach((el) => {
+    if (observedElements.has(el)) return;
+    iobs.observe(el);
+    observedElements.add(el);
+  });
+
+  const mobs = new MutationObserver(() => {
+    document.querySelectorAll(".item__expand").forEach((el) => {
+      if (observedElements.has(el)) return;
+      iobs.observe(el);
+      observedElements.add(el);
+    });
+  });
+
+  mobs.observe(document.body, { childList: true, subtree: true });
 }
 
 async function setHotkeyNavigation(): Promise<void> {
@@ -477,134 +658,6 @@ function getCharset(input: string | null): string {
   if (!matches) return DEFAULT_CHARSET;
   if (matches.length < 2) return DEFAULT_CHARSET;
   return matches[1].toLocaleLowerCase();
-}
-
-async function main(): Promise<void> {
-  let url = decodeURI(window.location.search.substr(5));
-  if (url.indexOf("ext%2Brss%3A") === 0) {
-    url = decodeURIComponent(url.substr(12));
-    window.location.replace("/show.html?url=" + encodeURI(url));
-  }
-
-  setThemeSwitching();
-
-  setHotkeyNavigation();
-
-  let resp: Response;
-  try {
-    resp = await fetch(url, {
-      headers: {
-        "Cache-Control": "no-cache",
-        "If-None-Match": "",
-        Pragma: "no-cache",
-      },
-    });
-    if (resp.status >= 400) {
-      const notFound = document.createElement("div");
-      notFound.innerHTML = `
-        <div>
-          <h1>404</h1>
-          <p>Feed <a href="${url}">${url}</a> not found</p>
-        </div>
-      `;
-      document.body.appendChild(notFound);
-      return;
-    }
-  } catch (e) {
-    const error = document.createElement("div");
-    error.innerHTML = `
-        <div>
-          <h1>Error</h1>
-          <p>Error while fetching feed</p>
-          <a href="${url}">${url}</a>
-        </div>
-      `;
-    document.body.appendChild(error);
-    return;
-  }
-
-  let data: RSSData;
-  try {
-    const type = resp.headers.get("Content-Type");
-    if (type!.includes("xml")) {
-      data = parseXML(
-        await resp.arrayBuffer(),
-        getCharset(resp.headers.get("content-type"))
-      );
-    } else if (type!.includes("json")) {
-      data = parseJSON(await resp.json());
-    } else {
-      throw new Error("Unsopported format");
-    }
-    data.feedUrl = url;
-  } catch (e) {
-    const error = document.createElement("div");
-    error.innerHTML = `
-        <div>
-          <h1>Error</h1>
-          <p>Error while parsing feed</p>
-          <a href="${url}">${url}</a>
-        </div>
-      `;
-    document.body.appendChild(error);
-    console.error(e);
-    return;
-  }
-
-  const container = document.body;
-  vif(
-    () => data.title || data.description,
-    (description) => (document.title = description)
-  );
-  const fr = document.createElement("template");
-  fr.innerHTML = await render({ data, url });
-  container.append(fr.content);
-
-  const sortArticles = (sort: Sorting) => {
-    const articleContainer = document.getElementById("items")!;
-    const articles = articleContainer.querySelectorAll(":scope > .item");
-
-    Array.from(articles)
-      .sort(SortingObjects[sort].fn as any)
-      .forEach((x, i) => {
-        (x as HTMLElement).dataset.sortIndex = i.toString();
-        articleContainer.appendChild(x);
-      });
-  };
-  const sort = await Storage.get("sort");
-  if (sort !== "none") sortArticles(sort);
-
-  Storage.subscribe((changes) => {
-    if (changes.hasOwnProperty("useRelativeTime")) {
-      document.querySelectorAll("time[is='relative-date']").forEach((el) => {
-        (el as HTMLElement).dataset.relative =
-          changes.useRelativeTime!.newValue.toString();
-      });
-    }
-  });
-
-  document
-    .querySelector(".relative-time-checkbox")!
-    .addEventListener("change", async (e) => {
-      Storage.set("useRelativeTime", (e.target as HTMLInputElement).checked);
-    });
-
-  document
-    .querySelector(".items-sort__select")!
-    .addEventListener("change", async (e) => {
-      const sort = (e.target as HTMLInputElement).value as Sorting;
-      Storage.set("sort", sort);
-      sortArticles(sort);
-    });
-
-  unwrapVisibleItems(data.items);
-
-  const resizeScrollHandler = throttle(() => {
-    unwrapVisibleItems(data.items);
-  }, 150);
-
-  window.addEventListener("scroll", resizeScrollHandler);
-  window.addEventListener("resize", resizeScrollHandler);
 }
 
 function unwrapVisibleItems(rssitems: RSSDataItem[]) {

@@ -1,160 +1,160 @@
 @font-face {
-	font-family: "PTSans";
-	src: url("/fonts/PTS55F_W.woff");
-	font-weight: normal;
-	font-style: normal;
+  font-family: "PTSans";
+  src: url("/fonts/PTS55F_W.woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: "PTSans";
-	src: url("/fonts/PTS56F_W.woff");
-	font-weight: normal;
-	font-style: italic;
+  font-family: "PTSans";
+  src: url("/fonts/PTS56F_W.woff");
+  font-weight: normal;
+  font-style: italic;
 }
 
 @font-face {
-	font-family: "PTSans";
-	src: url("PTS75F_W.woff");
-	font-weight: bold;
-	font-style: normal;
+  font-family: "PTSans";
+  src: url("PTS75F_W.woff");
+  font-weight: bold;
+  font-style: normal;
 }
 
 :root {
-	--background-color: hsl(40, 10%, 98.5%);
-	--main-color: #000;
-	--link-color: hsl(200, 90%, 40%);
-	--link-underline-color: hsl(200, 90%, 40%, 0.3);
-	--link-hover-color: hsl(200, 90%, 60%);
-	--link-hover-underline-color: hsl(200, 90%, 60%, 0.3);
-	--link-visited-color: hsl(260, 50%, 70%);
-	--link-visited-underline-color: hsl(260, 50%, 70%, 0.3);
-	--link-visited-hover-color: var(--link-hover-color);
-	--link-visited-hover-underline-color: var(--link-hover-underline-color);
+  --background-color: hsl(40, 10%, 98.5%);
+  --main-color: #000;
+  --link-color: hsl(200, 90%, 40%);
+  --link-underline-color: hsl(200, 90%, 40%, 0.3);
+  --link-hover-color: hsl(200, 90%, 60%);
+  --link-hover-underline-color: hsl(200, 90%, 60%, 0.3);
+  --link-visited-color: hsl(260, 50%, 70%);
+  --link-visited-underline-color: hsl(260, 50%, 70%, 0.3);
+  --link-visited-hover-color: var(--link-hover-color);
+  --link-visited-hover-underline-color: var(--link-hover-underline-color);
 
-	--header-source-opacity: 0.6;
-	--header-description-opacity: 0.6;
+  --header-source-opacity: 0.6;
+  --header-description-opacity: 0.6;
 
-	--main-url-color: #000;
-	--main-url-underline-color: rgba(0, 0, 0, 0.001);
+  --main-url-color: #000;
+  --main-url-underline-color: rgba(0, 0, 0, 0.001);
 
-	--item-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1);
-	--item-border-radius: 0.2rem;
-	--item-background-color: #fff;
-	--line-color: rgba(0, 0, 0, 0.09);
-	--media-title-color: rgba(0, 0, 0, 0.6);
+  --item-shadow: 0 0 0.2rem rgba(0, 0, 0, 0.1);
+  --item-border-radius: 0.2rem;
+  --item-background-color: #fff;
+  --line-color: rgba(0, 0, 0, 0.09);
+  --media-title-color: rgba(0, 0, 0, 0.6);
 }
 
 html {
-	background: var(--background-color);
-	color: var(--main-color);
+  background: var(--background-color);
+  color: var(--main-color);
 }
 
 body {
-	padding: 1rem;
-	font-family: "PTSans", Arial, Helvetica, sans-serif;
-	max-width: 60rem;
-	margin-left: auto;
-	margin-right: auto;
+  padding: 1rem;
+  font-family: "PTSans", Arial, Helvetica, sans-serif;
+  max-width: 60rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 a {
-	color: var(--link-color);
-	text-decoration-color: var(--link-underline-color);
+  color: var(--link-color);
+  text-decoration-color: var(--link-underline-color);
 }
 
 a:hover {
-	color: var(--link-hover-color);
-	text-decoration-color: var(--link-hover-underline-color);
+  color: var(--link-hover-color);
+  text-decoration-color: var(--link-hover-underline-color);
 }
 
 a:visited {
-	color: var(--link-visited-color);
-	text-decoration-color: var(--link-visited-underline-color);
+  color: var(--link-visited-color);
+  text-decoration-color: var(--link-visited-underline-color);
 }
 
 a:visited:hover {
-	color: var(--link-visited-hover-color);
-	text-decoration-color: var(--link-visited-hover-underline-color);
+  color: var(--link-visited-hover-color);
+  text-decoration-color: var(--link-visited-hover-underline-color);
 }
 
 a.noline:not(:hover) {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 hr {
-	border: none;
-	border-bottom: 1px solid var(--line-color);
+  border: none;
+  border-bottom: 1px solid var(--line-color);
 }
 
 /* body */
 
 .body__header {
-	margin-bottom: 3rem;
+  margin-bottom: 3rem;
 }
 
 /* header */
 
 .header__image {
-	max-width: 5rem;
-	max-height: 5rem;
-	object-fit: scale-down;
-	float: left;
-	margin-top: 0.3rem;
-	margin-right: 0.5rem;
+  max-width: 5rem;
+  max-height: 5rem;
+  object-fit: scale-down;
+  float: left;
+  margin-top: 0.3rem;
+  margin-right: 0.5rem;
 }
 
 .header__subscribe {
-	display: inline-block;
-	vertical-align: 0.5em;
+  display: inline-block;
+  vertical-align: 0.5em;
 }
 
 a.header__main-url {
-	color: var(--main-url-color);
-	text-decoration-color: var(--main-url-underline-color);
-	margin-right: 0.4rem;
+  color: var(--main-url-color);
+  text-decoration-color: var(--main-url-underline-color);
+  margin-right: 0.4rem;
 }
 
 a.header__main-url:hover {
-	color: var(--link-hover-color);
-	text-decoration-color: var(--link-hover-underline-color);
+  color: var(--link-hover-color);
+  text-decoration-color: var(--link-hover-underline-color);
 }
 
 a.header__main-url:visited:hover {
-	color: var(--link-visited-hover-color);
-	text-decoration-color: var(--link-visited-hover-underline-color);
+  color: var(--link-visited-hover-color);
+  text-decoration-color: var(--link-visited-hover-underline-color);
 }
 
 .header__title {
-	font-size: 2.45rem;
-	margin-top: 0.2rem;
-	margin-bottom: 0.2rem;
-	margin-right: 2.5rem;
+  font-size: 2.45rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  margin-right: 2.5rem;
 }
 
 .header__title-span {
-	margin-right: 0.4rem;
+  margin-right: 0.4rem;
 }
 
 .header__original-url-source {
-	margin-left: 1em;
-	font-size: 0.8em;
-	vertical-align: bottom;
-	opacity: 0;
-	transition: opacity 0.4s;
+  margin-left: 1em;
+  font-size: 0.8em;
+  vertical-align: bottom;
+  opacity: 0;
+  transition: opacity 0.4s;
 }
 
 .header__links {
-	display: inline-block;
+  display: inline-block;
 }
 
 .header__links:hover .header__original-url-source {
-	opacity: var(--header-source-opacity);
-	transition: opacity 0s;
+  opacity: var(--header-source-opacity);
+  transition: opacity 0s;
 }
 
 .header__description {
-	opacity: var(--header-description-opacity);
-	font-size: 0.8em;
+  opacity: var(--header-description-opacity);
+  font-size: 0.8em;
 }
 
 /* main */
@@ -162,233 +162,256 @@ a.header__main-url:visited:hover {
 /* controls */
 
 .controls {
-	display: flex;
-	margin-bottom: 0.5em;
+  display: flex;
+  margin-bottom: 0.5em;
 }
 
 .controls__spacer {
-	flex: 1;
+  flex: 1;
 }
 
 .controls__relative-time-switch {
-	-moz-user-select: none;
-	user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
 /* items-sort */
 
 .items-sort {
-	display: inline-block;
+  display: inline-block;
 }
 
 .items-sort__label {
-	-moz-user-select: none;
-	user-select: none;
-	font-size: 0.8em;
+  -moz-user-select: none;
+  user-select: none;
+  font-size: 0.8em;
 }
 
 /* item */
 
 .item {
-	background: var(--item-background-color);
-	box-shadow: var(--item-shadow);
-	padding: 1rem;
-	border-radius: var(--item-border-radius);
-	overflow: hidden;
+  background: var(--item-background-color);
+  box-shadow: var(--item-shadow);
+  padding: 1rem;
+  border-radius: var(--item-border-radius);
+  overflow: hidden;
 }
 
 .item + .item {
-	margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .item__image {
-	max-width: 10rem;
-	max-height: 5rem;
-	float: right;
-	margin-top: -0.5rem;
+  max-width: 10rem;
+  max-height: 5rem;
+  float: right;
+  margin-top: -0.5rem;
 }
 
 .item__header {
-	padding: 0.5rem;
-	padding-top: 1rem;
-	width: 100%;
-	margin-top: -0.5rem;
-	margin-bottom: 1rem;
-	margin-left: -0.5rem;
-	border-bottom: 1px dashed var(--line-color);
+  padding: 0.5rem;
+  padding-top: 1rem;
+  width: 100%;
+  margin-top: -0.5rem;
+  margin-bottom: 1rem;
+  margin-left: -0.5rem;
+  border-bottom: 1px dashed var(--line-color);
 }
 
 .item__title {
-	font-family: Lucida Bright, Georgia, serif;
-	font-size: 2rem;
-	margin-top: 0.2rem;
-	margin-bottom: 0.2rem;
+  font-family: Lucida Bright, Georgia, serif;
+  font-size: 2rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
 }
 
 .item__info {
-	margin-top: 0.2rem;
-	padding-bottom: 0.2rem;
-	margin-bottom: 0.2rem;
-	font-size: 0.8em;
+  margin-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.2rem;
+  font-size: 0.8em;
 }
 
 .item__author {
-	font-style: italic;
+  font-style: italic;
+}
+
+.item[data-collapsed="true"] .item__content {
+  max-height: 800px;
+  overflow: hidden;
 }
 
 .item__media-title {
-	margin-bottom: 0.2rem;
-	color: var(--media-title-color);
+  margin-bottom: 0.2rem;
+  color: var(--media-title-color);
 }
 
 .item__media-title a {
-	border: none;
+  border: none;
 }
 
 .item__media-element-image {
-	max-width: 100%;
-	object-fit: scale-down;
-	box-sizing: border-box;
+  max-width: 100%;
+  object-fit: scale-down;
+  box-sizing: border-box;
 }
 
 .item__media-element-audio {
-	width: 100%;
-	box-sizing: border-box;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .item__media-element-video {
-	width: 100%;
-	height: 25rem;
-	box-sizing: border-box;
-	box-shadow: var(--item-shadow);
+  width: 100%;
+  height: 25rem;
+  box-sizing: border-box;
+  box-shadow: var(--item-shadow);
+}
+
+.item__bottom-spacer {
+  height: 1rem;
+}
+
+.item[data-collapsed="false"] .item__expand {
+  display: none;
+}
+
+.item__expand {
+  color: var(--link-color);
+  text-align: end;
+  cursor: pointer;
+}
+
+.item__expand:hover {
+  opacity: 0.7;
 }
 
 .item__bottom-link {
-	margin-top: 0.5rem;
-	height: 1rem;
-	display: block;
-	border-bottom-style: solid;
-	border-bottom-width: 0.5rem;
-	width: 100%;
-	padding-left: 1rem;
-	padding-right: 1rem;
-	margin-left: -1rem;
-	margin-bottom: -1rem;
+  height: 1rem;
+  display: block;
+  border-bottom-style: solid;
+  border-bottom-width: 0.5rem;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: -1rem;
+  margin-top: -1rem;
+  margin-bottom: -1rem;
 }
 
 /* content */
 
 .content {
-	font-size: 140%;
+  font-size: 140%;
 }
 
 .content img {
-	max-width: 100%;
-	object-fit: scale-down;
-	padding: 0.2rem;
-	box-sizing: border-box;
+  max-width: 100%;
+  object-fit: scale-down;
+  padding: 0.2rem;
+  box-sizing: border-box;
 }
 
 .content iframe,
 .content figure {
-	max-width: 100%;
-	box-sizing: border-box;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .content code,
 .content pre {
-	overflow: scroll;
+  overflow: scroll;
 }
 
 .content figure {
-	margin: 0;
+  margin: 0;
 }
 
 .content audio {
-	width: 100%;
+  width: 100%;
 }
 
 .content > ul,
 .content > ol {
-	padding-left: 1em;
+  padding-left: 1em;
 }
 
 .content blockquote {
-	opacity: 0.8;
-	font-style: italic;
+  opacity: 0.8;
+  font-style: italic;
 }
 
 .content blockquote::before {
-	content: "— ";
-	opacity: 0.6;
-	float: left;
-	font-style: normal;
-	margin-left: -1.5rem;
+  content: "— ";
+  opacity: 0.6;
+  float: left;
+  font-style: normal;
+  margin-left: -1.5rem;
 }
 
 .content iframe[allowfullscreen] {
-	width: 100%;
-	min-height: 30rem;
+  width: 100%;
+  min-height: 30rem;
 }
 
 /* footer */
 
 .footer {
-	margin-top: 2rem;
-	height: 10rem;
+  margin-top: 2rem;
+  height: 10rem;
 }
 
 /* theme-switch */
 
 .theme-switch {
-	position: absolute;
-	top: 1rem;
-	right: 1rem;
-	cursor: default;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: default;
 }
 
 .theme-switch__img {
-	width: 2rem;
-	height: 2rem;
+  width: 2rem;
+  height: 2rem;
 }
 
 @media screen and (min-width: 68rem) {
-	.theme-switch {
-		height: 0;
-		position: sticky;
-		display: inline-block;
-		margin-left: 61rem;
-	}
+  .theme-switch {
+    height: 0;
+    position: sticky;
+    display: inline-block;
+    margin-left: 61rem;
+  }
 }
 
 /* switch-transition */
 
 .switch-transition {
-	transition: background-color 0.5s, color 0.5s, border-color 0.5s, fill 0.5s;
+  transition: background-color 0.5s, color 0.5s, border-color 0.5s, fill 0.5s;
 }
 
 /* night theme */
 
 html[data-theme="night"] {
-	--background-color: hsl(30, 20%, 4%);
-	--main-color: rgba(255, 255, 255, 0.8);
-	--link-color: hsl(200, 100%, 70%);
-	--link-underline-color: hsl(200, 100%, 70%, 0.7);
-	--link-hover-color: hsl(200, 100%, 90%);
-	--link-hover-underline-color: hsl(200, 90%, 90%, 0.7);
-	--link-visited-color: hsl(230, 40%, 80%);
-	--link-visited-underline-color: hsl(230, 40%, 80%, 0.7);
-	--link-visited-hover-color: hsl(230, 70%, 90%);
-	--link-visited-hover-underline-color: hsl(230, 70%, 90%, 0.7);
+  --background-color: hsl(30, 20%, 4%);
+  --main-color: rgba(255, 255, 255, 0.8);
+  --link-color: hsl(200, 100%, 70%);
+  --link-underline-color: hsl(200, 100%, 70%, 0.7);
+  --link-hover-color: hsl(200, 100%, 90%);
+  --link-hover-underline-color: hsl(200, 90%, 90%, 0.7);
+  --link-visited-color: hsl(230, 40%, 80%);
+  --link-visited-underline-color: hsl(230, 40%, 80%, 0.7);
+  --link-visited-hover-color: hsl(230, 70%, 90%);
+  --link-visited-hover-underline-color: hsl(230, 70%, 90%, 0.7);
 
-	--header-source-opacity: 0.9;
-	--header-description-opacity: 0.9;
+  --header-source-opacity: 0.9;
+  --header-description-opacity: 0.9;
 
-	--main-url-color: var(--main-color);
-	--main-url-underline-color: rgba(255, 255, 255, 0.001);
+  --main-url-color: var(--main-color);
+  --main-url-underline-color: rgba(255, 255, 255, 0.001);
 
-	--item-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.2);
-	--item-background-color: hsl(30, 20%, 10%);
-	--line-color: rgba(255, 255, 255, 0.4);
-	--media-title-color: rgba(255, 255, 255, 0.6);
+  --item-shadow: 0px 0px 0px 1px rgba(255, 255, 255, 0.2);
+  --item-background-color: hsl(30, 20%, 10%);
+  --line-color: rgba(255, 255, 255, 0.4);
+  --media-title-color: rgba(255, 255, 255, 0.6);
 }
