@@ -133,6 +133,7 @@ async function render({
                         <div class="item__media">
                           <h4 class="item__media-title">Media ${link}</h4>
                           <img
+                            loading="lazy"
                             class="item__media-element item__media-element-image"
                             src="${eurl}"
                           />
