@@ -186,7 +186,9 @@ async function render({
           )}</span><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`
       )}
       <div class="header__links">
-        <a class="header__original-url" href="${url}">${url}</a><a class="header__original-url-source" href="view-source:${url}">source</a>
+        <a class="header__original-url" href="${url}">${decodeURI(
+    url
+  )}</a><a class="header__original-url-source" href="view-source:${url}">source</a>
       </div>
       ${vif(
         () => t(data, ".description", null, t.escape),
