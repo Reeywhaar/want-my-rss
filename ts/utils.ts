@@ -143,3 +143,12 @@ export function findParent(
   }
   return el;
 }
+
+export function isRelativeUrl(url: string): boolean {
+  return !/^(?:[a-z]+:)?\/\//i.test(url);
+}
+
+export function withDomain(base: string, url: string): string {
+  if (isRelativeUrl(url)) return [base, url].join("");
+  return url;
+}

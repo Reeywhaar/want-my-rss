@@ -2,7 +2,14 @@ import SubscribeButton from "./subscribeButton.js";
 import RelativeDate from "./relativeDate.js";
 import { Storage } from "./storage.js";
 import { Sorting, Sortings, SortingObjects } from "./sortings.js";
-import { vif, t, longest, findParent, escapeHtml } from "./utils.js";
+import {
+  vif,
+  t,
+  longest,
+  findParent,
+  escapeHtml,
+  withDomain,
+} from "./utils.js";
 import { RSSData, RSSDataItem } from "./rssDataType.js";
 import { setTheme, getTheme } from "./theme.js";
 
@@ -19,6 +26,8 @@ async function main(): Promise<void> {
     url = decodeURIComponent(url.substr(12));
     window.location.replace("/show.html?url=" + encodeURI(url));
   }
+
+  const urlObj = new URL(url);
 
   setThemeSwitching();
   setExpansion();
@@ -63,11 +72,12 @@ async function main(): Promise<void> {
     const type = resp.headers.get("Content-Type");
     if (type!.includes("xml")) {
       data = parseXML(
+        urlObj.origin,
         await resp.arrayBuffer(),
         getCharset(resp.headers.get("content-type"))
       );
     } else if (type!.includes("json")) {
-      data = parseJSON(await resp.json());
+      data = parseJSON(urlObj.origin, await resp.json());
     } else {
       throw new Error("Unsopported format");
     }
@@ -365,7 +375,6 @@ function setExpansion() {
     (entries) => {
       for (const entry of entries) {
         if (!entry.isIntersecting) continue;
-        console.log("sms1 intersection", entry);
         const itemEl = findParent(entry.target as HTMLElement, ".item");
         if (!itemEl) throw new Error("Parent not found");
         const contentEl =
@@ -471,6 +480,7 @@ function getSafeDecoder(enc: string): TextDecoder {
 }
 
 function parseXML(
+  base: string,
   input: ArrayBuffer,
   presumedCharset: string = DEFAULT_CHARSET
 ): RSSData {
@@ -509,7 +519,7 @@ function parseXML(
   vif(
     () =>
       t(dom, ">link\\:not([rel]):") || t(dom, ">link:") || t(dom, ">link^href"),
-    (link) => (data.url = link)
+    (link) => (data.url = withDomain(base, link))
   );
   data.title = t(dom, ">title:", "Untitled");
 
@@ -537,16 +547,16 @@ function parseXML(
           t(item, ">link:") ||
           t(item, ">guid[isPermalink='true']:") ||
           t(item, ">link^href"),
-        (url) => (parsed.url = url)
+        (url) => (parsed.url = withDomain(base, url))
       );
 
       let baseURL = "";
       if (parsed.url) {
-        const url = new URL(parsed.url);
-        baseURL = url.origin;
+        try {
+          const url = new URL(withDomain(base, parsed.url));
+          baseURL = url.origin;
+        } catch {}
       }
-
-      console.log(baseURL);
 
       parsed.title = t(item, ">title:", "Untitled");
 
@@ -594,7 +604,7 @@ function parseXML(
           out.url = t(media as any, "^url");
           out.name = !out.url
             ? ""
-            : new URL(out.url).pathname
+            : new URL(withDomain(base, out.url)).pathname
                 .split("/")
                 .reverse()
                 .find((x) => x.length > 0) || "";
@@ -607,12 +617,12 @@ function parseXML(
   return data;
 }
 
-function parseJSON(json: any): RSSData {
+function parseJSON(base: string, json: any): RSSData {
   const data = {} as RSSData;
   data.title = t(json, ".title", "Untitled");
   vif(
     () => json.home_page_url,
-    (url) => (data.url = url)
+    (url) => (data.url = withDomain(base, url))
   );
   vif(
     () => json.icon,
@@ -625,7 +635,7 @@ function parseJSON(json: any): RSSData {
       out.title = t(item, ".title", "Untitled");
       vif(
         () => item.url,
-        (url) => (out.url = url)
+        (url) => (out.url = withDomain(base, url))
       );
       vif(
         () => item.image,
