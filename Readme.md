@@ -21,6 +21,14 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.31
+
+_This is how we chill_
+
+- Added relative urls support
+- Add error message when parsing fails
+- Minor fixes to ensure there are less parsing hard failures
+
 ### 0.30
 
 _Radio of the storm_
