@@ -21,7 +21,7 @@ window.customElements.define("relative-date", RelativeDate, {
 });
 
 async function main(): Promise<void> {
-  let url = decodeURI(window.location.search.substr(5));
+  let url = decodeURI(window.location.search.substring("?url=".length));
   if (url.indexOf("ext%2Brss%3A") === 0) {
     url = decodeURIComponent(url.substr(12));
     window.location.replace("/show.html?url=" + encodeURI(url));
