@@ -70,13 +70,13 @@ async function main(): Promise<void> {
   let data: RSSData;
   try {
     const type = resp.headers.get("Content-Type");
-    if (type!.includes("xml")) {
+    if (type?.includes("xml")) {
       data = parseXML(
         urlObj.origin,
         await resp.arrayBuffer(),
         getCharset(resp.headers.get("content-type"))
       );
-    } else if (type!.includes("json")) {
+    } else if (type?.includes("json")) {
       data = parseJSON(urlObj.origin, await resp.json());
     } else {
       throw new Error("Unsopported format");
