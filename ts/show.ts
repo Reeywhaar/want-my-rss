@@ -2,7 +2,7 @@ import SubscribeButton from "./subscribeButton.js";
 import RelativeDate from "./relativeDate.js";
 import { Storage } from "./storage.js";
 import { Sorting, Sortings, SortingObjects } from "./sortings.js";
-import { vif, t, longest, findParent } from "./utils.js";
+import { vif, t, longest, findParent, escapeHtml } from "./utils.js";
 import { RSSData, RSSDataItem } from "./rssDataType.js";
 import { setTheme, getTheme } from "./theme.js";
 
@@ -77,7 +77,9 @@ async function main(): Promise<void> {
     error.innerHTML = `
         <div>
           <h1>Error</h1>
-          <p>Error while parsing feed</p>
+          <p>Error while parsing feed: <span style="color: red">${escapeHtml(
+            e instanceof Error ? e.message : String(e)
+          )}</span></p>
           <a href="${url}">${url}</a>
         </div>
       `;
