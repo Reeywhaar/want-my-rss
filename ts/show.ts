@@ -9,6 +9,7 @@ import {
   findParent,
   escapeHtml,
   withDomain,
+  sleep,
 } from "./utils.js";
 import { RSSData, RSSDataItem } from "./rssDataType.js";
 import { setTheme, getTheme } from "./theme.js";
@@ -34,9 +35,8 @@ async function main(): Promise<void> {
 
   setHotkeyNavigation();
 
-  let resp: Response;
-  try {
-    resp = await fetch(url, {
+  const fetchResp = async () => {
+    return await fetch(url, {
       cache: "no-cache",
       headers: {
         "Cache-Control": "no-cache",
@@ -44,6 +44,16 @@ async function main(): Promise<void> {
         Pragma: "no-cache",
       },
     });
+  };
+
+  let resp: Response;
+  try {
+    resp = await fetchResp();
+    if (resp.status === 304) {
+      // If the response is cached (even though fetch is set to no-cache), we can get an empty body, which makes it impossible to parse the feed.
+      await sleep(500);
+      resp = await fetchResp();
+    }
     if (resp.status >= 400) {
       const notFound = document.createElement("div");
       notFound.innerHTML = `
@@ -188,8 +198,8 @@ async function render({
       )}
       <div class="header__links">
         <a class="header__original-url" href="${url}">${decodeURI(
-    url
-  )}</a><a class="header__original-url-source" href="view-source:${url}">source</a>
+          url
+        )}</a><a class="header__original-url-source" href="view-source:${url}">source</a>
       </div>
       ${vif(
         () => t(data, ".description", null, t.escape),
@@ -218,10 +228,10 @@ async function render({
           .map(
             (item, index) => `
               <article class="item items__item" data-index="${index}" data-collapsed="true" data-datetime="${vif(
-              () => item.date!.getTime(),
-              (date) => date,
-              () => 0
-            )}">
+                () => item.date!.getTime(),
+                (date) => date,
+                () => 0
+              )}">
                 <header class="item__header">
                   ${vif(
                     () => item.image,

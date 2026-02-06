@@ -1,3 +1,7 @@
+export function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 /**
  * takes predicate and if it is not falsy then pass it
  * as first argument to fn, if falsy then fnNot will be
