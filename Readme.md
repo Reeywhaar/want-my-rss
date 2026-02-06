@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.32
+
+_The Past Recedes_
+
+- Fixed cached rss feeds retrieval
+
 ### 0.31
 
 _This is how we chill_
