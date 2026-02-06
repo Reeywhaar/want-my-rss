@@ -79,7 +79,7 @@ async function main(): Promise<void> {
     } else if (type?.includes("json")) {
       data = parseJSON(urlObj.origin, await resp.json());
     } else {
-      throw new Error("Unsopported format");
+      throw new Error("Unsupported format");
     }
     data.feedUrl = url;
   } catch (e) {
