@@ -37,6 +37,7 @@ async function main(): Promise<void> {
   let resp: Response;
   try {
     resp = await fetch(url, {
+      cache: "no-cache",
       headers: {
         "Cache-Control": "no-cache",
         "If-None-Match": "",
