@@ -29,9 +29,7 @@ function getRedirectURL(url: string): string {
 }
 
 function getRedirectObject(url: string): browser.webRequest.BlockingResponse {
-  return {
-    redirectUrl: getRedirectURL(url),
-  };
+  return { redirectUrl: getRedirectURL(url) };
 }
 
 /**
@@ -65,9 +63,9 @@ type RequestData = {
   statusCode: number;
 };
 
-function webRequestHandler(
+async function webRequestHandler(
   data: RequestData
-): browser.webRequest.BlockingResponse | undefined {
+): Promise<browser.webRequest.BlockingResponse | undefined> {
   if (
     data.originUrl &&
     data.originUrl.indexOf(browser.runtime.getURL("")) !== -1
@@ -82,42 +80,39 @@ function webRequestHandler(
   const lctype = type.toLocaleLowerCase();
   let xmlType = null;
   for (let type of xmlTypes) {
-    if (lctype.indexOf(type) !== -1) {
+    if (lctype.includes(type)) {
       xmlType = type;
       break;
     }
   }
   if (!xmlType) return;
-  if (obviousRssTypes.indexOf(xmlType) !== -1)
-    return getRedirectObject(data.url);
+  if (obviousRssTypes.includes(xmlType)) return getRedirectObject(data.url);
 
-  const filter = browser.webRequest.filterResponseData(data.requestId);
-  const decoder = new TextDecoder();
-  let reqbody = "";
-  const process = (body: string): boolean => {
-    if (!isFeed(body)) return false;
-    browser.tabs.update(data.tabId, {
-      url: getRedirectURL(data.url),
-      loadReplace: true,
-    });
-    filter.suspend();
-    return true;
-  };
-
-  filter.ondata = (event) => {
-    reqbody += decoder.decode(event.data);
-    filter.write(event.data);
-    if (reqbody.length > 150 && process(reqbody)) filter.close();
-    if (reqbody.length > 150) filter.disconnect();
-  };
-  filter.onstop = () => {
-    process(reqbody);
-    filter.disconnect();
-  };
-  filter.onerror = () => {
-    filter.disconnect();
-  };
-  return;
+  return new Promise((resolve) => {
+    const filter = browser.webRequest.filterResponseData(data.requestId);
+    const decoder = new TextDecoder();
+    let reqbody = "";
+    const process = (body: string) => {
+      if (isFeed(body)) {
+        resolve(getRedirectObject(data.url));
+        filter.close();
+      } else {
+        resolve(undefined);
+        filter.disconnect();
+      }
+    };
+    filter.ondata = (event) => {
+      reqbody += decoder.decode(event.data);
+      filter.write(event.data);
+      if (reqbody.length > 150) process(reqbody);
+    };
+    filter.onstop = () => {
+      process(reqbody);
+    };
+    filter.onerror = () => {
+      process("");
+    };
+  });
 }
 
 const RequestInterceptor: {
