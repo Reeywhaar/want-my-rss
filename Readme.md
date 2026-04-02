@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.34
+
+_You paint yourself white_
+
+- Fixed subscribe button becomes unusable when current custom feed reader gets removed
+
 ### 0.33
 
 _She sits alone waiting for suggestions_
