@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.33
+
+_She sits alone waiting for suggestions_
+
+- Fixed blocking filtering gets stuck
+
 ### 0.32
 
 _The Past Recedes_
