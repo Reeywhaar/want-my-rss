@@ -1,4 +1,4 @@
-import SubscribeButton from "./subscribeButton.js";
+import { SubscribeButtonFactory } from "./subscribeButton.js";
 import RelativeDate from "./relativeDate.js";
 import { Storage } from "./storage.js";
 import { Sorting, Sortings, SortingObjects } from "./sortings.js";
@@ -16,7 +16,10 @@ import { setTheme, getTheme } from "./theme.js";
 
 const DEFAULT_CHARSET = "utf-8";
 
-window.customElements.define("subscribe-button", SubscribeButton);
+window.customElements.define(
+  "subscribe-button",
+  new SubscribeButtonFactory(Storage).create()
+);
 window.customElements.define("relative-date", RelativeDate, {
   extends: "time",
 });
