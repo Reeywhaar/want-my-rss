@@ -63,84 +63,77 @@ type RequestData = {
   statusCode: number;
 };
 
-async function webRequestHandler(
-  data: RequestData
-): Promise<browser.webRequest.BlockingResponse | undefined> {
-  if (
-    data.originUrl &&
-    data.originUrl.indexOf(browser.runtime.getURL("")) !== -1
-  )
-    return;
-  const contentTypeHeader = data.responseHeaders!.find(
-    (x) => x.name.toLocaleLowerCase() === "content-type"
-  );
-  if (!contentTypeHeader) return;
-  const type = contentTypeHeader.value;
-  if (!type) return;
-  const lctype = type.toLocaleLowerCase();
-  let xmlType = null;
-  for (let type of xmlTypes) {
-    if (lctype.includes(type)) {
-      xmlType = type;
-      break;
-    }
-  }
-  if (!xmlType) return;
-  if (obviousRssTypes.includes(xmlType)) return getRedirectObject(data.url);
-
-  return new Promise((resolve) => {
-    const filter = browser.webRequest.filterResponseData(data.requestId);
-    const decoder = new TextDecoder();
-    let reqbody = "";
-    const process = (body: string) => {
-      if (isFeed(body)) {
-        browser.tabs.update(data.tabId, { url: getRedirectURL(data.url) });
-        resolve(undefined);
-        filter.close();
-      } else {
-        resolve(undefined);
-        filter.disconnect();
-      }
-    };
-    filter.ondata = (event) => {
-      reqbody += decoder.decode(event.data);
-      filter.write(event.data);
-      if (reqbody.length > 150) process(reqbody);
-    };
-    filter.onstop = () => {
-      process(reqbody);
-    };
-    filter.onerror = () => {
-      process("");
-    };
-    filter.resume();
-  });
-}
-
-const RequestInterceptor: {
-  state: boolean;
-  on: () => void;
-  off: () => void;
-} = {
-  state: false,
-  on: () => {
-    if (RequestInterceptor.state) return;
+class RequestInterceptor {
+  intercept() {
     browser.webRequest.onHeadersReceived.addListener(
-      webRequestHandler,
+      this.handler,
       {
         types: ["main_frame"],
         urls: ["<all_urls>"],
       },
       ["blocking", "responseHeaders"]
     );
-    RequestInterceptor.state = true;
-  },
-  off: () => {
-    if (!RequestInterceptor.state) return;
-    browser.webRequest.onHeadersReceived.removeListener(webRequestHandler);
-    RequestInterceptor.state = false;
-  },
-};
+    return {
+      [Symbol.dispose]: () => {
+        browser.webRequest.onHeadersReceived.removeListener(this.handler);
+      },
+    };
+  }
+
+  private async handler(
+    data: RequestData
+  ): Promise<browser.webRequest.BlockingResponse | undefined> {
+    if (
+      data.originUrl &&
+      data.originUrl.indexOf(browser.runtime.getURL("")) !== -1
+    )
+      return;
+    const contentTypeHeader = data.responseHeaders!.find(
+      (x) => x.name.toLocaleLowerCase() === "content-type"
+    );
+    if (!contentTypeHeader) return;
+    const type = contentTypeHeader.value;
+    if (!type) return;
+    const lctype = type.toLocaleLowerCase();
+    let xmlType = null;
+    for (let type of xmlTypes) {
+      if (lctype.includes(type)) {
+        xmlType = type;
+        break;
+      }
+    }
+    if (!xmlType) return;
+    if (obviousRssTypes.includes(xmlType)) return getRedirectObject(data.url);
+
+    return new Promise((resolve) => {
+      const filter = browser.webRequest.filterResponseData(data.requestId);
+      const decoder = new TextDecoder();
+      let reqbody = "";
+      const process = (body: string) => {
+        if (isFeed(body)) {
+          browser.tabs.update(data.tabId, { url: getRedirectURL(data.url) });
+          resolve(undefined);
+          filter.close();
+        } else {
+          resolve(undefined);
+          filter.disconnect();
+        }
+      };
+      filter.ondata = (event) => {
+        reqbody += decoder.decode(event.data);
+        filter.write(event.data);
+        if (reqbody.length > 150) process(reqbody);
+      };
+      filter.onstop = () => {
+        process(reqbody);
+      };
+      filter.onerror = () => {
+        process("");
+      };
+      filter.resume();
+    });
+  }
+}
 
 /**
  * Sets request interception so click on feed link
@@ -148,13 +141,14 @@ const RequestInterceptor: {
  */
 export async function attach() {
   const redirectRequests = await Storage.get("redirectRequests");
-  if (redirectRequests) RequestInterceptor.on();
+  let disposable: Disposable | null = null;
+  if (redirectRequests) disposable = new RequestInterceptor().intercept();
 
   Storage.subscribe((changes) => {
     if ("redirectRequests" in changes) {
       changes.redirectRequests!.newValue
-        ? RequestInterceptor.on()
-        : RequestInterceptor.off();
+        ? (disposable = new RequestInterceptor().intercept())
+        : disposable?.[Symbol.dispose]();
     }
   });
 }
