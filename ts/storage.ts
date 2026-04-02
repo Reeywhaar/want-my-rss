@@ -1,6 +1,7 @@
 import { Sorting } from "./sortings.js";
 import { FeedReader, FeedReaders } from "./feedReaders.js";
 import { ThemeLabelType } from "./themeType.js";
+import { invariant } from "./invariant.js";
 
 const internalStorage = browser.storage.sync;
 
@@ -144,7 +145,9 @@ export class Storage extends RawStorage {
     if (label === "currentFeedReader") {
       const readers = await this.get("feedReaders");
       const id = await this.get("feedReaderID");
-      return readers.find((x) => x.id === id)! as StorageProperties[T];
+      return (readers.find((x) => x.id === id) ??
+        readers.at(0) ??
+        invariant("No feed readers available")) as StorageProperties[T];
     }
     return RawStorage.get(
       label as keyof RawStorageProperties

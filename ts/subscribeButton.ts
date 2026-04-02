@@ -53,11 +53,10 @@ export default class SubscribeButton extends HTMLElement {
     });
     subscribeDiv.appendChild(provDiv);
 
-    const [readers, currentReaderId] = await Promise.all([
+    const [readers, currentReader] = await Promise.all([
       Storage.get("feedReaders"),
-      Storage.get("feedReaderID"),
+      Storage.get("currentFeedReader"),
     ]);
-    const currentReader = readers.find((r) => r.id === currentReaderId)!;
 
     const providerIcon = document.createElement("img");
     providerIcon.className = "provider-icon";
@@ -71,7 +70,7 @@ export default class SubscribeButton extends HTMLElement {
 
     const providers = readers.map((reader) => {
       const el = document.createElement("span");
-      const isCurrent = reader.id === currentReaderId;
+      const isCurrent = reader.id === currentReader.id;
       el.className = `providers__item ${
         isCurrent ? "providers__item--current" : ""
       }`;
