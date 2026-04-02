@@ -94,7 +94,8 @@ async function webRequestHandler(
     let reqbody = "";
     const process = (body: string) => {
       if (isFeed(body)) {
-        resolve(getRedirectObject(data.url));
+        browser.tabs.update(data.tabId, { url: getRedirectURL(data.url) });
+        resolve(undefined);
         filter.close();
       } else {
         resolve(undefined);
@@ -112,6 +113,7 @@ async function webRequestHandler(
     filter.onerror = () => {
       process("");
     };
+    filter.resume();
   });
 }
 
