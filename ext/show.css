@@ -26,7 +26,7 @@
   --link-underline-color: hsl(200, 90%, 40%, 0.3);
   --link-hover-color: hsl(200, 90%, 60%);
   --link-hover-underline-color: hsl(200, 90%, 60%, 0.3);
-  --link-visited-color: hsl(260, 50%, 70%);
+  --link-visited-color: hsl(220, 45%, 60%);
   --link-visited-underline-color: hsl(260, 50%, 70%, 0.3);
   --link-visited-hover-color: var(--link-hover-color);
   --link-visited-hover-underline-color: var(--link-hover-underline-color);
