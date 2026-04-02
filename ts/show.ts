@@ -212,7 +212,7 @@ async function render({
     <main class="main body__main">
       <div class="controls main__controls">
         <label class="items-sort">
-          <span class="items-sort__label">Sort:</span> <select class="items-sort__select">
+          <span class="items-sort__label">Sort </span> <select class="items-sort__select">
             ${Sortings.map(
               (sort) =>
                 `<option value="${sort}" ${
@@ -224,7 +224,7 @@ async function render({
         <div class="controls__spacer"></div>
         <label class="controls__relative-time-switch"><input class="relative-time-checkbox controls__relative-time-checkbox" type="checkbox" ${
           store.useRelativeTime === true ? "checked" : ""
-        }>relative time</label>
+        }><span>relative time<span></label>
       </div>
       <div class="items" id="items">
         ${data.items

@@ -173,18 +173,30 @@ a.header__main-url:visited:hover {
 .controls__relative-time-switch {
   -moz-user-select: none;
   user-select: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.8em;
 }
 
 /* items-sort */
 
 .items-sort {
   display: inline-block;
+  font-size: 0.8em;
+}
+
+.items-sort__select {
+  background: transparent;
+  color: var(--link-color);
+  border: none;
+  padding: 0;
+  font: inherit;
 }
 
 .items-sort__label {
   -moz-user-select: none;
   user-select: none;
-  font-size: 0.8em;
 }
 
 /* item */
@@ -219,7 +231,10 @@ a.header__main-url:visited:hover {
 }
 
 .item__title {
-  font-family: Lucida Bright, Georgia, serif;
+  font-family:
+    Lucida Bright,
+    Georgia,
+    serif;
   font-size: 2rem;
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
@@ -387,7 +402,11 @@ a.header__main-url:visited:hover {
 /* switch-transition */
 
 .switch-transition {
-  transition: background-color 0.5s, color 0.5s, border-color 0.5s, fill 0.5s;
+  transition:
+    background-color 0.5s,
+    color 0.5s,
+    border-color 0.5s,
+    fill 0.5s;
 }
 
 /* night theme */

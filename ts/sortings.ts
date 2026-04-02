@@ -9,7 +9,7 @@ export type SortingObject = {
 
 export const SortingObjects: { [P in Sorting]: SortingObject } = {
   none: {
-    label: "None",
+    label: "Default",
     fn: (a, b) => {
       try {
         const pa = parseInt(a.dataset.index!, 10);
