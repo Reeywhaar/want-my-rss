@@ -180,6 +180,24 @@ async function render({
 }): Promise<string> {
   const store = await Storage.getAll();
   return `
+    <div class="controls">
+      <theme-switch></theme-switch>
+      <label class="items-sort">
+        <span class="items-sort__label">Sort </span> <select class="items-sort__select">
+          ${Sortings.map(
+            (sort) =>
+              `<option value="${sort}" ${
+                sort === store.sort ? "selected" : ""
+              }>${SortingObjects[sort].label}</option>`
+          ).join("")}
+        <select>
+      </label>
+      <label class="controls__relative-time-switch"><span>Relative time</span><input class="relative-time-checkbox controls__relative-time-checkbox" type="checkbox" ${
+        store.useRelativeTime === true ? "checked" : ""
+      }></label>
+      <div class="controls__spacer"></div>
+      <subscribe-button class="header__subscribe" link="${url}"></subscribe-button>
+    </div>
     <header class="header body__header">
       ${vif(
         () => data.image,
@@ -203,10 +221,6 @@ async function render({
               t.escape
             )}</span></h1>`
         )}
-        <div class="header__controls">
-          <subscribe-button class="header__subscribe" link="${url}"></subscribe-button>
-          <theme-switch></theme-switch>
-        </div>
       </div>
       <div class="header__links">
         <a class="header__original-url" href="${url}">${decodeURI(
@@ -219,22 +233,6 @@ async function render({
       )}
     </header>
     <main class="main body__main">
-      <div class="controls main__controls">
-        <label class="items-sort">
-          <span class="items-sort__label">Sort </span> <select class="items-sort__select">
-            ${Sortings.map(
-              (sort) =>
-                `<option value="${sort}" ${
-                  sort === store.sort ? "selected" : ""
-                }>${SortingObjects[sort].label}</option>`
-            ).join("")}
-          <select>
-        </label>
-        <div class="controls__spacer"></div>
-        <label class="controls__relative-time-switch"><span>Relative time</span><input class="relative-time-checkbox controls__relative-time-checkbox" type="checkbox" ${
-          store.useRelativeTime === true ? "checked" : ""
-        }></label>
-      </div>
       <div class="items" id="items">
         ${data.items
           .map(
