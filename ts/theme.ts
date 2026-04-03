@@ -21,7 +21,7 @@ export class ThemeService {
   }
 
   async get(): Promise<ThemeType> {
-    return Themes[await this.storage.get("theme")];
+    return Themes[await this.storage.get("theme")] ?? Themes.day;
   }
 
   async set(themeName: ThemeLabelType) {
