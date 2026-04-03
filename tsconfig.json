@@ -2,25 +2,24 @@
   "compilerOptions": {
     "lib": [
       "es2022",
+      "ESNext.Disposable",
       "dom"
     ],
     "rootDir": "./ts",
     "outDir": "./ext/js",
     "target": "es2017",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "noImplicitReturns": true,
     "noImplicitAny": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "strict": true,
-    "baseUrl": "./",
     "alwaysStrict": true,
     "forceConsistentCasingInFileNames": true,
-    "typeRoots": [
-      "node_modules/@types",
-      "node_modules/web-ext-types"
-    ]
+    "types": [
+      "firefox-webext-browser"
+    ],
   },
   "include": [
     "./ts/**/*.ts"

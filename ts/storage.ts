@@ -76,10 +76,7 @@ export class RawStorage {
   }
 
   static subscribe(handler: (changes: RawStorageChange) => void): void {
-    const fn = (
-      changes: RawStorageChange,
-      area: browser.storage.StorageName
-    ) => {
+    const fn = (changes: RawStorageChange, area: string) => {
       if (area !== "sync") return;
       /** filtered changes */
       let fChanges = {} as RawStorageChange;

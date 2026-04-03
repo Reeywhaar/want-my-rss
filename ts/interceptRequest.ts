@@ -48,21 +48,6 @@ function isFeed(body: string): boolean {
   return false;
 }
 
-type RequestData = {
-  requestId: string;
-  url: string;
-  method: string;
-  frameId: number;
-  parentFrameId: number;
-  tabId: number;
-  type: browser.webRequest.ResourceType;
-  timeStamp: number;
-  originUrl: string;
-  statusLine: string;
-  responseHeaders?: browser.webRequest.HttpHeaders;
-  statusCode: number;
-};
-
 class RequestInterceptor {
   intercept() {
     browser.webRequest.onHeadersReceived.addListener(
@@ -80,9 +65,12 @@ class RequestInterceptor {
     };
   }
 
-  private async handler(
-    data: RequestData
-  ): Promise<browser.webRequest.BlockingResponse | undefined> {
+  private handler(
+    data: browser.webRequest._OnHeadersReceivedDetails
+  ):
+    | browser.webRequest.BlockingResponse
+    | Promise<browser.webRequest.BlockingResponse>
+    | void {
     if (
       data.originUrl &&
       data.originUrl.indexOf(browser.runtime.getURL("")) !== -1
@@ -112,10 +100,10 @@ class RequestInterceptor {
       const process = (body: string) => {
         if (isFeed(body)) {
           browser.tabs.update(data.tabId, { url: getRedirectURL(data.url) });
-          resolve(undefined);
+          resolve({});
           filter.close();
         } else {
-          resolve(undefined);
+          resolve({});
           filter.disconnect();
         }
       };

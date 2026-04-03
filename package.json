@@ -27,9 +27,9 @@
   },
   "homepage": "https://github.com/Reeywhaar/want-my-rss#readme",
   "devDependencies": {
+    "@types/firefox-webext-browser": "^143.0.0",
     "env-cmd": "^11.0.0",
-    "typescript": "^5.5.2",
-    "web-ext": "^9.0.0",
-    "web-ext-types": "^3.2.1"
+    "typescript": "^6.0.2",
+    "web-ext": "^10.1.0"
   }
 }
