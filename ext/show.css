@@ -239,20 +239,13 @@ a.header__main-url:visited:hover {
 }
 
 .item__header {
-  padding: 0.5rem;
-  padding-top: 1rem;
   width: 100%;
-  margin-top: -0.5rem;
   margin-bottom: 1rem;
-  margin-left: -0.5rem;
+  padding-bottom: 1rem;
   border-bottom: 1px dashed var(--line-color);
 }
 
 .item__title {
-  font-family:
-    Lucida Bright,
-    Georgia,
-    serif;
   font-size: 2rem;
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
