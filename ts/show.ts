@@ -180,7 +180,7 @@ async function render({
 }): Promise<string> {
   const store = await Storage.getAll();
   return `
-    <div class="controls">
+    <div class="controls body__controls">
       <theme-switch class="controls__theme-switch"></theme-switch>
       <label class="items-sort">
         <span class="items-sort__label">Sort </span> <select class="items-sort__select">
@@ -336,7 +336,6 @@ async function render({
       </div>
     </main>
     <footer class="footer body__footer">
-      <hr/>
       <a href="https://github.com/Reeywhaar/want-my-rss">Want My RSS</a>
     </footer>
   `;

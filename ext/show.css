@@ -29,7 +29,7 @@ html {
 }
 
 body {
-  padding: 1rem;
+  padding: 1rem 0;
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -69,15 +69,35 @@ a.noline:not(:hover) {
   text-decoration: none;
 }
 
-hr {
-  border: none;
-  border-bottom: 1px solid var(--line-color);
-}
-
 /* body */
 
 .body__header {
   margin-bottom: 2rem;
+}
+
+.body__controls {
+  margin-top: -0.5em;
+  margin-bottom: 1em;
+}
+
+.body__footer {
+  border-top: 1px solid var(--line-color);
+  padding: 1rem 0;
+}
+
+@media screen and (max-width: 60rem) {
+  .body__header {
+    padding: 0 1rem;
+  }
+
+  .body__footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .body__controls {
+    padding: 0 1rem;
+  }
 }
 
 /* header */
@@ -138,8 +158,7 @@ a.header__main-url:visited:hover {
 }
 
 .header__original-url-source {
-  margin-left: 1em;
-  font-size: 0.8em;
+  margin-left: 0.2em;
   vertical-align: bottom;
   opacity: 0;
   transition: opacity 0.4s;
@@ -168,8 +187,6 @@ a.header__main-url:visited:hover {
   display: flex;
   align-items: center;
   gap: 1em;
-  margin-top: -0.5em;
-  margin-bottom: 1em;
 }
 
 .controls__theme-switch {
@@ -220,6 +237,12 @@ a.header__main-url:visited:hover {
   padding: 1rem;
   border-radius: var(--item-border-radius);
   overflow: hidden;
+}
+
+@media screen and (max-width: 60rem) {
+  .item {
+    border-radius: 0;
+  }
 }
 
 .item + .item {
