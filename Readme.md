@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.35
+
+_August 10_
+
+- Interface clean up and tinkering
+
 ### 0.34
 
 _You paint yourself white_
