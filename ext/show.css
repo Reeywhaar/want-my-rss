@@ -270,6 +270,8 @@ a.header__main-url:visited:hover {
 .item__media-title {
   margin-bottom: 0.2rem;
   color: var(--media-title-color);
+  font-weight: normal;
+  margin-bottom: 0.5rem;
 }
 
 .item__media-title a {
