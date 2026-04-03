@@ -12,7 +12,7 @@ import {
   sleep,
 } from "./utils.js";
 import { RSSData, RSSDataItem } from "./rssDataType.js";
-import { setTheme, getTheme } from "./theme.js";
+import { ThemeSwitcherFactory } from "./themeSwitcher.js";
 
 const DEFAULT_CHARSET = "utf-8";
 
@@ -23,6 +23,10 @@ window.customElements.define(
 window.customElements.define("relative-date", RelativeDate, {
   extends: "time",
 });
+window.customElements.define(
+  "theme-switch",
+  new ThemeSwitcherFactory(Storage).create()
+);
 
 async function main(): Promise<void> {
   let url = decodeURI(window.location.search.substring("?url=".length));
@@ -33,7 +37,6 @@ async function main(): Promise<void> {
 
   const urlObj = new URL(url);
 
-  setThemeSwitching();
   setExpansion();
 
   setHotkeyNavigation();
@@ -182,23 +185,29 @@ async function render({
         () => data.image,
         (url) => `<img class="header__image" src="${url}"/>`
       )}
-      ${vif(
-        () => t(data, ".url", null, t.escape),
-        (mainUrl) =>
-          `<h1 class="header__title"><a class="header__main-url" href="${mainUrl}">${t(
-            data,
-            ".title",
-            "",
-            t.escape
-          )}</a><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`,
-        () =>
-          `<h1 class="header__title"><span class="header__title-span">${t(
-            data,
-            ".title",
-            "",
-            t.escape
-          )}</span><subscribe-button class="header__subscribe" link="${url}"></subsribe-button></h1>`
-      )}
+      <div class="header__top">
+        ${vif(
+          () => t(data, ".url", null, t.escape),
+          (mainUrl) =>
+            `<h1 class="header__title"><a class="header__main-url" href="${mainUrl}">${t(
+              data,
+              ".title",
+              "",
+              t.escape
+            )}</a></h1>`,
+          () =>
+            `<h1 class="header__title"><span class="header__title-span">${t(
+              data,
+              ".title",
+              "",
+              t.escape
+            )}</span></h1>`
+        )}
+        <div class="header__controls">
+          <subscribe-button class="header__subscribe" link="${url}"></subscribe-button>
+          <theme-switch></theme-switch>
+        </div>
+      </div>
       <div class="header__links">
         <a class="header__original-url" href="${url}">${decodeURI(
           url
@@ -222,9 +231,9 @@ async function render({
           <select>
         </label>
         <div class="controls__spacer"></div>
-        <label class="controls__relative-time-switch"><input class="relative-time-checkbox controls__relative-time-checkbox" type="checkbox" ${
+        <label class="controls__relative-time-switch"><span>Relative time</span><input class="relative-time-checkbox controls__relative-time-checkbox" type="checkbox" ${
           store.useRelativeTime === true ? "checked" : ""
-        }><span>relative time<span></label>
+        }></label>
       </div>
       <div class="items" id="items">
         ${data.items
@@ -333,34 +342,6 @@ async function render({
       <a href="https://github.com/Reeywhaar/want-my-rss">Want My RSS</a>
     </footer>
   `;
-}
-
-async function setThemeSwitching(): Promise<void> {
-  const switcher = document.createElement("div");
-  switcher.classList.add("theme-switch");
-  document.body.appendChild(switcher);
-
-  const theme = await getTheme();
-  document.documentElement.dataset.theme = theme.id;
-  const themeImg = document.createElement("img");
-  themeImg.classList.add("theme-switch__img");
-  themeImg.src = "./icons/" + theme.img;
-
-  Storage.subscribe(async (changes) => {
-    if (changes.theme) {
-      const theme = await getTheme();
-      document.documentElement.dataset.theme = theme.id;
-      themeImg.src = "./icons/" + theme.img;
-    }
-  });
-
-  switcher.appendChild(themeImg);
-  switcher.addEventListener("click", async () => {
-    const nt = (await getTheme()).id === "day" ? "night" : "day";
-    setTheme(nt);
-    const theme = await getTheme();
-    themeImg.src = "./icons/" + theme.img;
-  });
 }
 
 function findCurrentArticle(): HTMLElement | null {

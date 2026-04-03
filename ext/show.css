@@ -94,6 +94,29 @@ hr {
 
 /* header */
 
+.header__top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+
+@media screen and (max-width: 600px) {
+  .header__top {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+  }
+}
+
+.header__controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0.8em;
+  gap: 0.5em;
+}
+
 .header__image {
   max-width: 5rem;
   max-height: 5rem;
@@ -105,7 +128,6 @@ hr {
 
 .header__subscribe {
   display: inline-block;
-  vertical-align: 0.5em;
 }
 
 a.header__main-url {
@@ -155,6 +177,7 @@ a.header__main-url:visited:hover {
 .header__description {
   opacity: var(--header-description-opacity);
   font-size: 0.8em;
+  margin: 0;
 }
 
 /* main */
@@ -252,7 +275,7 @@ a.header__main-url:visited:hover {
 }
 
 .item[data-collapsed="true"] .item__content {
-  max-height: 800px;
+  max-height: 600px;
   overflow: hidden;
 }
 
@@ -374,29 +397,6 @@ a.header__main-url:visited:hover {
 .footer {
   margin-top: 2rem;
   height: 10rem;
-}
-
-/* theme-switch */
-
-.theme-switch {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  cursor: default;
-}
-
-.theme-switch__img {
-  width: 2rem;
-  height: 2rem;
-}
-
-@media screen and (min-width: 68rem) {
-  .theme-switch {
-    height: 0;
-    position: sticky;
-    display: inline-block;
-    margin-left: 61rem;
-  }
 }
 
 /* switch-transition */
