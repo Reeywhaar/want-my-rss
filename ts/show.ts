@@ -181,7 +181,7 @@ async function render({
   const store = await Storage.getAll();
   return `
     <div class="controls">
-      <theme-switch></theme-switch>
+      <theme-switch class="controls__theme-switch"></theme-switch>
       <label class="items-sort">
         <span class="items-sort__label">Sort </span> <select class="items-sort__select">
           ${Sortings.map(

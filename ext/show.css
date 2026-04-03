@@ -172,6 +172,10 @@ a.header__main-url:visited:hover {
   margin-bottom: 1em;
 }
 
+.controls__theme-switch {
+  flex: 0 0 auto;
+}
+
 .controls__spacer {
   flex: 1;
 }
@@ -198,7 +202,9 @@ a.header__main-url:visited:hover {
   border: none;
   padding: 0;
   font: inherit;
-  width: 3.2em;
+  width: 3.4em;
+  appearance: none;
+  -moz-appearance: none;
 }
 
 .items-sort__label {
