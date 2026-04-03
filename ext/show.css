@@ -1,24 +1,3 @@
-@font-face {
-  font-family: "PTSans";
-  src: url("/fonts/PTS55F_W.woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "PTSans";
-  src: url("/fonts/PTS56F_W.woff");
-  font-weight: normal;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: "PTSans";
-  src: url("PTS75F_W.woff");
-  font-weight: bold;
-  font-style: normal;
-}
-
 :root {
   --background-color: hsl(40, 10%, 98.5%);
   --main-color: #000;
@@ -51,7 +30,17 @@ html {
 
 body {
   padding: 1rem;
-  font-family: "PTSans", Helvetica, Arial, sans-serif;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    Segoe UI,
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol;
   max-width: 60rem;
   margin: 0 auto;
 }
@@ -249,6 +238,7 @@ a.header__main-url:visited:hover {
   font-size: 2rem;
   margin-top: 0.2rem;
   margin-bottom: 0.2rem;
+  font-weight: 600;
 }
 
 .item__info {
