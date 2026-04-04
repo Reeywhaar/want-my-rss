@@ -3,7 +3,12 @@ export interface Disposable {
 }
 
 export class DisposableStack {
+  private isDisposed = false;
   private disposables: Disposable[] = [];
+
+  get disposed() {
+    return this.isDisposed;
+  }
 
   adopt<T>(value: T, dispose: (value: T) => void): T {
     this.disposables.push({ dispose: () => dispose(value) });
@@ -20,5 +25,11 @@ export class DisposableStack {
       disposable.dispose();
     }
     this.disposables = [];
+    this.isDisposed = true;
+  }
+
+  defer(cb: () => void) {
+    const res = cb();
+    this.disposables.push({ dispose: () => res });
   }
 }

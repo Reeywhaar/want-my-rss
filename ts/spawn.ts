@@ -5,11 +5,14 @@ export const spawn = (cb: (stack: DisposableStack) => unknown) => {
   try {
     const res = cb(stack);
     if (res instanceof Promise) {
-      res.finally(() => stack.dispose());
+      res.catch((e) => {
+        if (!stack.disposed) stack.dispose();
+        throw e;
+      });
     }
     return stack;
   } catch (e) {
-    stack.dispose();
+    if (!stack.disposed) stack.dispose();
     throw e;
   }
 };

@@ -2,6 +2,7 @@ import { Sorting } from "./sortings.js";
 import { FeedReader, FeedReaders } from "./feedReaders.js";
 import { ThemeLabelType } from "./themeType.js";
 import { invariant } from "./invariant.js";
+import { Disposable } from "./disposable.js";
 
 const internalStorage = browser.storage.sync;
 
@@ -75,7 +76,7 @@ export class RawStorage {
     });
   }
 
-  static subscribe(handler: (changes: RawStorageChange) => void): void {
+  static subscribe(handler: (changes: RawStorageChange) => void): Disposable {
     const fn = (changes: RawStorageChange, area: string) => {
       if (area !== "sync") return;
       /** filtered changes */
@@ -90,6 +91,12 @@ export class RawStorage {
       handler(fChanges);
     };
     browser.storage.onChanged.addListener(fn);
+
+    return {
+      dispose() {
+        browser.storage.onChanged.removeListener(fn);
+      },
+    };
   }
 
   static clear(): Promise<void> {
