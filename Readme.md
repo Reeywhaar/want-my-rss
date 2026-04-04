@@ -21,6 +21,12 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.36
+
+_Traffic Lights_
+
+- Further interface clean up and tinkering
+
 ### 0.35
 
 _August 10_
