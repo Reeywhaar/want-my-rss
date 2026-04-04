@@ -36,13 +36,6 @@ export const FeedReaders: FeedReader[] = [
     favicon: "newsblur.png",
   },
   {
-    id: "netvibes",
-    name: "Netvibes",
-    link: (feed) =>
-      `https://www.netvibes.com/subscribe.php?url=${encodeURIComponent(feed)}`,
-    favicon: "netvibes.png",
-  },
-  {
     id: "bazqux",
     name: "BazQux",
     link: (feed) => `https://bazqux.com/add?url=${encodeURIComponent(feed)}`,
@@ -53,12 +46,6 @@ export const FeedReaders: FeedReader[] = [
     name: "Feedbin",
     link: (feed) => `https://feedbin.me/?subscribe=${encodeURIComponent(feed)}`,
     favicon: "feedbin.ico",
-  },
-  {
-    id: "g2reader",
-    name: "G2Reader",
-    link: (feed) => `https://g2reader.com/?add&q=${encodeURIComponent(feed)}`,
-    favicon: "g2reader.ico",
   },
   {
     id: "commafeed",
