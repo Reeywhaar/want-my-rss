@@ -21,6 +21,13 @@ Contributions are welcome. Fill issues, make prs!
 
 ## Changelog
 
+### 0.37
+
+_Tu as le droit de tenir le silence_
+
+- Fixed compatibility with older browsers
+- Removed broken readers
+
 ### 0.36
 
 _Traffic Lights_
