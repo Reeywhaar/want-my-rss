@@ -1,3 +1,4 @@
+import { DisposableStack } from "./disposable.js";
 import { spawn } from "./spawn.js";
 import { type Storage } from "./storage.js";
 import { ThemeService } from "./theme.js";
@@ -13,10 +14,11 @@ export class ThemeSwitcherFactory {
     const st = this.storage;
     return class ThemeSwitcher extends HTMLElement {
       storage = st;
+      private stack = new DisposableStack();
+
       themeService = new ThemeService(this.storage);
 
-      constructor() {
-        super();
+      connectedCallback() {
         const root = this.attachShadow({ mode: "open" });
         const style = document.createElement("link");
         style.rel = "stylesheet";
@@ -29,12 +31,14 @@ export class ThemeSwitcherFactory {
         const themeImg = document.createElement("img");
         switcher.appendChild(themeImg);
 
-        spawn(async () => {
-          const theme = await this.themeService.get();
-          document.documentElement.dataset.theme = theme.id;
-          themeImg.classList.add("theme-switch__img");
-          themeImg.src = "./icons/" + theme.img;
-        });
+        this.stack.use(
+          spawn(async () => {
+            const theme = await this.themeService.get();
+            document.documentElement.dataset.theme = theme.id;
+            themeImg.classList.add("theme-switch__img");
+            themeImg.src = "./icons/" + theme.img;
+          })
+        );
 
         this.storage.subscribe(async (changes) => {
           if (changes.theme) {
@@ -53,6 +57,10 @@ export class ThemeSwitcherFactory {
         });
 
         root.appendChild(switcher);
+      }
+
+      disconnectedCallback() {
+        this.stack.dispose();
       }
     };
   }

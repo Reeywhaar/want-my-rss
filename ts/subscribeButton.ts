@@ -10,13 +10,14 @@ export class SubscribeButtonFactory {
   create() {
     const st = this.storage;
     return class SubscribeButton extends HTMLElement {
-      storage: typeof Storage;
+      storage = st;
+
       constructor() {
         super();
-        this.storage = st;
         const root = this.attachShadow({ mode: "open" });
         this.init(root);
       }
+
       private async init(root: ShadowRoot) {
         const style = document.createElement("link");
         style.rel = "stylesheet";

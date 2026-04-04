@@ -2,7 +2,6 @@
   "compilerOptions": {
     "lib": [
       "es2022",
-      "ESNext.Disposable",
       "dom"
     ],
     "rootDir": "./ts",

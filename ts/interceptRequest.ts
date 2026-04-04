@@ -1,3 +1,4 @@
+import { Disposable } from "./disposable.js";
 import { Storage } from "./storage.js";
 
 type Handler = (message: {
@@ -59,7 +60,7 @@ class RequestInterceptor {
       ["blocking", "responseHeaders"]
     );
     return {
-      [Symbol.dispose]: () => {
+      dispose: () => {
         browser.webRequest.onHeadersReceived.removeListener(this.handler);
       },
     };
@@ -136,7 +137,7 @@ export async function attach() {
     if ("redirectRequests" in changes) {
       changes.redirectRequests!.newValue
         ? (disposable = new RequestInterceptor().intercept())
-        : disposable?.[Symbol.dispose]();
+        : disposable?.dispose();
     }
   });
 }
