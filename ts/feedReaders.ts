@@ -63,4 +63,10 @@ export const FeedReaders: FeedReader[] = [
       `https://www.nooshub.com/me/feeds/new?url=${encodeURIComponent(feed)}`,
     favicon: "nooshub.ico",
   },
+  {
+    id: "thunderbird",
+    name: "Thunderbird",
+    link: (feed) => `feed:${feed}`,
+    favicon: "thunderbird.svg",
+  },
 ];
